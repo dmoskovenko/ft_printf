@@ -12,7 +12,6 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [ { "name": "squid", "value": "clam" } ],
             "externalConsole": false,
             "MIMode": "lldb",
             "preLaunchTask": "clang build active file"
