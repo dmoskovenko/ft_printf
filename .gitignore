@@ -1,5 +1,4 @@
-a.out
-.vscode/**
+minprintf
 *.o
 *.dSYM
 *.DS_Store
