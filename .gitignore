@@ -1,4 +1,4 @@
-minprintf
+ft_printf
 *.o
 *.dSYM
 *.DS_Store
