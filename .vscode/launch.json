@@ -6,23 +6,12 @@
     "configurations": [
         {
             "name": "(lldb) Запустить",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/${fileBasenameNoExtension}",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "externalConsole": false,
-            "MIMode": "lldb",
             "preLaunchTask": "clang build active file"
-        },
-        {
-			"name": "(lldb) Подключить",
-			"type": "cppdbg",
-			"request": "attach",
-			"program": "${workspaceFolder}/${fileBasenameNoExtension}",
-			"processId": "${command:pickProcess}",
-			"MIMode": "lldb"
-		}
+        }
     ]
 }
