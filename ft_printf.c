@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coclayto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
+/*   Updated: 2020/02/17 22:53:32 by coclayto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdarg.h>
 #include <stdio.h>
 #include "libft/includes/libft.h"
 
-void ft_printf(const char *fmt, ...)
+void	ft_printf(const char *fmt, ...)
 {
-	va_list	args;
+	va_list		args;
 	const char	*str;
 	char		*s;
 	int			d;
@@ -36,7 +48,7 @@ void ft_printf(const char *fmt, ...)
 	va_end(args);
 }
 
-int main(void)
+int		main(void)
 {
 	ft_printf("digit: %d %s\n", 30, "tis");
 	printf("digit: %d %s\n", 30, "tis");
