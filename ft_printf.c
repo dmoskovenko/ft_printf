@@ -6,7 +6,7 @@
 /*   By: coclayto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/19 00:31:01 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/19 00:44:00 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_printf(const char *fmt, ...)
 	int			d;
 */
 	va_start(args, fmt);
-	printed = formatparse(fmt, flags, args, 0)
+	printed = formatparse(fmt, flags, args, 0);
 /*	str = fmt;
 	while (*str)
 	{
