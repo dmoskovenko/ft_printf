@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/19 00:06:00 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:16:39 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ typedef struct	s_struct
 	int			precision;
 	int			length;
 }				t_struct;
+
+void	conversions(char c, va_list params, t_struct *new_struct);
+void	type_char(t_struct *new_struct, va_list params);
 
 #endif
