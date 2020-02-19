@@ -20,9 +20,9 @@ int		format_parse(const char *format, t_struct *list, va_list ap, int pos)
 			list->nprinted += write(1, &format[pos], 1);
 		else if (format[pos] == '%')
 		{
-			if (!ft_strchr(ALLSYMBOLS, format[pos + 1]))       // need to define ALLSYMBOLS
+			if (!ft_strchr(VALIDSYM, format[pos + 1]))       // need to define VALIDSYM
 				break;
-			while (ft_strchr(ALLSYMBOLS, format[pos + 1]))
+			while (ft_strchr(VALIDSYM, format[pos + 1]))
 			{
 				pos += 1;
 				if (ft_strchr("cspdiouxXfyb%", format[pos]))   //we don't need all these identifiers
