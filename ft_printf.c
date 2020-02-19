@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/18 20:15:55 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/19 00:44:00 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	ft_printf(const char *fmt, ...)
 {
 	va_list		args;
+	int			printed;
+	t_struct	flags;
+/*
 	const char	*str;
 	char		*s;
 	int			d;
-
+*/
 	va_start(args, fmt);
-	str = fmt;
+	printed = formatparse(fmt, flags, args, 0);
+/*	str = fmt;
 	while (*str)
 	{
 		if (*str != '%')
@@ -43,12 +47,7 @@ void	ft_printf(const char *fmt, ...)
 		}
 		str++;
 	}
+*/
 	va_end(args);
-}
-
-int		main(void)
-{
-	ft_printf("digit: %d %s\n", 30, "tis");
-	printf("digit: %d %s\n", 30, "tis");
-	return (0);
+	return (printed);
 }
