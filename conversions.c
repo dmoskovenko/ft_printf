@@ -5,21 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 17:02:47 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/19 17:17:17 by releanor         ###   ########.fr       */
+/*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
+/*   Updated: 2020/02/19 17:58:28 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void	writezeros(int n)
+{
+	while (n > 0)
+	{
+		write(1, "0", 1);
+		n--;
+	}
+}
+
+void	writeblanks(int n)
+{
+	while (n > 0)
+	{
+		write(1, " ", 1);
+		n--;
+	}
+}
+
 void	conversions(char c, va_list params, t_struct *new_struct)
 {
 	if (c == 'c')
 		type_char(new_struct, params);
-	else if (c == 's')
-		string(new_struct, params);
-	else if (c == 'p')
-		pointer(new_struct, params, 2);
+	// else if (c == 's')
+	// 	type_string(new_struct, params);
+	// else if (c == 'p')
+	// 	type_pointer(new_struct, params, 2);
 
 	// will add other types later
 }

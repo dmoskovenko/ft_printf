@@ -6,32 +6,45 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 23:35:59 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/19 17:18:42 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/19 18:01:14 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		format_parse(const char *format, t_struct *new_struct, va_list params, int pos)
+int		format_parse2(t_struct *new_struct, int position, const char *fmt, va_list params)
 {
-	while (format[pos] != '\0')
+	new_struct->i = position;
+	// if (!ft_strchr("cspdiouxXfyb%", fmt[position]))
+	// 	modifiers(fmt, new_struct, params);
+	/*else*/ if (ft_strchr(("cspdiouxXfyb%"), fmt[position]))
 	{
-		if (format[pos] != '%' && format[pos])
-			new_struct->nprinted += write(1, &format[pos], 1);
-		else if (format[pos] == '%')
+		conversions(fmt[position], params, new_struct);
+		//bezerostruct2(new_struct);
+	}
+	return (new_struct->i - 1);
+}
+
+int		format_parse(const char *fmt, t_struct *new_struct, va_list params, int pos)
+{
+	while (fmt[pos] != '\0')
+	{
+		if (fmt[pos] != '%' && fmt[pos])
+			new_struct->nprinted += write(1, &fmt[pos], 1);
+		else if (fmt[pos] == '%')
 		{
-			if (!ft_strchr(ALLSYMBOLS, format[pos + 1]))       // need to define ALLSYMBOLS
+			if (!ft_strchr(/*ALLSYMBOLS*/ "cspdiouxXfyb%#-+ .*0123456789hLljz", fmt[pos + 1]))       // need to define ALLSYMBOLS
 				break;
-			while (ft_strchr(ALLSYMBOLS, format[pos + 1]))
+			while (ft_strchr(/*ALLSYMBOLS*/ "cspdiouxXfyb%#-+ .*0123456789hLljz", fmt[pos + 1]))
 			{
 				pos += 1;
-				if (ft_strchr("cspdiouxXfyb%", format[pos]))   //we don't need all these identifiers
+				if (ft_strchr("cspdiouxXfyb%", fmt[pos]))   //we don't need all these identifiers
 				{
-					pos = parsel2(new_struct, pos, format, params) + 2;  //maybe change the name of this func
+					pos = format_parse2(new_struct, pos, fmt, params) + 2;  //maybe change the name of this func
 					break;
 				}
 				else
-					pos = parsel2(new_struct, pos, format, params);
+					pos = format_parse2(new_struct, pos, fmt, params);
 			}
 			continue;
 		}
@@ -39,3 +52,4 @@ int		format_parse(const char *format, t_struct *new_struct, va_list params, int 
 	}
 	return (new_struct->nprinted);
 }
+
