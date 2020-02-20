@@ -22,10 +22,10 @@ char	*itoa_base(int num, int base)  //китаец юзает intmax_t, инте
 	i = 0;
 	tmp = (num < 0 && base == 10) ? -num : num;
 	is_neg = (num < 0 && base == 10) ? 1 : 0;
-	num = (num < 0 && base == 10) ? -num : num;
+	num = tmp;
 	while (tmp >= 1)
 	{
-	    tmp = tmp / base;
+	    tmp /= base;
 		i++;
 	}
 	out = (char *)malloc(sizeof(char) * (is_neg + i + 1));
