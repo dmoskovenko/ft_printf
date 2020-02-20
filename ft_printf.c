@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/20 17:29:17 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:17:06 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		format_parse2(va_list args, const char *fmt, t_struct params, int pos)
 }
 */ // переместил все в format_parse
 
-void	bzerostruct(t_struct params, int full)
+t_struct	bzerostruct(t_struct params, int full)
 {
 	if (full)
 	{
@@ -44,6 +44,7 @@ void	bzerostruct(t_struct params, int full)
 	params.precisiontf = 0;
 	params.precision = 0;
 	params.length = 0;
+	return (params);
 }
 
 int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
@@ -83,7 +84,7 @@ int		ft_printf(const char *fmt, ...)
 	int			printed;
 
 	params.fmt = (char *) fmt;
-	bzerostruct(params, 1);
+	params = bzerostruct(params, 1);
 	va_start(args, fmt);
 	if (!fmt[0])
 		return (0);

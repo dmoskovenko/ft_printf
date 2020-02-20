@@ -5,22 +5,39 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "clang build active file",
-            "command": "/usr/bin/clang",
-            "args": [
-                "-g",
-                "${workspaceFolder}/main.c",
-                "${workspaceFolder}/ft_printf.a",
-                "-o",
-                "${workspaceFolder}/ft_printf"
-            ],
+            "label": "Make lib",
+            "command": "make",
+            "args": [],
             "options": {
-                "cwd": "/usr/bin"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
             ],
             "group": "build"
+        },
+        {
+            "type": "shell",
+            "label": "Clang build",
+            "command": "clang",
+            "args": [
+                "-g",
+                "main.c",
+                "ft_printf.a",
+                "-o",
+                "ft_printf"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Build",
+            "dependsOn": ["Make lib", "Clang build"]
         }
     ]
 }

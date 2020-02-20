@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/ft_printf",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "clang build active file"
+            "preLaunchTask": "Build"
         }
     ]
 }

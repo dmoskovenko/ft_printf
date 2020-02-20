@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 17:22:57 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:06:45 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ typedef struct	s_struct
 	int			length;
 }				t_struct;
 
-int		ft_printf(const char *fmt, ...);
-int		format_parse(va_list args, const char *fmt, t_struct params, int pos);
-int		conversions(va_list args, char fmt, t_struct params);
-void	type_char(va_list args, t_struct params);
-void	bzerostruct(t_struct params, int full);
-void	writezeros(int n);
-void	writeblanks(int n);
+int			ft_printf(const char *fmt, ...);
+int			format_parse(va_list args, const char *fmt, t_struct params, int pos);
+int			conversions(va_list args, char fmt, t_struct params);
+void		type_char(va_list args, t_struct params);
+void		writezeros(int n);
+void		writeblanks(int n);
+t_struct	bzerostruct(t_struct params, int full);
 
 #endif
