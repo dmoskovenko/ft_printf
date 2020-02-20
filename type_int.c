@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 18:34:13 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 22:38:47 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:55:58 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*itoa_base(int num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
 {
-	char 	*result;
+	char 	*out;
 	int 	i;
 	int		is_neg;
 	int     tmp;
@@ -28,14 +28,15 @@ char	*itoa_base(int num, int base)  //китаец юзает intmax_t, инте
 	    tmp = tmp / base;
 		i++;
 	}
-	result = (char *)malloc(sizeof(char) * (is_neg + i + 1));
-	result[i-- + is_neg] = '\0';
+	out = (char *)malloc(sizeof(char) * (is_neg + i + 1));
+	out[i-- + is_neg] = '\0';
 	while (i >= 0)
 	{
-		result[i + is_neg] = (num % base) + '0';
+		out[i + is_neg] = (num % base < 10) ? (num % base) + '0' : \
+		(num % base + 'A' - 10);
 		num /= base;
 		i--;
 	}
-    result[0] = (is_neg == 1) ? '-' : result[0];
-	return (result);
+    out[0] = (is_neg == 1) ? '-' : out[0];
+	return (out);
 }
