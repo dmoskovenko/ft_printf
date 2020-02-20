@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 09:47:10 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:51:08 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void     type_char(va_list args, t_struct params)
 		writeblanks(num);
 		params.nprinted = params.nprinted + num;
 	}
-*/
 	else
+*/
 		write(1, &c, 1);
 	params.nprinted++;
 }
