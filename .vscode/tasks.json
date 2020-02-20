@@ -9,10 +9,10 @@
             "command": "/usr/bin/clang",
             "args": [
                 "-g",
-                "${file}",
-                "${workspaceFolder}/libft/libft.a",
+                "${workspaceFolder}/main.c",
+                "${workspaceFolder}/ft_printf.a",
                 "-o",
-                "${workspaceFolder}/${fileBasenameNoExtension}"
+                "${workspaceFolder}/ft_printf"
             ],
             "options": {
                 "cwd": "/usr/bin"

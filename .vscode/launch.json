@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(lldb) Запустить",
+            "name": "(lldb) Run",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/ft_printf",
             "args": [],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "clang build active file"

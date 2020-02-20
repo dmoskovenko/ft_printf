@@ -55,23 +55,23 @@ SRC = ft_memset.c \
 		ft_putnbr_fd.c \
 		ft_countwords.c
 
-FILEO = $(SRC:.c=.o)
+OBJS = $(SRC:.c=.o)
 
 HEADER = libft.h
 
 WWW = -Wall -Werror -Wextra
 
 $(NAME):
-	gcc $(WWW) -c $(SRC) -I ./includes
-	ar rc $(NAME) $(FILEO)
-	ranlib $(NAME)
+	@gcc $(WWW) -c $(SRC) -I ./includes
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
 all: $(NAME)
 
 clean:
-	/bin/rm -f $(FILEO)
+	@rm -f $(OBJS)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

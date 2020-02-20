@@ -1,19 +1,33 @@
 NAME = ft_printf.a
+
 BIN = ft_printf
+
 FLAGS = -Wall -Wextra -Werror -g
+
 SRCS = ft_printf.c conversions.c
-OBJS = $(SRC:.c=.o)
+
+OBJS = $(addprefix $(DIR_O)/,$(SRCS:.c=.o))
+
 HDR = ft_printf.h
+
 LIBFT = libft
+
+DIR_O = obj
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT)
+	@echo
+	cp libft/libft.a ./$(NAME)
+	@echo
 	ar rc $(NAME) $(OBJS)
+	@echo
 	ranlib $(NAME)
-	gcc $(FLAGS) main.c -I $(HEADER) -o $(BIN)
 
-# test:
-#	@make all main.c
+$(DIR_O)/%.o: %.c $(HDR)
+	@mkdir -p obj
+	gcc $(FLAGS) -I $(HDR) -o $@ -c $<
+	@echo
+
 all: $(NAME)
 
 norme:
@@ -26,11 +40,15 @@ norme:
 
 clean:
 	rm -f $(OBJS)
-	make -C $(LIBFT) clean 
+	@echo
+	@rm -rf $(DIR_O)
+	make clean -C $(LIBFT)
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C $(LIBFT) fclean
+	@echo
+	rm -f $(NAME)
+	@echo
+	make fclean -C $(LIBFT)
 
 re: fclean all
 
