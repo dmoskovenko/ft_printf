@@ -1,6 +1,9 @@
+#include "ft_printf.h"
+#include <stdio.h>
+
 int		main(void)
 {
-	ft_printf("digit: %d %s\n", 30, "tis");
-	printf("digit: %d %s\n", 30, "tis");
+	ft_printf("digit: %c\n", '3');
+	printf("digit: %c\n", '3');
 	return (0);
 }

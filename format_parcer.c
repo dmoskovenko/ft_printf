@@ -3,39 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   format_parcer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 23:35:59 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/19 00:12:25 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:16:53 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int		format_parse(const char *format, t_struct *list, va_list ap, int pos)
+/*
+int		format_parse2(va_list args, const char *fmt, t_struct params, int pos)
 {
-	while (format[pos] != '\0')
+	params.i = pos;
+	if (!ft_strchr("cspdiouxXf%", fmt[pos]))
+		modifiers(args, fmt, params);
+	else if (ft_strchr(("cspdiouxXf%"), fmt[pos]))
 	{
-		if (format[pos] != '%' && format[pos])
-			list->nprinted += write(1, &format[pos], 1);
-		else if (format[pos] == '%')
+		conversions(args, fmt[pos], params);
+//		bezerostruct2(params);
+	}
+	return (params.i - 1);
+}
+*/
+int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
+{
+	while (fmt[pos] != '\0')
+	{
+		if (fmt[pos] != '%' && fmt[pos])
+			params.nprinted += write(1, &fmt[pos], 1);
+		else if (fmt[pos] == '%')
 		{
-			if (!ft_strchr(VALIDSYM, format[pos + 1]))       // need to define VALIDSYM
+			if (!ft_strchr(VALIDSYM, fmt[pos + 1]))
 				break;
-			while (ft_strchr(VALIDSYM, format[pos + 1]))
+			while (ft_strchr(VALIDSYM, fmt[pos + 1]))
 			{
-				pos += 1;
-				if (ft_strchr("cspdiouxXfyb%", format[pos]))   //we don't need all these identifiers
+				pos++;
+				params.i = pos;
+				if (ft_strchr("cspdiouxXf%", fmt[pos]))
 				{
-					pos = parsel2(list, pos, format, ap) + 2;  //maybe change the name of this func
+					pos = conversions(args, fmt[pos], params) + 1;
 					break;
 				}
-				else
-					pos = parsel2(list, pos, format, ap);
+/*				else
+					pos = modifiers(args, fmt, params) - 1;
+*/
 			}
 			continue;
 		}
 		pos++;
 	}
-	return (list->nprinted);
+	return (params.nprinted);
 }

@@ -3,51 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/19 00:44:00 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:15:58 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printf(const char *fmt, ...)
+int		ft_printf(const char *fmt, ...)
 {
 	va_list		args;
+	t_struct	params;
 	int			printed;
-	t_struct	flags;
-/*
-	const char	*str;
-	char		*s;
-	int			d;
-*/
+
+	params.fmt = (char *) fmt;
 	va_start(args, fmt);
-	printed = formatparse(fmt, flags, args, 0);
-/*	str = fmt;
-	while (*str)
-	{
-		if (*str != '%')
-			write(1, str, 1);
-		else
-		{
-			if (*++str == 'd')
-			{
-				d = va_arg(args, int);
-				ft_putnbr(d);
-			}
-			else if (*str == 's')
-			{
-				s = va_arg(args, char *);
-				while (*s)
-					write(1, s++, 1);
-			}
-			else
-				write(1, str, 1);
-		}
-		str++;
-	}
-*/
+	if (!fmt[0])
+		return (0);
+	if (fmt[0] == '%' && !fmt[1])
+		return (0);
+	printed = format_parse(args, fmt, params, 0);
 	va_end(args);
 	return (printed);
 }
