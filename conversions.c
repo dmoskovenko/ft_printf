@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 09:51:08 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:19:45 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int     conversions(va_list args, char fmt, t_struct params)
 	else if (c == 'p')
 	 	type_pointer(params, params, 2);
 */  // will add other types later
-    bezerostruct2(params);
+    bzerostruct(params, 0);
     return (params.i);
 }
 

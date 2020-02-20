@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/20 09:48:43 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:26:49 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,25 @@ int		format_parse2(va_list args, const char *fmt, t_struct params, int pos)
 }
 */ // переместил все в format_parse
 
-void	bezerostruct(t_struct *list)
+void	bzerostruct(t_struct params, int full)
 {
-	list->i = 0;
-	list->nprinted = 0;
-	list->len = 0;
-	list->minus = 0;
-	list->plus = 0;
-	list->space = 0;
-	list->zero = 0;
-	list->hash = 0;
-	list->width = 0;
-	list->precisiontf = 0;
-	list->precision = 0;
-	list->length = 0;
+	if (full)
+	{
+		params.i = 0;
+		params.nprinted = 0;
+	}
+	params.len = 0;
+	params.minus = 0;
+	params.plus = 0;
+	params.space = 0;
+	params.zero = 0;
+	params.hash = 0;
+	params.width = 0;
+	params.precisiontf = 0;
+	params.precision = 0;
+	params.length = 0;
 }
-
+/*
 void	bezerostruct2(t_struct params)
 {
 	params.len = 0;
@@ -56,10 +59,10 @@ void	bezerostruct2(t_struct params)
 	params.precision = 0;
 	params.length = 0;
 }
-
+*/
 int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
 {
-	while (fmt[pos] != '\0')
+	while (fmt[pos])
 	{
 		if (fmt[pos] != '%' && fmt[pos])
 			params.nprinted += write(1, &fmt[pos], 1);
@@ -94,6 +97,7 @@ int		ft_printf(const char *fmt, ...)
 	int			printed;
 
 	params.fmt = (char *) fmt;
+	bzerostruct(params, 1);
 	va_start(args, fmt);
 	if (!fmt[0])
 		return (0);
