@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/20 17:26:49 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:29:17 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,7 @@ void	bzerostruct(t_struct params, int full)
 	params.precision = 0;
 	params.length = 0;
 }
-/*
-void	bezerostruct2(t_struct params)
-{
-	params.len = 0;
-	params.minus = 0;
-	params.plus = 0;
-	params.space = 0;
-	params.zero = 0;
-	params.hash = 0;
-	params.width = 0;
-	params.precisiontf = 0;
-	params.precision = 0;
-	params.length = 0;
-}
-*/
+
 int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
 {
 	while (fmt[pos])
