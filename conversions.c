@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 17:19:45 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 23:05:35 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,46 +31,17 @@ void	writeblanks(int n)
 }
 */
 
-int     conversions(va_list args, char fmt, t_struct params)
+int     conversions(va_list args, char spec, t_struct params)
 {
-	if (fmt == 'c')
+	if (spec == 'c')
 		type_char(args, params);
 /*  else if (c == 's')
         type_string(params, params);
 	else if (c == 'p')
 	 	type_pointer(params, params, 2);
 */  // will add other types later
+	else if (spec == 'd' || spec == 'i')
+		type_int(args, params);
     bzerostruct(params, 0);
     return (params.i);
-}
-
-void     type_char(va_list args, t_struct params)
-{
-	int				num;
-	unsigned char	c;
-
-	num = 0;
-	c = (unsigned char)va_arg(args, int);
-/*
-	if (params.width && params.minus == 0)
-	{
-		num = params.width - 1;
-		if (params.zero != 0)
-			writezeros(num);
-		else if (params.zero == 0)
-			writeblanks(num);
-		write(1, &c, 1);
-		params.nprinted = params.nprinted + num;
-	}
-	else if (params.width && params.minus == 1)
-	{
-		num = params.width - 1;
-		write(1, &c, 1);
-		writeblanks(num);
-		params.nprinted = params.nprinted + num;
-	}
-	else
-*/
-		write(1, &c, 1);
-	params.nprinted++;
 }
