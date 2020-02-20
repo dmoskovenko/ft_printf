@@ -6,12 +6,12 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 09:33:39 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:47:10 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+/*
 void	writezeros(int n)
 {
 	while (n > 0)
@@ -29,17 +29,17 @@ void	writeblanks(int n)
 		n--;
 	}
 }
+*/
 
 int     conversions(va_list args, char fmt, t_struct params)
 {
 	if (fmt == 'c')
 		type_char(args, params);
-	// else if (c == 's')
-	// 	type_string(params, params);
-	// else if (c == 'p')
-	// 	type_pointer(params, params, 2);
-
-	// will add other types later
+/*  else if (c == 's')
+        type_string(params, params);
+	else if (c == 'p')
+	 	type_pointer(params, params, 2);
+*/  // will add other types later
     bezerostruct2(params);
     return (params.i);
 }
@@ -51,6 +51,7 @@ void     type_char(va_list args, t_struct params)
 
 	num = 0;
 	c = (unsigned char)va_arg(args, int);
+/*
 	if (params.width && params.minus == 0)
 	{
 		num = params.width - 1;
@@ -68,6 +69,7 @@ void     type_char(va_list args, t_struct params)
 		writeblanks(num);
 		params.nprinted = params.nprinted + num;
 	}
+*/
 	else
 		write(1, &c, 1);
 	params.nprinted++;

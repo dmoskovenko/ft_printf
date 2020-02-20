@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/20 09:33:17 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:48:43 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		format_parse2(va_list args, const char *fmt, t_struct params, int pos)
 	}
 	return (params.i - 1);
 }
-*/
+*/ // переместил все в format_parse
 
 void	bezerostruct(t_struct *list)
 {
