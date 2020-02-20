@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 17:22:57 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 21:40:35 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define VALIDSYM		"cspdiouxXfhl0123456789 %#-+."
 # include <stdarg.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include "libft/includes/libft.h"
 
 typedef struct	s_struct
