@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 18:34:13 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 22:55:58 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/20 23:06:42 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,9 @@ char	*itoa_base(int num, int base)  //китаец юзает intmax_t, инте
     out[0] = (is_neg == 1) ? '-' : out[0];
 	return (out);
 }
+
+void	type_int(args, params)
+{
+	
+}
+

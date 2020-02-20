@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 18:45:29 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/20 23:05:35 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,4 @@ int     conversions(va_list args, char spec, t_struct params)
 		type_int(args, params);
     bzerostruct(params, 0);
     return (params.i);
-}
-
-void     type_char(va_list args, t_struct params)
-{
-	int				num;
-	unsigned char	c;
-
-	num = 0;
-	c = (unsigned char)va_arg(args, int);
-/*
-	if (params.width && params.minus == 0)
-	{
-		num = params.width - 1;
-		if (params.zero != 0)
-			writezeros(num);
-		else if (params.zero == 0)
-			writeblanks(num);
-		write(1, &c, 1);
-		params.nprinted = params.nprinted + num;
-	}
-	else if (params.width && params.minus == 1)
-	{
-		num = params.width - 1;
-		write(1, &c, 1);
-		writeblanks(num);
-		params.nprinted = params.nprinted + num;
-	}
-	else
-*/
-		write(1, &c, 1);
-	params.nprinted++;
 }
