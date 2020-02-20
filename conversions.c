@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 17:19:45 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:39:35 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int     conversions(va_list args, char fmt, t_struct params)
 	else if (c == 'p')
 	 	type_pointer(params, params, 2);
 */  // will add other types later
+	else if (c == 'd' || c == 'i')
+		type_int(args, params);
     bzerostruct(params, 0);
     return (params.i);
 }
