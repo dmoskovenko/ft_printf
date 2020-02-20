@@ -6,25 +6,11 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 09:17:28 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:33:39 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	bezerostruct2(t_struct params)
-{
-	params.len = 0;
-	params.minus = 0;
-	params.plus = 0;
-	params.space = 0;
-	params.zero = 0;
-	params.hash = 0;
-	params.width = 0;
-	params.precisiontf = 0;
-	params.precision = 0;
-	params.length = 0;
-}
 
 void	writezeros(int n)
 {
