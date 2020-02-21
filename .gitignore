@@ -3,3 +3,4 @@ ft_printf
 *.o
 *.dSYM
 *.DS_Store
+main.c
