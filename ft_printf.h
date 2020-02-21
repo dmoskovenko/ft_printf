@@ -38,10 +38,10 @@ typedef struct	s_struct
 
 int		ft_printf(const char *fmt, ...);
 int		format_parse(va_list args, const char *fmt, t_struct params, int pos);
-int		conversions(va_list args, char fmt, t_struct params);
+int		conversions(va_list args, char spec, t_struct params);
 
 void	type_char(va_list args, t_struct params);
-void	type_int(args, params);
+void	type_int(va_list args, t_struct params);
 
 void	writezeros(int n);
 void	writeblanks(int n);

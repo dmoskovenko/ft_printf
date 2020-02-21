@@ -39,9 +39,9 @@ int     conversions(va_list args, char spec, t_struct params)
         type_string(params, params);
 	else if (c == 'p')
 	 	type_pointer(params, params, 2);
-*/  // will add other types later
 	else if (spec == 'd' || spec == 'i')
 		type_int(args, params);
+*/
     bzerostruct(params, 0);
     return (params.i);
 }

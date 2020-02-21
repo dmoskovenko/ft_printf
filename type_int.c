@@ -40,9 +40,9 @@ char	*itoa_base(int num, int base)  //китаец юзает intmax_t, инте
     out[0] = (is_neg == 1) ? '-' : out[0];
 	return (out);
 }
-
+/*
 void	type_int(args, params)
 {
 	
 }
-
+*/

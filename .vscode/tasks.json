@@ -37,6 +37,7 @@
         },
         {
             "label": "Build",
+            "dependsOrder": "sequence",
             "dependsOn": ["Make lib", "Clang build"]
         }
     ]
