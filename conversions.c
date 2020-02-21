@@ -6,11 +6,12 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/20 23:05:35 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/21 14:25:36 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 /*
 void	writezeros(int n)
 {
@@ -35,13 +36,15 @@ int     conversions(va_list args, char spec, t_struct params)
 {
 	if (spec == 'c')
 		type_char(args, params);
-/*  else if (c == 's')
+/*
+	else if (c == 's')
         type_string(params, params);
 	else if (c == 'p')
 	 	type_pointer(params, params, 2);
+*/
 	else if (spec == 'd' || spec == 'i')
 		type_int(args, params);
-*/
+
     bzerostruct(params, 0);
     return (params.i);
 }
