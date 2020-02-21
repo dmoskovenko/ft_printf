@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 18:34:13 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/21 15:22:47 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:43:53 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	int_from_fmt(t_struct params, int num)
 	s = itoa_base(num, 10);
 	if (s[0] == '-')
 		num_len++;
-	write(1, s, num_len);
+	params.nprinted = write(1, s, num_len);
+	free(s);
 }
 
 void	type_int(va_list args, t_struct params)
