@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/21 17:21:49 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:51:13 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		ft_printf(const char *fmt, ...);
 int		format_parse(va_list args, const char *fmt, t_struct params, int pos);
 int		conversions(va_list args, char spec, t_struct params);
 int		modifiers(va_list args, const char *fmt, t_struct params);
+void	length_field(const char *fmt, t_struct params);
 
 void	type_char(va_list args, t_struct params);
 
