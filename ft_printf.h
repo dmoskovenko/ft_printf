@@ -6,18 +6,24 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/21 14:45:38 by releanor         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:40:58 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# define VALIDSYM		"cspdiouxXfhl0123456789 %#-+."
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/includes/libft.h"
+
+# define VALIDSYM		"cspdiouxXfhl0123456789 %#-+."
+# define SHORT			1
+# define SHORTSHORT		2
+# define LONG			3
+# define LONGLONG		4
+# define LONGDOUBLE		7
 
 typedef struct	s_struct
 {
