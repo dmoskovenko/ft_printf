@@ -3,7 +3,7 @@
 
 int		main(void)
 {
-	ft_printf("digit: %c, %c\n", '3', '9');
-	printf("digit: %c, %c\n", '3', '9');
+	ft_printf("%ld\n", 2147483647l);
+	printf("%ld\n", 2147483647l);
 	return (0);
 }
