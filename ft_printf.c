@@ -67,7 +67,7 @@ int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
 					break;
 				}
 				else
-					pos = modifiers(args, fmt, params) - 1;
+					pos = modifiers(args, fmt, params);
 			}
 			continue;
 		}
