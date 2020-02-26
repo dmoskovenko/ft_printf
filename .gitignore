@@ -1,6 +1,0 @@
-ft_printf
-*.a
-*.o
-*.dSYM
-*.DS_Store
-main.c
