@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@42.fr>                  +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 20:33:47 by coclayto          #+#    #+#             */
-/*   Updated: 2019/04/30 20:33:57 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/01 10:51:26 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(long long n)
 {
 	ft_putnbr_fd(n, 1);
 }

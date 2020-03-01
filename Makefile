@@ -1,10 +1,10 @@
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 BIN = ft_printf
 
 FLAGS = -Wall -Wextra -Werror -g
 
-SRCS = ft_printf.c conversions.c type_char.c type_int.c modifiers.c
+SRCS = ft_printf.c conversions.c type_char.c type_int.c type_float.c modifiers.c
 
 HDR = ft_printf.h
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/21 17:40:12 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/01 11:29:27 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
 			{
 				pos++;
 				params.i = pos;
-				if (ft_strchr("cspdiouxXf%", fmt[pos]))
+				if (ft_strchr(TYPESYM, fmt[pos]))
 				{
 					pos = conversions(args, fmt[pos], params) + 1;
 					break;
