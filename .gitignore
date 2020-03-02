@@ -5,3 +5,4 @@ ft_printf
 *.DS_Store
 main.c
 /.vscode
+a.out

@@ -1,49 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_int.c                                         :+:      :+:    :+:   */
+/*   type_oct.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/20 18:34:13 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/02 22:39:45 by releanor         ###   ########.fr       */
+/*   Created: 2020/03/02 13:36:52 by releanor          #+#    #+#             */
+/*   Updated: 2020/03/02 22:39:35 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	int_from_fmt(t_struct params, int num)
+void	oct_from_fmt(t_struct params, unsigned int num)
 {
 	char	*s;
 	int		num_length;
 	int		i;
 
 	i = 0;
-	// if (params.length == 666)
-	// 	write(1, "$", 1);
-	num_length = num_len(num, 10);
-	s = itoa_base(num, 10);
-	if (s[0] == '-')
-		num_length++;
+	num_length = num_len(num, 8);
+	s = itoa_base_unsigned(num, 8);
 	params.nprinted = write(1, s, num_length);
 	free(s);
 }
 
-void	type_int(va_list args, t_struct params)
+void	type_oct(va_list args, t_struct params)
 {
 	// Length specifiers handling.
-	int num;
+	unsigned long long num;
 	
 	num = 0;
 	if (params.length == 0)
-		num = (int)va_arg(args, int);
+		num = va_arg(args, unsigned int);
 	if (params.length == SHORTSHORT)
-		num = (signed char)va_arg(args, int);
+		num = (signed char)va_arg(args, unsigned int);
 	if (params.length == SHORT)
-		num = (short int)va_arg(args, int);
+		num = (short int)va_arg(args, unsigned int);
 	if (params.length == LONG)
-		num = (long int)va_arg(args, int);
+		num = (unsigned long)va_arg(args, unsigned long);
 	if (params.length == LONGLONG)
-		num = (long long int)va_arg(args, int);
-	int_from_fmt(params, num);
+		num = (unsigned long long)va_arg(args, unsigned long long);
+	oct_from_fmt(params, num);
 }

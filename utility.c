@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 12:55:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/02 20:17:40 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/02 22:40:23 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		unsigned_num_len(unsigned int num, int base)
 	return (num_len);
 }
 
-char	*itoa_base(int num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
+char	*itoa_base(intmax_t num, int base)
 {
 	char 	*out;
 	int 	i;
@@ -63,7 +63,7 @@ char	*itoa_base(int num, int base)  //китаец юзает intmax_t, инте
 	return (out);
 }
 
-char	*itoa_base_unsigned(uintmax_t num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
+char	*itoa_base_unsigned(uintmax_t num, int base)
 {
 	char 	*out;
 	int 	i;
@@ -81,7 +81,7 @@ char	*itoa_base_unsigned(uintmax_t num, int base)  //китаец юзает int
 	return (out);
 }
 
-char	*itoa_base_upp(uintmax_t num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
+char	*itoa_base_upp(uintmax_t num, int base)
 {
 	char 	*out;
 	int 	i;
