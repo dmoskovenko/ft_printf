@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/21 17:51:13 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/02 15:37:09 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include "libft/includes/libft.h"
 
 # define VALIDSYM		"cspdiouxXfhl0123456789 %#-+."
@@ -51,11 +52,16 @@ void	length_field(const char *fmt, t_struct params);
 
 void	type_char(va_list args, t_struct params);
 
-int		pos_num_len(int num, int base);
-char	*itoa_base(int num, int base);
+int		signed_num_len(int num, int base);
+int		unsigned_num_len(unsigned int num, int base);
+char	*itoa_base(int num, int base, int signe);
+char	*itoa_base_unsigned(unsigned int num, int base/*, int signe*/);
 
 void	type_int(va_list args, t_struct params);
 void	int_from_fmt(t_struct params, int num);
+
+void	type_oct(va_list args, t_struct params);
+void	oct_from_fmt(t_struct params, unsigned int num);
 
 void	writezeros(int n);
 void	writeblanks(int n);
