@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 18:34:13 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/02 15:07:50 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/02 19:59:09 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	int_from_fmt(t_struct params, int num)
 {
 	char	*s;
-	int		num_len;
+	int		num_length;
 	int		i;
 
 	i = 0;
 	// if (params.length == 666)
 	// 	write(1, "$", 1);
-	num_len = signed_num_len(num, 10);
-	s = itoa_base(num, 10, 1);
+	num_length = num_len(num, 10);
+	s = itoa_base(num, 10);
 	if (s[0] == '-')
-		num_len++;
-	params.nprinted = write(1, s, num_len);
+		num_length++;
+	params.nprinted = write(1, s, num_length);
 	free(s);
 }
 

@@ -6,13 +6,13 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 12:55:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/02 16:27:31 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/02 20:17:40 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		signed_num_len(int num, int base)
+int		num_len(int num, int base)
 {
 	int		num_len;
 
@@ -41,14 +41,13 @@ int		unsigned_num_len(unsigned int num, int base)
 	return (num_len);
 }
 
-char	*itoa_base(int num, int base, int signe)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
+char	*itoa_base(int num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
 {
 	char 	*out;
 	int 	i;
 	int		is_neg;
 
-	i = (signe == 0) ? unsigned_num_len(num, base) : signed_num_len(num, base);
-	num = (signe == 0) ? (unsigned int)num : num; 
+	i = num_len(num, base);
 	is_neg = (num < 0 && base == 10) ? 1 : 0;
 	num = (num < 0 && base == 10) ? -num : num;
 	out = (char *)malloc(sizeof(char) * (is_neg + i + 1));
@@ -64,7 +63,7 @@ char	*itoa_base(int num, int base, int signe)  //китаец юзает intmax_
 	return (out);
 }
 
-char	*itoa_base_unsigned(unsigned int num, int base/*, int signe*/)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
+char	*itoa_base_unsigned(uintmax_t num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
 {
 	char 	*out;
 	int 	i;
@@ -82,24 +81,20 @@ char	*itoa_base_unsigned(unsigned int num, int base/*, int signe*/)  //кита�
 	return (out);
 }
 
-char	*itoa_base_upp(int num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
+char	*itoa_base_upp(uintmax_t num, int base)  //китаец юзает intmax_t, интересно, ёк-макарёк, почему?
 {
 	char 	*out;
 	int 	i;
-	int		is_neg;
 
-	i = signed_num_len(num, base);
-	is_neg = (num < 0 && base == 10) ? 1 : 0;
-	num = (num < 0 && base == 10) ? -num : num;
-	out = (char *)malloc(sizeof(char) * (is_neg + i + 1));
-	out[i-- + is_neg] = '\0';
+	i = unsigned_num_len(num, base);
+	out = (char *)malloc(sizeof(char) * (i + 1));
+	out[i--] = '\0';
 	while (i >= 0)
 	{
-		out[i + is_neg] = (num % base < 10) ? (num % base) + '0' : \
+		out[i] = (num % base < 10) ? (num % base) + '0' : \
 		(num % base + 'A' - 10);
 		num /= base;
 		i--;
 	}
-    out[0] = (is_neg == 1) ? '-' : out[0];
 	return (out);
 }

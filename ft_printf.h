@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/02 15:37:09 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/02 21:26:25 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ int		ft_printf(const char *fmt, ...);
 int		format_parse(va_list args, const char *fmt, t_struct params, int pos);
 int		conversions(va_list args, char spec, t_struct params);
 int		modifiers(va_list args, const char *fmt, t_struct params);
-void	length_field(const char *fmt, t_struct params);
+int		length_field(const char *fmt, t_struct params);
 
 void	type_char(va_list args, t_struct params);
 
-int		signed_num_len(int num, int base);
+int		num_len(int num, int base);
 int		unsigned_num_len(unsigned int num, int base);
-char	*itoa_base(int num, int base, int signe);
-char	*itoa_base_unsigned(unsigned int num, int base/*, int signe*/);
+char	*itoa_base(int num, int base);
+char	*itoa_base_unsigned(uintmax_t num, int base);
+char	*itoa_base_upp(uintmax_t num, int base);
 
 void	type_int(va_list args, t_struct params);
 void	int_from_fmt(t_struct params, int num);
