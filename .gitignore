@@ -1,8 +1,8 @@
-/.vscode
-*.a
-*.o
-*.dSYM
-*.DS_Store
 main.c
 ft_printf
 a.out
+*.a
+*.o
+*.json
+*.dSYM
+*.DS_Store
