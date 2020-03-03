@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/03 05:25:54 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:53:54 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include "libft/includes/libft.h"
 
 # define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 %#-+."
@@ -57,16 +58,23 @@ int			conversions(va_list args, char spec, t_struct *params);
 int			modifiers(va_list args, const char *fmt, t_struct *params);
 void		length_field(const char *fmt, t_struct *params);
 
-int			pos_num_len(int num, int base);
-char		*itoa_base(int num, int base);
+int			num_len(int num, int base);
+int			unsigned_num_len(unsigned int num, int base);
+char		*itoa_base(intmax_t num, int base);
+char		*itoa_base_unsigned(uintmax_t num, int base);
+char		*itoa_base_upp(uintmax_t num, int base);
 
 void		type_int(va_list args, t_struct *params);
-void		type_char(va_list args, t_struct *params);
-t_fstruct	type_float(va_list args, t_struct *params);
-
 void		int_from_fmt(t_struct *params, int num);
+
+void		type_char(va_list args, t_struct *params);
+
+t_fstruct	type_float(va_list args, t_struct *params);
 t_fstruct	float_from_fmt(t_struct *params, long double num, t_fstruct fstr);
 int			float_math(long double num, t_struct *params, t_fstruct fstr);
+
+void		type_oct(va_list args, t_struct *params);
+void		oct_from_fmt(t_struct *params, unsigned int num);
 
 void		writezeros(int n);
 void		writeblanks(int n);
