@@ -27,7 +27,12 @@ int		format_parse2(va_list args, const char *fmt, t_struct *params, int pos)
 }
 */ // переместил все в format_parse
 
-
+int		retmsg(char *str)
+{
+	ft_putstr(str);
+	ft_putchar('\n');
+	return (1);
+}
 
 void	bzerostruct(t_struct *params, int full)
 {

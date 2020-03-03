@@ -12,47 +12,40 @@
 
 #include "ft_printf.h"
 
-int			float_math(long double num, t_struct *params, t_fstruct fstr)
+void		float_math(long double num, t_struct *params)
 {
+	int			i;
 	long double buf;
-	int	i;
-	
+
 	i = 0;
-	buf = num - fstr.d;
+	buf = num - params->fdecimal;
 	while (i < params->precision)
 	{
 		buf *= 10;
 		i++;
 	}
-	return (buf);
+	if (params->length >= i)
+	{
+		
+	}
 }
 
-t_fstruct	float_from_fmt(t_struct *params, long double num, t_fstruct fstr)
-{
-	int i;
-
-	i = 0;
-	if (!params->precision)
-		params->precision = 6;
-	fstr.d = num;
-	ft_putnbr((long)num);
-	write(1, ".", 1);
-	ft_putnbr((long)float_math(num, params, fstr));
-	return (fstr);
-}
-
-t_fstruct		type_float(va_list args, t_struct *params)
+t_struct	*type_float(va_list args, t_struct *params)
 {
 	long double num;
-	t_fstruct	fstr;
 
-	fstr.before = "\0";
 	if (params->length == LONG)
 		num = (double)va_arg(args, double);
 	if (params->length == LONGDOUBLE)  
 		num = (long double)va_arg(args, long double);
 	if (params->length == 0)
 		num = (double)va_arg(args, double);
-	float_from_fmt(params, num, fstr);
-	return (fstr);
+	if (!params->precision)
+		params->precision = 6;
+	params->fdecimal = num;
+	ft_putnbr((long)num);
+	write(1, ".", 1);
+	float_math(num, params);
+	ft_putstr(params->fres);
+	return (params);
 }

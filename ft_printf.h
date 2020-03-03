@@ -43,20 +43,19 @@ typedef struct	s_struct
 	int			precisiontf;
 	int			precision;
 	int			length;
+	long long	fdecimal;
+	char		*fbefore;
+	char		*fafter;
+	char		*fres;
 }				t_struct;
-
-typedef struct	s_fstruct
-{
-	long long	d;
-	char		*before;
-	char		*after;
-}				t_fstruct;
 
 int			ft_printf(const char *fmt, ...);
 int			format_parse(va_list args, const char *fmt, t_struct *params, int pos);
 int			conversions(va_list args, char spec, t_struct *params);
 int			modifiers(va_list args, const char *fmt, t_struct *params);
 void		length_field(const char *fmt, t_struct *params);
+void		bzerostruct(t_struct *params, int full);
+int			retmsg(char *str);
 
 int			num_len(int num, int base);
 int			unsigned_num_len(unsigned int num, int base);
@@ -69,16 +68,13 @@ void		int_from_fmt(t_struct *params, int num);
 
 void		type_char(va_list args, t_struct *params);
 
-t_fstruct	type_float(va_list args, t_struct *params);
-t_fstruct	float_from_fmt(t_struct *params, long double num, t_fstruct fstr);
-int			float_math(long double num, t_struct *params, t_fstruct fstr);
+t_struct	*type_float(va_list args, t_struct *params);
+void		float_math(long double num, t_struct *params);
 
 void		type_oct(va_list args, t_struct *params);
 void		oct_from_fmt(t_struct *params, unsigned int num);
 
 void		writezeros(int n);
 void		writeblanks(int n);
-
-void		bzerostruct(t_struct *params, int full);
 
 #endif
