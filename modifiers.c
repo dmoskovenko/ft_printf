@@ -6,36 +6,36 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:46:52 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/01 07:55:40 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/03 04:55:17 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	length_field(const char *fmt, t_struct params)
+void	length_field(const char *fmt, t_struct *params)
 {
 	int i;
 
-	i = params.i;
+	i = params->i;
 	if (ft_strchr(LENGHTFLAGS, fmt[i]))
 	{
 		if (fmt[i] == 'h')
-			params.length = SHORT;
+			params->length = SHORT;
 		else if (fmt[i] == 'h' && fmt[i + 1] == 'h')
-			params.length = SHORTSHORT;
+			params->length = SHORTSHORT;
 		if (fmt[i] == 'l')
-			params.length = LONG;
+			params->length = LONG;
 		else if (fmt[i] == 'l' && fmt[i + 1] == 'l')
-			params.length = LONGLONG;
+			params->length = LONGLONG;
 		if (fmt[i] == 'L')
-			params.length = LONGDOUBLE;
+			params->length = LONGDOUBLE;
 	}
 	while (ft_strchr(LENGHTFLAGS, fmt[i]))
 		i++;
-	params.i = i;
+	params->i = i;
 }
 
-int		modifiers(va_list args, const char *fmt, t_struct params)
+int		modifiers(va_list args, const char *fmt, t_struct *params)
 {
 	// Flags
 	// Width
@@ -43,5 +43,5 @@ int		modifiers(va_list args, const char *fmt, t_struct params)
 	if (args == NULL)
 		return (0);
 	length_field(fmt, params);
-	return (params.i);
+	return (params->i);
 }

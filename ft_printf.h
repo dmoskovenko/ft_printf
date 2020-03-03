@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/01 11:29:47 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:25:54 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,25 @@ typedef struct	s_fstruct
 }				t_fstruct;
 
 int			ft_printf(const char *fmt, ...);
-int			format_parse(va_list args, const char *fmt, t_struct params, int pos);
-int			conversions(va_list args, char spec, t_struct params);
-int			modifiers(va_list args, const char *fmt, t_struct params);
-void		length_field(const char *fmt, t_struct params);
+int			format_parse(va_list args, const char *fmt, t_struct *params, int pos);
+int			conversions(va_list args, char spec, t_struct *params);
+int			modifiers(va_list args, const char *fmt, t_struct *params);
+void		length_field(const char *fmt, t_struct *params);
 
 int			pos_num_len(int num, int base);
 char		*itoa_base(int num, int base);
 
-void		type_int(va_list args, t_struct params);
-void		type_char(va_list args, t_struct params);
-void		type_float(va_list args, t_struct params);
+void		type_int(va_list args, t_struct *params);
+void		type_char(va_list args, t_struct *params);
+t_fstruct	type_float(va_list args, t_struct *params);
 
-void		int_from_fmt(t_struct params, int num);
-t_fstruct	float_from_fmt(t_struct params, long double num, t_fstruct fstr);
-int			float_math(long double num, t_struct params, t_fstruct fstr);
+void		int_from_fmt(t_struct *params, int num);
+t_fstruct	float_from_fmt(t_struct *params, long double num, t_fstruct fstr);
+int			float_math(long double num, t_struct *params, t_fstruct fstr);
 
 void		writezeros(int n);
 void		writeblanks(int n);
 
-t_struct	bzerostruct(t_struct params, int full);
+void		bzerostruct(t_struct *params, int full);
 
 #endif

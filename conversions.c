@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/01 11:29:15 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/03 04:54:53 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	writeblanks(int n)
 }
 */
 
-int		conversions(va_list args, char spec, t_struct params)
+int		conversions(va_list args, char spec, t_struct *params)
 {
 	if (spec == 'c' || spec == 'C')
 		type_char(args, params);
@@ -47,5 +47,5 @@ int		conversions(va_list args, char spec, t_struct params)
 	else if (spec == 'f' || spec == 'F')
 		type_float(args, params);
 	bzerostruct(params, 0);
-	return (params.i);
+	return (params->i);
 }
