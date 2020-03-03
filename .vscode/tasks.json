@@ -23,7 +23,7 @@
             "args": [
                 "-g",
                 "main.c",
-                "ft_printf.a",
+                "libftprintf.a",
                 "-o",
                 "ft_printf"
             ],

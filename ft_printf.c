@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/02/21 17:40:12 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:23:52 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-int		format_parse2(va_list args, const char *fmt, t_struct params, int pos)
+int		format_parse2(va_list args, const char *fmt, t_struct *params, int pos)
 {
-	params.i = pos;
+	params->i = pos;
 	if (!ft_strchr("cspdiouxXf%", fmt[pos]))
 		modifiers(args, fmt, params);
 	else if (ft_strchr(("cspdiouxXf%"), fmt[pos]))
@@ -23,36 +23,37 @@ int		format_parse2(va_list args, const char *fmt, t_struct params, int pos)
 		conversions(args, fmt[pos], params);
 //		bezerostruct2(params);
 	}
-	return (params.i - 1);
+	return (params->i - 1);
 }
 */ // переместил все в format_parse
 
-t_struct	bzerostruct(t_struct params, int full)
+
+
+void	bzerostruct(t_struct *params, int full)
 {
 	if (full)
 	{
-		params.i = 0;
-		params.nprinted = 0;
+		params->i = 0;
+		params->nprinted = 0;
 	}
-	params.len = 0;
-	params.minus = 0;
-	params.plus = 0;
-	params.space = 0;
-	params.zero = 0;
-	params.hash = 0;
-	params.width = 0;
-	params.precisiontf = 0;
-	params.precision = 0;
-	params.length = 0;
-	return (params);
+	params->len = 0;
+	params->minus = 0;
+	params->plus = 0;
+	params->space = 0;
+	params->zero = 0;
+	params->hash = 0;
+	params->width = 0;
+	params->precisiontf = 0;
+	params->precision = 0;
+	params->length = 0;
 }
 
-int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
+int		format_parse(va_list args, const char *fmt, t_struct *params, int pos)
 {
 	while (fmt[pos])
 	{
 		if (fmt[pos] != '%' && fmt[pos])
-			params.nprinted += write(1, &fmt[pos], 1);
+			params->nprinted += write(1, &fmt[pos], 1);
 		else if (fmt[pos] == '%')
 		{
 			if (!ft_strchr(VALIDSYM, fmt[pos + 1]))
@@ -60,8 +61,8 @@ int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
 			while (ft_strchr(VALIDSYM, fmt[pos + 1]))
 			{
 				pos++;
-				params.i = pos;
-				if (ft_strchr("cspdiouxXf%", fmt[pos]))
+				params->i = pos;
+				if (ft_strchr(TYPESYM, fmt[pos]))
 				{
 					pos = conversions(args, fmt[pos], params) + 1;
 					break;
@@ -73,17 +74,19 @@ int		format_parse(va_list args, const char *fmt, t_struct params, int pos)
 		}
 		pos++;
 	}
-	return (params.nprinted);
+	return (params->nprinted);
 }
 
 int		ft_printf(const char *fmt, ...)
 {
 	va_list		args;
-	t_struct	params;
+	t_struct	*params;
 	int			printed;
 
-	params.fmt = (char *) fmt;
-	params = bzerostruct(params, 1);
+	if (!(params = (t_struct *)malloc(sizeof(t_struct))))
+		return (0);
+	bzerostruct(params, 1);
+	params->fmt = (char *) fmt;
 	va_start(args, fmt);
 	if (!fmt[0])
 		return (0);

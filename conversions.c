@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/02/21 14:25:36 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/03 04:54:53 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,20 @@ void	writeblanks(int n)
 }
 */
 
-int     conversions(va_list args, char spec, t_struct params)
+int		conversions(va_list args, char spec, t_struct *params)
 {
-	if (spec == 'c')
+	if (spec == 'c' || spec == 'C')
 		type_char(args, params);
 /*
-	else if (c == 's')
-        type_string(params, params);
-	else if (c == 'p')
-	 	type_pointer(params, params, 2);
+	else if (c == 's' || spec == 'S')
+		type_string(params, params);
+	else if (c == 'p' || spec == 'P')
+		type_pointer(params, params, 2);
 */
-	else if (spec == 'd' || spec == 'i')
+	else if (spec == 'd' || spec == 'i' || spec == 'D' || spec == 'I')
 		type_int(args, params);
-
-    bzerostruct(params, 0);
-    return (params.i);
+	else if (spec == 'f' || spec == 'F')
+		type_float(args, params);
+	bzerostruct(params, 0);
+	return (params->i);
 }
