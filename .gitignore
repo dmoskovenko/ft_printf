@@ -1,4 +1,5 @@
 ft_printf
+*.json
 *.a
 *.o
 *.dSYM
