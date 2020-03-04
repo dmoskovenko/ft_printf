@@ -3,6 +3,6 @@ ft_printf
 a.out
 *.a
 *.o
-*.json
+#*.json
 *.dSYM
 *.DS_Store
