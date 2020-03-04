@@ -3,7 +3,7 @@
 
 int		main(void)
 {
-	ft_printf("%F\n", 66666666666.21474568);
-	printf("%F\n", 66666666666.21474568);
+	ft_printf("%f\n", 666.98632523);
+	printf("%f\n", 666.98632523);
 	return (0);
 }

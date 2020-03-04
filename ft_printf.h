@@ -43,10 +43,10 @@ typedef struct	s_struct
 	int			precisiontf;
 	int			precision;
 	int			length;
-	long long	fdecimal;
-	char		*fbefore;
-	char		*fafter;
-	char		*fres;
+	long double fdecimal;
+	long long	fafter;
+	long long	fbefore;
+	char		*fstr;
 }				t_struct;
 
 int			ft_printf(const char *fmt, ...);
@@ -57,8 +57,8 @@ void		length_field(const char *fmt, t_struct *params);
 void		bzerostruct(t_struct *params, int full);
 int			retmsg(char *str);
 
-int			num_len(int num, int base);
-int			unsigned_num_len(unsigned int num, int base);
+int			num_len(intmax_t num, int base);
+int			unsigned_num_len(uintmax_t num, int base);
 char		*itoa_base(intmax_t num, int base);
 char		*itoa_base_unsigned(uintmax_t num, int base);
 char		*itoa_base_upp(uintmax_t num, int base);

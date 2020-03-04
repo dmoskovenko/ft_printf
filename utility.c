@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int		num_len(int num, int base)
+int		num_len(intmax_t num, int base)
 {
 	int		num_len;
 
@@ -26,7 +26,7 @@ int		num_len(int num, int base)
 	return (num_len);
 }
 
-int		unsigned_num_len(unsigned int num, int base)
+int		unsigned_num_len(uintmax_t num, int base)
 {
 	int		num_len;
 

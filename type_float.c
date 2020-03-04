@@ -15,25 +15,39 @@
 void		float_math(long double num, t_struct *params)
 {
 	int			i;
-	long double buf;
+	int			len;
+	long long	buf;
+	
 
 	i = 0;
-	buf = num - params->fdecimal;
-	while (i < params->precision)
-	{
-		buf *= 10;
-		i++;
-	}
-	if (params->length >= i)
-	{
-		
-	}
+	params->fdecimal = num - params->fbefore;
+	while (i++ < params->precision)
+		params->fdecimal *= 10;
+	buf = params->fdecimal * 10;
+	if ((buf % 10) >= 5)
+		params->fdecimal += 0.5;
+	params->fafter = params->fdecimal;
+	params->fstr = itoa_base_unsigned(params->fafter, 10);
+	len = ft_strlen(params->fstr);
+	while (len++ < params->precision)
+		write(1, "0", 1);
+
+/*
+** 	if (params->precision >= i)
+** 	{
+** 		params->fdecimal = decimal;
+** 		params->fafter = ft_itoa(params->fdecimal);
+** 		if (params->fafter[i - 1] == 5)
+** 
+** 	}
+*/
 }
 
 t_struct	*type_float(va_list args, t_struct *params)
 {
 	long double num;
 
+//	params->precision = 1;
 	if (params->length == LONG)
 		num = (double)va_arg(args, double);
 	if (params->length == LONGDOUBLE)  
@@ -42,10 +56,10 @@ t_struct	*type_float(va_list args, t_struct *params)
 		num = (double)va_arg(args, double);
 	if (!params->precision)
 		params->precision = 6;
-	params->fdecimal = num;
-	ft_putnbr((long)num);
+	params->fbefore = num;
+	ft_putnbr(params->fbefore);
 	write(1, ".", 1);
 	float_math(num, params);
-	ft_putstr(params->fres);
+	ft_putstr(params->fstr);
 	return (params);
 }
