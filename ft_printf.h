@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 12:53:52 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:53:49 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,16 @@ char		*itoa_base(intmax_t num, int base);
 char		*itoa_base_unsigned(uintmax_t num, int base);
 char		*itoa_base_upp(uintmax_t num, int base);
 
+void		type_char(va_list args, t_struct *params);
+void		type_str(va_list args, t_struct *params);
+
 void		type_int(va_list args, t_struct *params);
 void		int_from_fmt(t_struct *params, intmax_t num);
 
+void		type_ptr(va_list args, t_struct *params);
+
 void		type_u(va_list args, t_struct *params);
 void		u_from_fmt(t_struct *params, uintmax_t num);
-
-void		type_char(va_list args, t_struct *params);
-void		type_str(va_list args, t_struct *params);
 
 t_fstruct	type_float(va_list args, t_struct *params);
 t_fstruct	float_from_fmt(t_struct *params, long double num, t_fstruct fstr);
