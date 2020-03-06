@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 12:51:07 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:33:58 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int		conversions(va_list args, char spec, t_struct *params)
 {
 	if (spec == 'c' || spec == 'C')
 		type_char(args, params);
-	// if (spec == 's' || spec == 'S')
-	// 	type_str(args, params);
+	if (spec == 's' || spec == 'S')
+		type_str(args, params);
 /*
 	else if (c == 'p' || spec == 'P')
 		type_pointer(params, params, 2);
