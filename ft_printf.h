@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 11:11:46 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:03:09 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ int			float_math(long double num, t_struct *params, t_fstruct fstr);
 
 void		type_oct(va_list args, t_struct *params);
 void		oct_from_fmt(t_struct *params, uintmax_t num);
+
+void		type_hex(va_list args, t_struct *params, char spec);
+void		hex_from_fmt(t_struct *params, uintmax_t num, char spec);
 
 void		writezeros(int n);
 void		writeblanks(int n);

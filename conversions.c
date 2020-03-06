@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:54:23 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/03 05:45:11 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:03:24 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ int		conversions(va_list args, char spec, t_struct *params)
 */
 	else if (spec == 'd' || spec == 'i' || spec == 'D' || spec == 'I')
 		type_int(args, params);
+	else if (spec == 'x' || spec == 'X')
+		type_hex(args, params, spec);
 	else if (spec == 'f' || spec == 'F')
 		type_float(args, params);
 	else if (spec == 'o')
-		type_oct(args, params);	
+		type_oct(args, params);
+	else
 	bzerostruct(params, 0);
 	return (params->i);
 }
