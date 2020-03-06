@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 12:40:22 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:53:52 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ char		*itoa_base_upp(uintmax_t num, int base);
 
 void		type_int(va_list args, t_struct *params);
 void		int_from_fmt(t_struct *params, intmax_t num);
+
+void		type_u(va_list args, t_struct *params);
+void		u_from_fmt(t_struct *params, uintmax_t num);
 
 void		type_char(va_list args, t_struct *params);
 void		type_str(va_list args, t_struct *params);
