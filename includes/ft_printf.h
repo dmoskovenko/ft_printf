@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 14:53:49 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 20:05:48 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 %#-+."
 # define TYPESYM		"cCsSpPdDiIoOuUxXfF"
 # define LENGHTFLAGS	"hlL"
+# define FLAGS			" %#-+."
 # define SHORT			1
 # define SHORTSHORT		2
 # define LONG			3

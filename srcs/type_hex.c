@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 11:55:06 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 12:04:12 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 20:00:16 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	hex_from_fmt(t_struct *params, uintmax_t num, char spec)
 	i = 0;
 	num_length = unsigned_num_len(num, 16);
 	s = (spec == 'x') ? itoa_base_unsigned(num, 16) : itoa_base_upp(num, 16);
+	if (params->hash == 1 && spec == 'x')
+		params->nprinted = write(1, "0x", 2);
+	else if (params->hash == 1 && spec == 'X')
+		params->nprinted = write(1, "0X", 2);
 	params->nprinted = write(1, s, num_length);
 	free(s);
 }

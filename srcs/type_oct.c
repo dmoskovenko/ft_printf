@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:36:52 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 12:22:29 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 20:25:22 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	oct_from_fmt(t_struct *params, uintmax_t num)
 	i = 0;
 	num_length = unsigned_num_len(num, 8);
 	s = itoa_base_unsigned(num, 8);
+	if (params->hash == 1)
+		params->nprinted = write(1, "0", 1);
 	params->nprinted = write(1, s, num_length);
 	free(s);
 }
