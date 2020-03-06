@@ -1,23 +1,19 @@
 NAME = libftprintf.a
 
-BIN = ft_printf
-
 FLAGS = -Wall -Wextra -Werror -g
 
-<<<<<<< .merge_file_ntnPml
-SRCS = ft_printf.c conversions.c type_char.c \
-									type_str.c \
-									type_ptr.c \
-									type_int.c \
-									type_u.c \
-									type_oct.c \
-									type_hex.c \
-									type_float.c \
-									modifiers.c \
-									utility.c
-=======
-SOURCES = ft_printf.c conversions.c type_char.c type_int.c type_oct.c type_float.c modifiers.c utility.c
->>>>>>> .merge_file_thKTuQ
+SOURCES = 	ft_printf.c \
+			conversions.c \
+			type_char.c \
+			type_str.c \
+			type_ptr.c \
+			type_int.c \
+			type_u.c \
+			type_oct.c \
+			type_hex.c \
+			type_float.c \
+			modifiers.c \
+			utility.c
 
 HEADER = includes
 

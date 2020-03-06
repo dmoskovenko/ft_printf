@@ -3,9 +3,8 @@ ft_printf
 a.out
 *.a
 *.o
+*.sh
+*.json
 *.dSYM
 *.DS_Store
-*.sh
 tests/*
-gnl/
-.vscode/*
