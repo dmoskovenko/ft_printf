@@ -4,7 +4,15 @@ BIN = ft_printf
 
 FLAGS = -Wall -Wextra -Werror -g
 
-SRCS = ft_printf.c conversions.c type_char.c type_int.c type_oct.c type_hex.c type_float.c type_str.c modifiers.c utility.c
+SRCS = ft_printf.c conversions.c type_char.c \
+									type_int.c \
+									type_u.c \
+									type_oct.c \
+									type_hex.c \
+									type_float.c \
+									type_str.c \
+									modifiers.c \
+									utility.c
 
 HDR = ft_printf.h
 
