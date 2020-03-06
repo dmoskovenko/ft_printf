@@ -23,3 +23,29 @@
 			  For floating point types, this has no effect.[????????];
 	ll		- For integer types, causes printf to expect a long long-sized integer argument;
 	L		- For floating point types, causes printf to expect a long double argument;
+
+
+	Flags:
+
+	#		- The value should be converted to an ``alternate form''.  For c, d, i, n, p, s, and u conver-
+			sions, this option has no effect.  For o conversions, the precision of the number is
+			increased to force the first character of the output string to a zero.  For x and X conver-
+			sions, a non-zero result has the string `0x' (or `0X' for X conversions) prepended to it.
+			For a, A, e, E, f, F, g, and G conversions, the result will always contain a decimal point,
+			even if no digits follow it (normally, a decimal point appears in the results of those con-
+			versions only if a digit follows).  For g and G conversions, trailing zeros are not removed
+			from the result as they would otherwise be.
+
+	0		- Zero padding.  For all conversions except n, the converted value is padded on the left with
+			zeros rather than blanks.  If a precision is given with a numeric conversion (d, i, o, u, i,
+			x, and X), the 0 flag is ignored.
+
+	-		- A negative field width flag; the converted value is to be left adjusted on the field bound-
+			ary.  Except for n conversions, the converted value is padded on the right with blanks,
+			rather than on the left with blanks or zeros.  A - overrides a 0 if both are given.
+
+	+		-   A sign must always be placed before a number produced by a signed conversion.  A + overrides
+			a space if both are used.
+
+	" "		-  A blank should be left before a positive number produced by a signed conversion (a, A, d, e,
+			E, f, F, g, G, or i).
