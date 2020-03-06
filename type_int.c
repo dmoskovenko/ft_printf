@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   type_int.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 18:34:13 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/03 08:27:10 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:07:30 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	int_from_fmt(t_struct *params, int num)
+void	int_from_fmt(t_struct *params, intmax_t num)
 {
 	char	*s;
 	int		num_length;
@@ -32,7 +32,7 @@ void	int_from_fmt(t_struct *params, int num)
 void	type_int(va_list args, t_struct *params)
 {
 	// Length specifiers handling.
-	int num;
+	intmax_t num;
 	
 	num = 0;
 	if (params->length == 0)
@@ -42,7 +42,7 @@ void	type_int(va_list args, t_struct *params)
 	if (params->length == SHORT)
 		num = (short int)va_arg(args, int);
 	if (params->length == LONG)
-		num = (long int)va_arg(args, int);
+		num = (long int)va_arg(args, long int);
 	if (params->length == LONGLONG)
 		num = (long long int)va_arg(args, int);
 	int_from_fmt(params, num);
