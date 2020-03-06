@@ -4,6 +4,7 @@ BIN = ft_printf
 
 FLAGS = -Wall -Wextra -Werror -g
 
+<<<<<<< .merge_file_ntnPml
 SRCS = ft_printf.c conversions.c type_char.c \
 									type_str.c \
 									type_ptr.c \
@@ -14,14 +15,21 @@ SRCS = ft_printf.c conversions.c type_char.c \
 									type_float.c \
 									modifiers.c \
 									utility.c
+=======
+SOURCES = ft_printf.c conversions.c type_char.c type_int.c type_oct.c type_float.c modifiers.c utility.c
+>>>>>>> .merge_file_thKTuQ
 
-HDR = ft_printf.h
+HEADER = includes
 
 LIBFT = libft
 
-OBJS = $(addprefix $(DIR_O)/,$(SRCS:.c=.o))
+DIR_S = srcs
 
 DIR_O = obj
+
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT)
@@ -29,16 +37,16 @@ $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-$(DIR_O)/%.o: %.c $(HDR)
+$(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)/ft_printf.h
 	@mkdir -p obj
-	gcc $(FLAGS) -I $(HDR) -o $@ -c $<
+	gcc $(FLAGS) -I $(HEADER) -o $@ -c $<
 
 all: $(NAME)
 
 norme:
 	norminette ./libft/
 	@echo
-	norminette ./$(HDR)/
+	norminette ./$(HEADER)/
 	@echo
 	norminette ./$(SRCS)/
 
@@ -49,7 +57,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	#make fclean -C $(LIBFT)
+	make fclean -C $(LIBFT)
 
 re: fclean all
 
