@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdint.h>
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 # define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 %#-+."
 # define TYPESYM		"cCsSpPdDiIoOuUxXfF"
