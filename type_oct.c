@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:36:52 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 11:17:49 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:22:29 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	oct_from_fmt(t_struct *params, uintmax_t num)
 
 void	type_oct(va_list args, t_struct *params)
 {
-	// Length specifiers handling.
 	uintmax_t num;
 	
 	num = 0;

@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 18:34:13 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 11:07:30 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:33:06 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	int_from_fmt(t_struct *params, intmax_t num)
 	int		i;
 
 	i = 0;
-	// if (params->length == 666)
-	// 	write(1, "$", 1);
 	num_length = num_len(num, 10);
 	s = itoa_base(num, 10);
 	if (s[0] == '-')
@@ -31,7 +29,6 @@ void	int_from_fmt(t_struct *params, intmax_t num)
 
 void	type_int(va_list args, t_struct *params)
 {
-	// Length specifiers handling.
 	intmax_t num;
 	
 	num = 0;
