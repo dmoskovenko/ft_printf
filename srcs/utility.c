@@ -6,11 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 12:55:23 by releanor          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2020/03/02 22:40:23 by releanor         ###   ########.fr       */
-=======
-/*   Updated: 2020/03/06 11:11:40 by releanor         ###   ########.fr       */
->>>>>>> pointer.conversion
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +28,7 @@ int		num_len(intmax_t num, int base)
 
 int		unsigned_num_len(uintmax_t num, int base)
 {
-<<<<<<< HEAD
-	int		num_len;
-=======
 	uintmax_t		num_len;
->>>>>>> pointer.conversion
 
 	num_len = 0;
 	if (num == 0)
