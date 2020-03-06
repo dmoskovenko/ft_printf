@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/03/03 05:54:23 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:02:42 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,17 @@ int		format_parse(va_list args, const char *fmt, t_struct *params, int pos)
 		{
 			if (!ft_strchr(VALIDSYM, fmt[pos + 1]))
 				break;
-			while (ft_strchr(VALIDSYM, fmt[pos + 1]))
-			{
+			else
 				pos++;
+			while (ft_strchr(VALIDSYM, fmt[pos/* + 1*/]))
+			{
 				params->i = pos;
 				if (ft_strchr(TYPESYM, fmt[pos]))
 				{
 					pos = conversions(args, fmt[pos], params) + 1;
 					break;
 				}
-				else
+				else if (ft_strchr(LENGHTFLAGS, fmt[pos]))
 					pos = modifiers(args, fmt, params);
 			}
 			continue;

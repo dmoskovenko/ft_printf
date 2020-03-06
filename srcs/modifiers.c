@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modifiers.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:46:52 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/03 08:30:48 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/06 10:22:12 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,25 @@ void	flags(const char *fmt, t_struct *params)
 
 void	length_field(const char *fmt, t_struct *params)
 {
-	int i;
+	//int i;
 
-	i = params->i;
-	if (ft_strchr(LENGHTFLAGS, fmt[i]))
+	//i = params->i;
+	if (ft_strchr(LENGHTFLAGS, fmt[params->i]))
 	{
-		if (fmt[i] == 'h')
+		if (fmt[params->i] == 'h')
 			params->length = SHORT;
-		else if (fmt[i] == 'h' && fmt[i + 1] == 'h')
+		else if (fmt[params->i] == 'h' && fmt[params->i + 1] == 'h')
 			params->length = SHORTSHORT;
-		if (fmt[i] == 'l')
+		if (fmt[params->i] == 'l')
 			params->length = LONG;
-		else if (fmt[i] == 'l' && fmt[i + 1] == 'l')
+		else if (fmt[params->i] == 'l' && fmt[params->i + 1] == 'l')
 			params->length = LONGLONG;
-		if (fmt[i] == 'L')
+		if (fmt[params->i] == 'L')
 			params->length = LONGDOUBLE;
 	}
-	while (ft_strchr(LENGHTFLAGS, fmt[i]))
-		i++;
-	params->i = i;
+	while (ft_strchr(LENGHTFLAGS, fmt[params->i]))
+		params->i++;
+	//params->i = i;
 }
 
 int		modifiers(va_list args, const char *fmt, t_struct *params)

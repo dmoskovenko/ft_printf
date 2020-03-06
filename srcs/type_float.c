@@ -103,4 +103,4 @@ t_struct	*type_float(va_list args, t_struct *params)
 	float_math(num, params);
 	float_print(negative, params);
 	return (params);
-}
+} 
