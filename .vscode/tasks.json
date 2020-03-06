@@ -21,8 +21,12 @@
             "label": "Clang build",
             "command": "clang",
             "args": [
-                "-g",
-                "main.c",
+				"-g",
+				"-Werror",
+				"-Wall",
+				"-Wextra",
+				"tests/main_2.c",
+				"gnl/get_next_line.c",
                 "libftprintf.a",
                 "-o",
                 "ft_printf"

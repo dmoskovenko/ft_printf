@@ -26,7 +26,7 @@ char			*ft_itoa(long long n)
 {
 	char			*str;
 	size_t			len;
-	unsigned int	n1;
+	long long		n1;
 
 	len = str_len(n);
 	n1 = n;

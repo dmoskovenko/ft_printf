@@ -12,6 +12,26 @@
 
 #include "ft_printf.h"
 
+void	flags(const char *fmt, t_struct *params)
+{
+	while (ft_strchr("-+ #0", fmt[params->i]))
+	{
+		if (fmt[params->i] == '-')
+			params->minus = 1;
+		if (fmt[params->i] == '+')
+			params->plus = 1;
+		if (fmt[params->i] == ' ')
+			params->space = 1;
+		if (fmt[params->i] == '#')
+			params->hash = 1;
+		if (fmt[params->i] == '0')
+			params->zero = 1;
+		params->i++;
+	}
+	if (params->plus == 1)
+		params->space = 0;
+}
+
 void	length_field(const char *fmt, t_struct *params)
 {
 	int i;
@@ -37,11 +57,13 @@ void	length_field(const char *fmt, t_struct *params)
 
 int		modifiers(va_list args, const char *fmt, t_struct *params)
 {
-	// Flags
-	// Width
-	// Precision
 	if (args == NULL)
 		return (0);
 	length_field(fmt, params);
+ 	flags(fmt, params);
+/*
+**  width(fmt, params, args);
+**  precision(fmt, params, args, 0);
+*/
 	return (params->i);
 }
