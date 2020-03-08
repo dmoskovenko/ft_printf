@@ -111,15 +111,13 @@ t_struct	*type_float(va_list args, t_struct *params)
 		params->zero = 0;
 		if (is_inf(num))
 		{
-			params->nprinted = 4;
-			write(1, "inf\0", 4);
+			params->nprinted = write(1, "inf", 3);
 			return (params);
 		}
 		if (is_nan(num))
 		{
 			params->plus = 0;
-			params->nprinted = 1;
-			write(1, "nan\0", 4);
+			params->nprinted = write(1, "nan", 3);
 			return (params);
 		}
 	}
