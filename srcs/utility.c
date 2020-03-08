@@ -16,6 +16,8 @@ int		num_len(intmax_t num, int base)
 {
 	int		num_len;
 
+	if (!num)
+		return(1);
 	num_len = 0;
 	num = (num < 0) ? -num : num;
 	while (num >= 1)

@@ -37,20 +37,20 @@ void	length_field(const char *fmt, t_struct *params)
 	//int i;
 
 	//i = params->i;
-	if (ft_strchr(LENGHTFLAGS, fmt[params->i]))
+	if (ft_strchr("hlL", fmt[params->i]))
 	{
 		if (fmt[params->i] == 'h')
 			params->length = SHORT;
-		else if (fmt[params->i] == 'h' && fmt[params->i + 1] == 'h')
+		if (fmt[params->i] == 'h' && fmt[params->i + 1] == 'h')
 			params->length = SHORTSHORT;
 		if (fmt[params->i] == 'l')
 			params->length = LONG;
-		else if (fmt[params->i] == 'l' && fmt[params->i + 1] == 'l')
+		if (fmt[params->i] == 'l' && fmt[params->i + 1] == 'l')
 			params->length = LONGLONG;
 		if (fmt[params->i] == 'L')
 			params->length = LONGDOUBLE;
 	}
-	while (ft_strchr(LENGHTFLAGS, fmt[params->i]))
+	while (ft_strchr("hlL", fmt[params->i]))
 		params->i++;
 	//params->i = i;
 }

@@ -21,8 +21,7 @@
 
 # define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 %#-+."
 # define TYPESYM		"cCsSpPdDiIoOuUxXfF"
-# define LENGHTFLAGS	"hlL"
-# define FLAGS			" %#-+."
+# define FLAGS			" -+#0hlL"
 # define SHORT			1
 # define SHORTSHORT		2
 # define LONG			3
@@ -49,6 +48,8 @@ typedef struct	s_struct
 	long long	fafter;
 	long long	fbefore;
 	char		*fstr;
+	int			nan;
+	int			inf;
 }				t_struct;
 
 int				ft_printf(const char *fmt, ...);

@@ -12,6 +12,19 @@
 
 #include "ft_printf.h"
 
+static int			is_nan(long double nb)
+{
+	return (!(nb == nb));
+}
+
+static int			is_inf(long double nb)
+{
+	if (nb == (1.0 / 0.0) || nb == -(1.0 / 0.0))
+		return (1);
+	else
+		return (0);
+}
+
 long double		power(long long n, int i)
 {
 	long long	j;
@@ -92,6 +105,24 @@ t_struct	*type_float(va_list args, t_struct *params)
 		num = (long double)va_arg(args, long double);
 	if (params->length == 0)
 		num = (double)va_arg(args, double);
+	if (is_nan(num) || is_inf(num))
+	{
+		params->hash = 0;
+		params->zero = 0;
+		if (is_inf(num))
+		{
+			params->nprinted = 4;
+			write(1, "inf\0", 4);
+			return (params);
+		}
+		if (is_nan(num))
+		{
+			params->plus = 0;
+			params->nprinted = 1;
+			write(1, "nan\0", 4);
+			return (params);
+		}
+	}
 	if (!params->precision)
 		params->precision = 6;
 	if (num < 0)

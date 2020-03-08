@@ -41,6 +41,6 @@ void	type_int(va_list args, t_struct *params)
 	if (params->length == LONG)
 		num = (long int)va_arg(args, long int);
 	if (params->length == LONGLONG)
-		num = (long long int)va_arg(args, int);
+		num = (long long int)va_arg(args, long long int);
 	int_from_fmt(params, num);
 }
