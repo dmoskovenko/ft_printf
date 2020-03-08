@@ -63,18 +63,17 @@ int		format_parse(va_list args, const char *fmt, t_struct *params, int pos)
 		{
 			if (!ft_strchr(VALIDSYM, fmt[pos + 1]))
 				break;
-			else
-				pos++;
-			while (ft_strchr(VALIDSYM, fmt[pos/* + 1*/]))
+			while (ft_strchr(VALIDSYM, fmt[pos + 1]))
 			{
+				pos++;
 				params->i = pos;
 				if (ft_strchr(TYPESYM, fmt[pos]))
 				{
 					pos = conversions(args, fmt[pos], params) + 1;
 					break;
 				}
-				else if (ft_strchr(LENGHTFLAGS, fmt[pos]))
-					pos = modifiers(args, fmt, params);
+				else if (ft_strchr(FLAGS, fmt[pos]))
+					pos = modifiers(args, fmt, params) - 1;
 			}
 			continue;
 		}
