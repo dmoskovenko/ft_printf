@@ -23,13 +23,13 @@ void	hex_from_fmt(t_struct *params, uintmax_t num, char spec)
 	if (spec == 'x')
 	{
 		s = itoa_base_unsigned(num, 16);
-		if (params->hash == 1)
+		if (params->hash && num)
 			params->nprinted = write(1, "0x", 2);
 	}
 	else
 	{
 		s = itoa_base_upp(num, 16);
-		if (params->hash == 1)
+		if (params->hash && num)
 			params->nprinted = write(1, "0X", 2);
 	}
 	params->nprinted = write(1, s, num_length);
@@ -41,7 +41,7 @@ void	type_hex(va_list args, t_struct *params, char spec)
 	uintmax_t num;
 	
 	num = 0;
-	if (params->length == 0)
+	if (!params->length)
 		num = va_arg(args, unsigned int);
 	if (params->length == SHORTSHORT)
 		num = (unsigned char)va_arg(args, unsigned int);
