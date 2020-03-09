@@ -27,7 +27,6 @@
 # define LONG			3
 # define LONGLONG		4
 # define LONGDOUBLE		7
-# define COUT			100
 
 typedef struct	s_struct
 {
@@ -57,7 +56,6 @@ int				format_parse(va_list args, const char *fmt, t_struct *params, int pos);
 int				conversions(va_list args, char spec, t_struct *params);
 int				modifiers(va_list args, const char *fmt, t_struct *params);
 void			length_field(const char *fmt, t_struct *params);
-void			print_modifiers(va_list args, const char *fmt, t_struct *params);
 
 void			flags(const char *fmt, t_struct	*params);
 void			width(const char *fmt, t_struct	*params);
