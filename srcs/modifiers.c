@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   modifiers.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:46:52 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 10:22:12 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/09 10:08:20 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+
+void			width(const char *fmt, t_struct	*params)
+{
+	int		i;
+	int		len;
+	char	*str;
+	
+	i = 0;
+	len = params->i;
+	if (ft_isdigit(fmt[len]))
+	{
+		while (ft_isdigit(fmt[len]))
+			len++;
+		str = (char*)malloc(sizeof(str) * (len - params->i) + 1);
+		while (params->i < len)
+			str[i++] = fmt[params->i++];
+		str[i] = '\0';
+		params->width = ft_atoi(str);
+	}		
+}
+
 
 void	flags(const char *fmt, t_struct *params)
 {
@@ -59,11 +81,10 @@ int		modifiers(va_list args, const char *fmt, t_struct *params)
 {
 	if (args == NULL)
 		return (0);
-	length_field(fmt, params);
  	flags(fmt, params);
-/*
-**  width(fmt, params, args);
-**  precision(fmt, params, args, 0);
+	width(fmt, params);
+	length_field(fmt, params);
+/*  precision(fmt, params, args, 0);
 */
 	return (params->i);
 }

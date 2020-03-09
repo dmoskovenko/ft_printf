@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 20:05:48 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/09 08:31:01 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,10 @@ int				format_parse(va_list args, const char *fmt, t_struct *params, int pos);
 int				conversions(va_list args, char spec, t_struct *params);
 int				modifiers(va_list args, const char *fmt, t_struct *params);
 void			length_field(const char *fmt, t_struct *params);
-
-int				num_len(intmax_t num, int base);
-int				unsigned_num_len(uintmax_t num, int base);
-char			*itoa_base(intmax_t num, int base);
-char			*itoa_base_unsigned(uintmax_t num, int base);
-char			*itoa_base_upp(uintmax_t num, int base);
+void			print_modifiers(va_list args, const char *fmt, t_struct *params);
 
 void			flags(const char *fmt, t_struct	*params);
-void			width(const char *fmt, t_struct	*params, va_list args);
+void			width(const char *fmt, t_struct	*params);
 void			precision(const char *fmt, t_struct	*params, va_list args, int p);
 void			bzerostruct(t_struct *params, int full);
 int				retmsg(char *str);
@@ -84,7 +79,6 @@ void			u_from_fmt(t_struct *params, uintmax_t num);
 t_struct		*type_float(va_list args, t_struct *params);
 void			float_math(long double num, t_struct *params);
 void			float_print(int negative, t_struct *params);
-long double		power(long long n, int i);
 
 void			type_oct(va_list args, t_struct *params);
 void			oct_from_fmt(t_struct *params, uintmax_t num);
@@ -96,5 +90,15 @@ void			writezeros(int n);
 void			writeblanks(int n);
 
 void			bzerostruct(t_struct *params, int full);
+
+int				num_len(intmax_t num, int base);
+int				unsigned_num_len(uintmax_t num, int base);
+char			*itoa_base(intmax_t num, int base);
+char			*itoa_base_unsigned(uintmax_t num, int base);
+char			*itoa_base_upp(uintmax_t num, int base);
+
+long double		power(long long n, int i);
+int				is_nan(long double nb);
+int				is_inf(long double nb);
 
 #endif

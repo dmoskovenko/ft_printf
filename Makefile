@@ -13,7 +13,8 @@ SOURCES = 	ft_printf.c \
 			type_hex.c \
 			type_float.c \
 			modifiers.c \
-			utility.c
+			utility.c \
+			utility_2.c
 
 HEADER = includes
 
