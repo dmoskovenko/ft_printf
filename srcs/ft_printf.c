@@ -31,7 +31,7 @@ int		retmsg(char *str)
 {
 	ft_putstr(str);
 	ft_putchar('\n');
-	return (1);
+	exit (1);
 }
 
 void	bzerostruct(t_struct *params, int full)
@@ -42,13 +42,14 @@ void	bzerostruct(t_struct *params, int full)
 		params->nprinted = 0;
 	}
 	params->len = 0;
+	params->negative = 0;
 	params->minus = 0;
 	params->plus = 0;
 	params->space = 0;
 	params->zero = 0;
 	params->hash = 0;
 	params->width = 0;
-	params->precisiontf = 0;
+	params->precisionzero = 0;
 	params->precision = 0;
 	params->length = 0;
 }

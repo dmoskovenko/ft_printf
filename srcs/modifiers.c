@@ -12,27 +12,27 @@
 
 #include "ft_printf.h"
 
-
-void			width(const char *fmt, t_struct	*params)
+void			precision(const char *fmt, t_struct	*params)
 {
-	int		i;
-	int		len;
-	char	*str;
-	
-	i = 0;
-	len = params->i;
-	if (ft_isdigit(fmt[len]))
+	if (fmt[params->i] == '.')
+		params->i++;
+	if (ft_isdigit(fmt[params->i]))
 	{
-		while (ft_isdigit(fmt[len]))
-			len++;
-		str = (char*)malloc(sizeof(str) * (len - params->i) + 1);
-		while (params->i < len)
-			str[i++] = fmt[params->i++];
-		str[i] = '\0';
-		params->width = ft_atoi(str);
-	}		
+		params->precision = ft_atoi(&fmt[params->i]);
+		if (fmt[params->i] == '0')
+			params->precisionzero++;
+		params->i += unsigned_num_len(params->precision, 10);
+	}
 }
 
+void			width(const char *fmt, t_struct *params)
+{
+	if (ft_isdigit(fmt[params->i]))
+	{
+		params->width = ft_atoi(&fmt[params->i]);
+		params->i += unsigned_num_len(params->width, 10);
+	}
+ }
 
 void	flags(const char *fmt, t_struct *params)
 {
@@ -84,7 +84,7 @@ int		modifiers(va_list args, const char *fmt, t_struct *params)
  	flags(fmt, params);
 	width(fmt, params);
 	length_field(fmt, params);
-/*  precision(fmt, params, args, 0);
-*/
+	precision(fmt, params);
+//	precision(fmt, params, args, 0);
 	return (params->i);
 }

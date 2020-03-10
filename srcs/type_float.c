@@ -12,19 +12,19 @@
 
 #include "ft_printf.h"
 
-void		float_print(int negative, t_struct *params)
+void		float_print(t_struct *params)
 {
 	int len;
-	int	buf;
+	int	indent;
 
-	buf = params->width - params->len;
-	if (negative)
-		params->nprinted += write(1, "-", 1);
-	if (params->plus)
-		params->nprinted += write(1, "+", 1);
-	if (params->width && !params->minus)
+	indent = 0;
+	if (params->width > params->len)
+		indent = params->width - params->len;
+	if (params->negative || params->plus || params->space)
+		indent--;
+	if (params->width > params->len && !params->minus)
 	{
-		while(buf--)
+		while(indent--)
 		{
 			if (params->zero)
 				params->nprinted += write(1, "0", 1);
@@ -32,15 +32,31 @@ void		float_print(int negative, t_struct *params)
 				params->nprinted += write(1, " ", 1);
 		}
 	}
+	if (params->negative)
+		params->nprinted += write(1, "-", 1);
+	if (params->plus)
+		params->nprinted += write(1, "+", 1);
+	if (params->space && !params->negative)
+		params->nprinted += write(1, " ", 1);
 //	params->nprinted += ft_strlen(itoa_base_unsigned(params->fbefore, 10));
 	ft_putnbr(params->fbefore);
-/*	params->nprinted += */write(1, ".", 1);
-	len = ft_strlen(params->fstr);
-//	params->nprinted += len;
-	while (len++ < params->precision)
-		params->nprinted += write(1, "0", 1);
-	ft_putstr(params->fstr);
-	params->nprinted += params->len;
+	params->nprinted += unsigned_num_len(params->fbefore, 10);
+	if (params->hash || params->precision)
+		params->nprinted += write(1, ".", 1);
+	if(params->precision)
+	{
+/*		params->nprinted += write(1, ".", 1);*/
+
+		len = ft_strlen(params->fstr);
+		params->nprinted += len;
+		while (len++ < params->precision)
+			params->nprinted += write(1, "0", 1);
+//		params->nprinted += len;
+		ft_putstr(params->fstr);
+	}
+	if (params->width && params->minus)
+	while(params->nprinted < params->width)
+		params->nprinted += write(1, " ", 1);
 }
 
 void		float_math(long double num, t_struct *params)
@@ -56,7 +72,6 @@ void		float_math(long double num, t_struct *params)
 	fpower = power(10, params->precision);
 	params->fdecimal *= fpower;
 	buf = params->fdecimal * 10;
-	params->fstr = itoa_base_unsigned(buf, 10);
 /*
 ** 	fbuf =+ (params->fstr[i]) - '0';
 */
@@ -83,7 +98,7 @@ void		float_math(long double num, t_struct *params)
 */
 }
 
-t_struct	*type_float(va_list args, t_struct *params)
+void		type_float(va_list args, t_struct *params)
 {
 	long double num;
 	int			negative;
@@ -103,24 +118,24 @@ t_struct	*type_float(va_list args, t_struct *params)
 		if (is_inf(num))
 		{
 			params->nprinted = write(1, "inf", 3);
-			return (params);
+			return;
 		}
 		if (is_nan(num))
 		{
 			params->plus = 0;
 			params->nprinted = write(1, "nan", 3);
-			return (params);
+			return;
 		}
 	}
-	if (!params->precision)
+	if (!params->precision && !params->precisionzero)
 		params->precision = 6;
 	if (num < 0)
 	{
-		negative++;
+		params->negative++;
 		num *= -1;
 	}
 	params->fbefore = num;
 	float_math(num, params);
-	float_print(negative, params);
-	return (params);
+	float_print(params);
+	return;
 } 

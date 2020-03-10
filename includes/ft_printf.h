@@ -19,9 +19,9 @@
 # include <stdint.h>
 # include "../libft/includes/libft.h"
 
-# define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 %#-+."
+# define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 .-+#%"
 # define TYPESYM		"cCsSpPdDiIoOuUxXfF"
-# define FLAGS			" -+#0hlL"
+# define FLAGS			" .-+#0hlL"
 # define SHORT			1
 # define SHORTSHORT		2
 # define LONG			3
@@ -34,21 +34,20 @@ typedef struct	s_struct
 	int			nprinted;
 	int			i;
 	int			len;
+	int			negative;
 	int			minus;
 	int			plus;
 	int			space;
 	int			zero;
 	int			hash;
 	int			width;
-	int			precisiontf;
 	int			precision;
+	int			precisionzero;
 	int			length;
 	long double fdecimal;
 	long long	fafter;
 	long long	fbefore;
 	char		*fstr;
-	int			nan;
-	int			inf;
 }				t_struct;
 
 int				ft_printf(const char *fmt, ...);
@@ -59,7 +58,7 @@ void			length_field(const char *fmt, t_struct *params);
 
 void			flags(const char *fmt, t_struct	*params);
 void			width(const char *fmt, t_struct	*params);
-void			precision(const char *fmt, t_struct	*params, va_list args, int p);
+void			precision(const char *fmt, t_struct	*params);
 void			bzerostruct(t_struct *params, int full);
 int				retmsg(char *str);
 
@@ -74,9 +73,9 @@ void			type_ptr(va_list args, t_struct *params);
 void			type_u(va_list args, t_struct *params);
 void			u_from_fmt(t_struct *params, uintmax_t num);
 
-t_struct		*type_float(va_list args, t_struct *params);
+void			type_float(va_list args, t_struct *params);
 void			float_math(long double num, t_struct *params);
-void			float_print(int negative, t_struct *params);
+void			float_print(t_struct *params);
 
 void			type_oct(va_list args, t_struct *params);
 void			oct_from_fmt(t_struct *params, uintmax_t num);
