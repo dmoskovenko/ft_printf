@@ -52,4 +52,4 @@
 			a space if both are used.
 
 	" "		- A blank should be left before a positive number produced by a signed conversion (a, A, d, e, E, 
-	f, F, g, G, or i).
+			f, F, g, G, or i).
