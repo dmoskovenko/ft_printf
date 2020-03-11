@@ -3,7 +3,7 @@
 	TYPES:
 
 	d, i		- dec signed;	[%d and %i are synonymous for output, but are different when
-				used with scanf() 
+				used with scanf() for input]
 	for input]
 	o		- oct unsigned;
 	u		- dec unsigned;
@@ -20,10 +20,10 @@
 
 	LENGTH FIELD:
 
-	hh		- For integer types, causes printf to expect an int-sized integer argument which was 
-			promoted from a char;
-	h		- For integer types, causes printf to expect an int-sized integer argument which was 
-			promoted from a short;
+	hh		- For integer types, causes printf to expect an int-sized integer argument which was promoted 
+	from a char;
+	h		- For integer types, causes printf to expect an int-sized integer argument which was promoted
+	 from a short;
 	l		- For integer types, causes printf to expect a long-sized integer argument;
 			  For floating point types, this has no effect;
 	ll		- For integer types, causes printf to expect a long long-sized integer argument;
