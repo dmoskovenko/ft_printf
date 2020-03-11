@@ -2,8 +2,7 @@
 
 	TYPES:
 
-	d, i		- dec signed;	[%d and %i are synonymous for output, but are different when
-			used with scanf() for input]
+	d, i		- dec signed;	[%d and %i are synonymous for output, but are different when used with scanf()
 	for input]
 	o		- oct unsigned;
 	u		- dec unsigned;
