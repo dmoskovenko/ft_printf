@@ -27,7 +27,7 @@
 	L		- For floating point types, causes printf to expect a long double argument;
 
 
-	Flags:
+	FLAGS:
 
 	#		- The value should be converted to an ``alternate form''.  For c, d, i, n, p, s, and u conver-
 			sions, this option has no effect.  For o conversions, the precision of the number is
