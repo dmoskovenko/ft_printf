@@ -7,12 +7,11 @@
 	u		- dec unsigned;
 	x		- hex unsigned;
 	X		- HEX UNSIGNED;
-	_______________________
 
 	c		- char;
 	s		- NTS;
+	
 	p		- void * (pointer to void) in an implementation-defined format;
-	_______________________
 
 	f		- float;
 	
