@@ -22,7 +22,7 @@
 	hh		- For integer types, causes printf to expect an int-sized integer argument which was promoted from a char;
 	h		- For integer types, causes printf to expect an int-sized integer argument which was promoted from a short;
 	l		- For integer types, causes printf to expect a long-sized integer argument;
-			  For floating point types, this has no effect.[????????];
+			  For floating point types, this has no effect;
 	ll		- For integer types, causes printf to expect a long long-sized integer argument;
 	L		- For floating point types, causes printf to expect a long double argument;
 
