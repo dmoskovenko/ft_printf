@@ -44,6 +44,8 @@ typedef struct	s_struct
 	int			precision;
 	int			precisionzero;
 	int			length;
+	int			nan;
+	int			inf;
 	long double fdecimal;
 	long long	fafter;
 	long long	fbefore;
@@ -54,13 +56,13 @@ int				ft_printf(const char *fmt, ...);
 int				format_parse(va_list args, const char *fmt, t_struct *params, int pos);
 int				conversions(va_list args, char spec, t_struct *params);
 int				modifiers(va_list args, const char *fmt, t_struct *params);
-void			length_field(const char *fmt, t_struct *params);
+int				retmsg(char *str);
+void			bzerostruct(t_struct *params, int full);
 
+void			length_field(const char *fmt, t_struct *params);
 void			flags(const char *fmt, t_struct	*params);
 void			width(const char *fmt, t_struct	*params);
 void			precision(const char *fmt, t_struct	*params);
-void			bzerostruct(t_struct *params, int full);
-int				retmsg(char *str);
 
 void			type_int(va_list args, t_struct *params);
 void			int_from_fmt(t_struct *params, intmax_t num);
@@ -73,15 +75,17 @@ void			type_ptr(va_list args, t_struct *params);
 void			type_u(va_list args, t_struct *params);
 void			u_from_fmt(t_struct *params, uintmax_t num);
 
-void			type_float(va_list args, t_struct *params);
-void			float_math(long double num, t_struct *params);
-void			float_print(t_struct *params);
-
 void			type_oct(va_list args, t_struct *params);
 void			oct_from_fmt(t_struct *params, uintmax_t num);
 
 void			type_hex(va_list args, t_struct *params, char spec);
 void			hex_from_fmt(t_struct *params, uintmax_t num, char spec);
+
+void			type_float(va_list args, t_struct *params);
+int				is_infnan(t_struct *params, long double num);
+void			float_math(long double num, t_struct *params);
+void			float_print(t_struct *params);
+void			float_print2(t_struct *params);
 
 void			writezeros(int n);
 void			writeblanks(int n);
@@ -95,7 +99,5 @@ char			*itoa_base_unsigned(uintmax_t num, int base);
 char			*itoa_base_upp(uintmax_t num, int base);
 
 long double		power(long long n, int i);
-int				is_nan(long double nb);
-int				is_inf(long double nb);
 
 #endif
