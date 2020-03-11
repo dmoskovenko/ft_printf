@@ -3,7 +3,7 @@
 	TYPES:
 
 	d, i		- dec signed;	[%d and %i are synonymous for output, but are different when used with scanf()
-	for input]
+			for input]
 	o		- oct unsigned;
 	u		- dec unsigned;
 	x		- hex unsigned;
