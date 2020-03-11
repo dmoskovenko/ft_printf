@@ -2,7 +2,8 @@
 
 	TYPES:
 
-	d, i		- dec signed;	[%d and %i are synonymous for output, but are different when used with scanf() 
+	d, i		- dec signed;	[%d and %i are synonymous for output, but are different when
+				used with scanf() 
 	for input]
 	o		- oct unsigned;
 	u		- dec unsigned;
@@ -41,12 +42,12 @@
 			from the result as they would otherwise be.
 
 	0		- Zero padding.  For all conversions except n, the converted value is padded on the left with
-			zeros rather than blanks.  If a precision is given with a numeric conversion (d, i, o, u, i,
-			x, and X), the 0 flag is ignored.
+			zeros rather than blanks.  If a precision is given with a numeric conversion (d, i, o, u, i, x, 
+			and X), the 0 flag is ignored.
 
 	-		- A negative field width flag; the converted value is to be left adjusted on the field boundary.
-			Except for n conversions, the converted value is padded on the right with blanks,
-			rather than on the left with blanks or zeros.  A - overrides a 0 if both are given.
+			Except for n conversions, the converted value is padded on the right with blanks rather than on 
+			the left with blanks or zeros.  A - overrides a 0 if both are given.
 
 	+		-   A sign must always be placed before a number produced by a signed conversion.  A + overrides
 			a space if both are used.
