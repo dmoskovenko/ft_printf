@@ -48,8 +48,8 @@
 			Except for n conversions, the converted value is padded on the right with blanks rather than on 
 			the left with blanks or zeros.  A - overrides a 0 if both are given.
 
-	+		-   A sign must always be placed before a number produced by a signed conversion.  A + overrides
+	+		- A sign must always be placed before a number produced by a signed conversion.  A + overrides
 			a space if both are used.
 
-	" "		-  A blank should be left before a positive number produced by a signed conversion (a, A, d, e,
+	" "		- A blank should be left before a positive number produced by a signed conversion (a, A, d, e,
 			E, f, F, g, G, or i).
