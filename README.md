@@ -41,8 +41,7 @@
 			zeros rather than blanks.  If a precision is given with a numeric conversion (d, i, o, u, i,
 			x, and X), the 0 flag is ignored.
 
-	-		- A negative field width flag; the converted value is to be left adjusted on the field bound-
-			ary.  Except for n conversions, the converted value is padded on the right with blanks,
+	-		- A negative field width flag; the converted value is to be left adjusted on the field boundary.  Except for n conversions, the converted value is padded on the right with blanks,
 			rather than on the left with blanks or zeros.  A - overrides a 0 if both are given.
 
 	+		-   A sign must always be placed before a number produced by a signed conversion.  A + overrides
