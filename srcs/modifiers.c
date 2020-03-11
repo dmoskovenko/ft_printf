@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modifiers.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:46:52 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/09 10:08:20 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:45:10 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	flags(const char *fmt, t_struct *params)
 	}
 	if (params->plus == 1)
 		params->space = 0;
+	if (params->minus == 1)
+		params->zero = 0;
 }
 
 void	length_field(const char *fmt, t_struct *params)

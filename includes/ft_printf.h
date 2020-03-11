@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/09 08:31:01 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/11 23:58:05 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void			type_ptr(va_list args, t_struct *params);
 
 void			type_u(va_list args, t_struct *params);
 void			u_from_fmt(t_struct *params, uintmax_t num);
+void			u_print(t_struct *params, char *s, int num_length, int indent);
 
 void			type_oct(va_list args, t_struct *params);
 void			oct_from_fmt(t_struct *params, uintmax_t num);
