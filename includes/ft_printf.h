@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/11 23:58:05 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/13 02:27:19 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_struct
 	int			length;
 	int			nan;
 	int			inf;
+	int			dot;
 	long double fdecimal;
 	long long	fafter;
 	long long	fbefore;
@@ -53,7 +54,8 @@ typedef struct	s_struct
 }				t_struct;
 
 int				ft_printf(const char *fmt, ...);
-int				format_parse(va_list args, const char *fmt, t_struct *params, int pos);
+int				format_parse(va_list args, const char *fmt, \
+				t_struct *params, int pos);
 int				conversions(va_list args, char spec, t_struct *params);
 int				modifiers(va_list args, const char *fmt, t_struct *params);
 int				retmsg(char *str);
@@ -73,9 +75,10 @@ void			type_str(va_list args, t_struct *params);
 void			type_ptr(va_list args, t_struct *params);
 
 void			type_u(va_list args, t_struct *params);
-void			u_from_fmt(t_struct *params, uintmax_t num);
+void			u_from_fmt(t_struct *params, uintmax_t num, int i);
+char			*u_with_prec(t_struct *params, char *s, int num_length, int i);
 void			u_print(t_struct *params, char *s, int num_length, int indent);
-
+int				u_print2(t_struct *params, char *s, int num_length);
 void			type_oct(va_list args, t_struct *params);
 void			oct_from_fmt(t_struct *params, uintmax_t num);
 
