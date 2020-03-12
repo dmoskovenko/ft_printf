@@ -51,5 +51,5 @@
 	+		- A sign must always be placed before a number produced by a signed conversion.  A + overrides
 			a space if both are used.
 
-	" "		- A blank should be left before a positive number produced by a signed conversion (a, A, d, e, E, 
-			f, F, g, G, or i).
+	" "		- A blank should be left before a positive number produced by a signed conversion (a, A, d, e, 
+			E, f, F, g, G, or i).
