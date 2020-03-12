@@ -12,18 +12,37 @@
 
 #include "ft_printf.h"
 
+int			is_infnan(t_struct *params, long double num)
+{
+	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
+	{
+		params->nprinted = write(1, "inf", 3);
+		return (1);
+	}
+	if (!(num == num))
+	{
+		params->plus = 0;
+		params->nprinted = write(1, "nan", 3);
+		return (1);
+	}
+	return (0);
+}
+
 void		float_print2(t_struct *params)
 {
+	int	i;
+
+	i = 0;
 	ft_putnbr(params->fbefore);
-	params->nprinted += unsigned_num_len(params->fbefore, 10);
+	params->nprinted += params->lenbefore;
 	if (params->hash || params->precision)
 		params->nprinted += write(1, ".", 1);
 	if(params->precision)
 	{
-		params->nprinted += ft_strlen(params->fstr);
-		while (params->nprinted < params->precision)
+		while (i++ < params->precision - params->lenafter)
 			params->nprinted += write(1, "0", 1);
 		ft_putstr(params->fstr);
+		params->nprinted += params->lenafter;
 	}
 	if (params->width && params->minus)
 		while(params->nprinted < params->width)
@@ -32,14 +51,17 @@ void		float_print2(t_struct *params)
 
 void		float_print(t_struct *params)
 {
+	int len;
 	int	indent;
 
 	indent = 0;
-	if (params->width > params->len)
-		indent = params->width - params->len;
+	len = params->lenbefore + params->lenafter;
+	(params->hash || params->precision) ? len++ : len--;
+	if (params->width > len)
+		indent = params->width - len;
 	if (params->negative || params->plus || params->space)
 		indent--;
-	if (params->width > params->len && !params->minus)
+	if (params->width > len && !params->minus)
 	{
 		while(indent--)
 		{
@@ -47,12 +69,12 @@ void		float_print(t_struct *params)
 			write(1, " ", 1);
 		}
 	}
+	if (params->space && !params->negative)
+		params->nprinted += write(1, " ", 1);
 	if (params->negative)
 		params->nprinted += write(1, "-", 1);
 	if (params->plus)
 		params->nprinted += write(1, "+", 1);
-	if (params->space && !params->negative)
-		params->nprinted += write(1, " ", 1);
 	float_print2(params);
 }
 
@@ -64,6 +86,7 @@ void		float_math(long double num, t_struct *params)
 	long double fpower;
 
 	i = 0;
+	params->fbefore = num;
 	params->fdecimal = num - params->fbefore;
 	fbuf = params->fdecimal;
 	fpower = power(10, params->precision);
@@ -78,27 +101,8 @@ void		float_math(long double num, t_struct *params)
 		params->fafter = 0;
 	}
 	params->fstr = itoa_base_unsigned(params->fafter, 10);
-	params->len = unsigned_num_len(params->fbefore, 10);
-	if (params->precision)
-		params->len += ft_strlen(params->fstr) + 1;
-}
-
-int			is_infnan(t_struct *params, long double num)
-{
-	params->hash = 0;
-	params->zero = 0;
-	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
-	{
-		params->nprinted = write(1, "inf", 3);
-		return (1);
-	}
-	if (!(num == num))
-	{
-		params->plus = 0;
-		params->nprinted = write(1, "nan", 3);
-		return (1);
-	}
-	return (0);
+	params->lenbefore = unsigned_num_len(params->fbefore, 10);
+	params->lenafter = ft_strlen(params->fstr);
 }
 
 void		type_float(va_list args, t_struct *params)
@@ -114,7 +118,11 @@ void		type_float(va_list args, t_struct *params)
 	if (params->length == 0)
 		num = (double)va_arg(args, double);
 	if (is_infnan(params, num))
+	{
+		params->hash = 0;
+		params->zero = 0;
 		return;
+	}
 	if (!params->precision && !params->precisionzero)
 		params->precision = 6;
 	if (num < 0)
@@ -122,8 +130,6 @@ void		type_float(va_list args, t_struct *params)
 		params->negative++;
 		num *= -1;
 	}
-	params->fbefore = num;
 	float_math(num, params);
 	float_print(params);
-	return;
 } 

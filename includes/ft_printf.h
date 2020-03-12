@@ -33,7 +33,6 @@ typedef struct	s_struct
 	char		*fmt;
 	int			nprinted;
 	int			i;
-	int			len;
 	int			negative;
 	int			minus;
 	int			plus;
@@ -44,12 +43,12 @@ typedef struct	s_struct
 	int			precision;
 	int			precisionzero;
 	int			length;
-	int			nan;
-	int			inf;
 	long double fdecimal;
-	long long	fafter;
-	long long	fbefore;
 	char		*fstr;
+	long long	fbefore;
+	long long	fafter;
+	int			lenbefore;
+	int			lenafter;
 }				t_struct;
 
 int				ft_printf(const char *fmt, ...);
@@ -89,8 +88,6 @@ void			float_print2(t_struct *params);
 
 void			writezeros(int n);
 void			writeblanks(int n);
-
-void			bzerostruct(t_struct *params, int full);
 
 int				num_len(intmax_t num, int base);
 int				unsigned_num_len(uintmax_t num, int base);

@@ -56,9 +56,6 @@ void	flags(const char *fmt, t_struct *params)
 
 void	length_field(const char *fmt, t_struct *params)
 {
-	//int i;
-
-	//i = params->i;
 	if (ft_strchr("hlL", fmt[params->i]))
 	{
 		if (fmt[params->i] == 'h')
@@ -74,7 +71,6 @@ void	length_field(const char *fmt, t_struct *params)
 	}
 	while (ft_strchr("hlL", fmt[params->i]))
 		params->i++;
-	//params->i = i;
 }
 
 int		modifiers(va_list args, const char *fmt, t_struct *params)
@@ -85,6 +81,5 @@ int		modifiers(va_list args, const char *fmt, t_struct *params)
 	width(fmt, params);
 	length_field(fmt, params);
 	precision(fmt, params);
-//	precision(fmt, params, args, 0);
 	return (params->i);
 }

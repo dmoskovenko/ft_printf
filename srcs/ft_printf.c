@@ -12,21 +12,6 @@
 
 #include "ft_printf.h"
 
-/*
-int		format_parse2(va_list args, const char *fmt, t_struct *params, int pos)
-{
-	params->i = pos;
-	if (!ft_strchr("cspdiouxXf%", fmt[pos]))
-		modifiers(args, fmt, params);
-	else if (ft_strchr(("cspdiouxXf%"), fmt[pos]))
-	{
-		conversions(args, fmt[pos], params);
-//		bezerostruct2(params);
-	}
-	return (params->i - 1);
-}
-*/ // переместил все в format_parse
-
 int		retmsg(char *str)
 {
 	ft_putstr(str);
@@ -41,7 +26,6 @@ void	bzerostruct(t_struct *params, int full)
 		params->i = 0;
 		params->nprinted = 0;
 	}
-	params->len = 0;
 	params->negative = 0;
 	params->minus = 0;
 	params->plus = 0;
@@ -49,8 +33,8 @@ void	bzerostruct(t_struct *params, int full)
 	params->zero = 0;
 	params->hash = 0;
 	params->width = 0;
-	params->precisionzero = 0;
 	params->precision = 0;
+	params->precisionzero = 0;
 	params->length = 0;
 }
 
