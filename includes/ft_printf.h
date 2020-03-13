@@ -6,7 +6,7 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/13 02:27:19 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/13 03:22:24 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,13 @@ void			u_from_fmt(t_struct *params, uintmax_t num, int i);
 char			*u_with_prec(t_struct *params, char *s, int num_length, int i);
 void			u_print(t_struct *params, char *s, int num_length, int indent);
 int				u_print2(t_struct *params, char *s, int num_length);
+
 void			type_oct(va_list args, t_struct *params);
-void			oct_from_fmt(t_struct *params, uintmax_t num);
+void			oct_from_fmt(t_struct *params, uintmax_t num, int i);
+char			*oct_with_prec(t_struct *params, char *s, int num_length, int i);
+char			*oct_hash(char *s, int num_length);
+void			oct_print(t_struct *params, char *s, int num_length, int indent);
+int				oct_print2(t_struct *params, char *s, int num_length);
 
 void			type_hex(va_list args, t_struct *params, char spec);
 void			hex_from_fmt(t_struct *params, uintmax_t num, char spec);
