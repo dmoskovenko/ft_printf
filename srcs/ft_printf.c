@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/03/09 10:19:15 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/03/15 15:25:55 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int		ft_printf(const char *fmt, ...)
 		return (0);
 	printed = format_parse(args, fmt, params, 0);
 	va_end(args);
+	free(params);
 	return (printed);
 }
