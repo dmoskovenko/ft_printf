@@ -39,14 +39,16 @@ typedef struct	s_struct
 	int			plus;
 	int			space;
 	int			zero;
+	int			zero_arg;
 	int			hash;
+	int			hash_case;
 	int			width;
+	int			dot;
 	int			precision;
 	int			precisionzero;
 	int			length;
 	int			nan;
 	int			inf;
-	int			dot;
 	long double fdecimal;
 	long long	fafter;
 	long long	fbefore;
@@ -84,6 +86,7 @@ void			type_oct(va_list args, t_struct *params);
 void			oct_from_fmt(t_struct *params, uintmax_t num, int i);
 char			*oct_with_prec(t_struct *params, char *s, int num_length, int i);
 char			*oct_hash(char *s, int num_length);
+void			oct_hash_chk(t_struct *params, int num, int num_length);
 void			oct_print(t_struct *params, char *s, int num_length, int indent);
 int				oct_print2(t_struct *params, char *s, int num_length);
 

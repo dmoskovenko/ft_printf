@@ -9,3 +9,4 @@ a.out
 *.DS_Store
 tests/*
 pft/
+ptf
