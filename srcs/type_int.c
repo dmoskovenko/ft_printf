@@ -147,5 +147,10 @@ void	type_int(va_list args, t_struct *params)
 		num = (long int)va_arg(args, long int);
 	if (params->length == LONGLONG)
 		num = (long long int)va_arg(args, long long int);
+	if (num == LLONG_MIN)
+	{
+		params->nprinted += write(1, "-9223372036854775808", 20);
+		return;
+	}
 	int_from_fmt(params, num, 0);
 }
