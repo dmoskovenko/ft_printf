@@ -94,6 +94,7 @@ void	u_from_fmt(t_struct *params, uintmax_t num, int i)
 		params->space = 0;
 	u_print(params, s, num_length, indent);
 	free(s);
+	bzerostruct(params, 0);
 }
 
 void	type_u(va_list args, t_struct *params)

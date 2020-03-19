@@ -49,6 +49,9 @@ void	bzerostruct(t_struct *params, int full)
 	params->zero = 0;
 	params->zero_arg = 0;
 	params->hash = 0;
+	params->hash_case = 0;
+	params->hash_case_zero = 0;
+	params->small_hex = 0;
 	params->dot = 0;
 	params->width = 0;
 	params->precisionzero = 0;

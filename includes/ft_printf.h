@@ -42,8 +42,10 @@ typedef struct	s_struct
 	int			zero_arg;
 	int			hash;
 	int			hash_case;
-	int			width;
+	int			hash_case_zero;
+	int			small_hex;
 	int			dot;
+	int			width;
 	int			precision;
 	int			precisionzero;
 	int			length;
@@ -91,7 +93,12 @@ void			oct_print(t_struct *params, char *s, int num_length, int indent);
 int				oct_print2(t_struct *params, char *s, int num_length);
 
 void			type_hex(va_list args, t_struct *params, char spec);
-void			hex_from_fmt(t_struct *params, uintmax_t num, char spec);
+void			hex_from_fmt(t_struct *params, uintmax_t num, char spec, int i);
+char			*hex_hash(char *s, int num_length, char spec);
+char			*hex_with_prec(t_struct *params, char *s, int num_length, int i);
+void			hex_hash_chk(t_struct *params, int num, int num_length);
+void			hex_print(t_struct *params, char *s, int num_length, int indent);
+int				hex_print2(t_struct *params, char *s, int num_length);
 
 void			type_float(va_list args, t_struct *params);
 int				is_infnan(t_struct *params, long double num);

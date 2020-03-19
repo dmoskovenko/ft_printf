@@ -105,7 +105,7 @@ void	oct_hash_chk(t_struct *params, int num, int num_length)
 {
 	if ((num == 0) && (num_length == 1))
 		params->zero_arg++;
-	if (!params->width &&params->hash && params->dot && params->zero_arg)
+	if (!params->width && params->hash && params->dot && params->zero_arg)
 		params->hash_case++;
 	if (params->hash && params->width && !params->precision && params->zero_arg)
 		params->hash_case++;
@@ -141,6 +141,7 @@ void	oct_from_fmt(t_struct *params, uintmax_t num, int i)
 		params->space = 0;
 	oct_print(params, s, num_length, indent);
 	free(s);
+	bzerostruct(params, 0);
 }
 
 void	type_oct(va_list args, t_struct *params)
