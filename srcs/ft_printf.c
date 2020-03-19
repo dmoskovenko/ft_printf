@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
 /*   Updated: 2020/03/15 15:25:55 by coclayto         ###   ########.fr       */
@@ -31,11 +31,17 @@ void	bzerostruct(t_struct *params, int full)
 	params->plus = 0;
 	params->space = 0;
 	params->zero = 0;
+	params->zero_arg = 0;
 	params->hash = 0;
+	params->hash_case = 0;
+	params->hash_case_zero = 0;
+	params->small_hex = 0;
+	params->dot = 0;
 	params->width = 0;
 	params->precision = 0;
 	params->precisionzero = 0;
 	params->length = 0;
+	/* Other float fields? */
 }
 
 int		format_parse(va_list args, const char *fmt, t_struct *params, int pos)

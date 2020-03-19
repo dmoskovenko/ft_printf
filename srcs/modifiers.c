@@ -6,16 +6,19 @@
 /*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:46:52 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/11 22:45:10 by releanor         ###   ########.fr       */
+/*   Updated: 2020/03/13 02:22:13 by releanor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			precision(const char *fmt, t_struct	*params)
+void	precision(const char *fmt, t_struct *params)
 {
 	if (fmt[params->i] == '.')
+	{
 		params->i++;
+		params->dot++;
+	}
 	if (ft_isdigit(fmt[params->i]))
 	{
 		params->precision = ft_atoi(&fmt[params->i]);
@@ -25,14 +28,14 @@ void			precision(const char *fmt, t_struct	*params)
 	}
 }
 
-void			width(const char *fmt, t_struct *params)
+void	width(const char *fmt, t_struct *params)
 {
 	if (ft_isdigit(fmt[params->i]))
 	{
 		params->width = ft_atoi(&fmt[params->i]);
 		params->i += unsigned_num_len(params->width, 10);
 	}
- }
+}
 
 void	flags(const char *fmt, t_struct *params)
 {
@@ -79,7 +82,7 @@ int		modifiers(va_list args, const char *fmt, t_struct *params)
 {
 	if (args == NULL)
 		return (0);
- 	flags(fmt, params);
+	flags(fmt, params);
 	width(fmt, params);
 	length_field(fmt, params);
 	precision(fmt, params);
