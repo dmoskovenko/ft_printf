@@ -71,7 +71,10 @@ void			width(const char *fmt, t_struct	*params);
 void			precision(const char *fmt, t_struct	*params);
 
 void			type_int(va_list args, t_struct *params);
-void			int_from_fmt(t_struct *params, intmax_t num);
+void			int_from_fmt(t_struct *params, intmax_t num, int i);
+void			int_print(t_struct *params, char *s, int num_length, int indent);
+int				int_print2(t_struct *params, char *s, int num_length);
+char			*int_with_prec(t_struct *params, char *s, int num_length, int i);
 
 void			type_char(va_list args, t_struct *params);
 void			type_str(va_list args, t_struct *params);
@@ -113,7 +116,7 @@ void			bzerostruct(t_struct *params, int full);
 
 int				num_len(intmax_t num, int base);
 int				unsigned_num_len(uintmax_t num, int base);
-char			*itoa_base(intmax_t num, int base);
+char			*itoa_base(t_struct *params, intmax_t num, int base);
 char			*itoa_base_unsigned(uintmax_t num, int base);
 char			*itoa_base_upp(uintmax_t num, int base);
 
