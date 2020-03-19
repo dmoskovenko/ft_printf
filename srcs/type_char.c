@@ -12,33 +12,32 @@
 
 #include "ft_printf.h"
 
-void     type_char(va_list args, t_struct *params)
+void	char_print(t_struct *params, char c, int indent)
 {
-	int				num;
+	int	printed_here;
+
+	printed_here = 0;
+	if (params->width > 1 && !params->minus)
+	{
+		indent = params->width - 1;
+		while (indent--)
+			printed_here += write(1, " ", 1);
+	}
+	printed_here += write(1, &c, 1);
+	if (params->width && params->minus)
+		while (printed_here < params->width)
+			printed_here += write(1, " ", 1);
+	params->nprinted += printed_here;
+}
+
+void	type_char(va_list args, t_struct *params)
+{
 	unsigned char	c;
 
-	num = 0;
 	c = (unsigned char)va_arg(args, int);
-/*
-	if (params->width && params->minus == 0)
-	{
-		num = params->width - 1;
-		if (params->zero != 0)
-			writezeros(num);
-		else if (params->zero == 0)
-			writeblanks(num);
-		write(1, &c, 1);
-		params->nprinted = params->nprinted + num;
-	}
-	else if (params->width && params->minus == 1)
-	{
-		num = params->width - 1;
-		write(1, &c, 1);
-		writeblanks(num);
-		params->nprinted = params->nprinted + num;
-	}
-	else
-*/
-		write(1, &c, 1);
-	params->nprinted++;
+	if (params->precision || params->zero || params->plus \
+	|| params->hash || params->space)
+		exit(1);
+	char_print(params, c, 0);
+	bzerostruct(params, 0);
 }

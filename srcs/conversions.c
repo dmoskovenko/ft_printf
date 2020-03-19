@@ -36,7 +36,7 @@ int		conversions(va_list args, char spec, t_struct *params)
 {
 	if (spec == 'c' || spec == 'C')
 		type_char(args, params);
-	if (spec == 's' || spec == 'S')
+	else if (spec == 's' || spec == 'S')
 		type_str(args, params);
 	else if (spec == 'p' || spec == 'P')
 		type_ptr(args, params);

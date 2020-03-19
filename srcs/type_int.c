@@ -130,6 +130,7 @@ void	int_from_fmt(t_struct *params, intmax_t num, int i)
 
 	int_print(params, s, num_length, indent);
 	free(s);
+	bzerostruct(params, 0);
 }
 
 void	type_int(va_list args, t_struct *params)
