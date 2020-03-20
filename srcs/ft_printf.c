@@ -66,7 +66,14 @@ int		format_parse(va_list args, const char *fmt, t_struct *params, int pos)
 					break;
 				}
 				else if (ft_strchr(FLAGS, fmt[pos]) || ft_isdigit(fmt[pos]))
+				{
 					pos = modifiers(args, fmt, params) - 1;
+					if (pos > (int)ft_strlen(fmt) - 1)
+					{
+						pos--;
+						break;
+					}
+				}
 			}
 			continue;
 		}
