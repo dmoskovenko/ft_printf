@@ -21,7 +21,7 @@
 # include "../libft/includes/libft.h"
 
 # define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 .-+#%"
-# define TYPESYM		"cCsSpPdDiIoOuUxXfF"
+# define TYPESYM		"cCsSpPdDiIoOuUxXfF%"
 # define FLAGS			" .-+#0hlL"
 # define SHORT			1
 # define SHORTSHORT		2
@@ -125,5 +125,6 @@ char			*itoa_base_unsigned(uintmax_t num, int base);
 char			*itoa_base_upp(uintmax_t num, int base);
 
 long double		power(long long n, int i);
+void			percent(t_struct *params);
 
 #endif

@@ -50,6 +50,8 @@ int		conversions(va_list args, char spec, t_struct *params)
 		type_float(args, params);
 	else if (spec == 'o' || spec == 'O')
 		type_oct(args, params);
+	else if (spec == '%')
+		percent(params);
 	else
 		bzerostruct(params, 0);
 	return (params->i);

@@ -14,27 +14,24 @@
 
 void	char_print(t_struct *params, char c, int indent)
 {
-	int	printed_here;
-
-	printed_here = 0;
 	if (params->width > 1 && !params->minus)
 	{
 		indent = params->width - 1;
 		{
 			while (indent--)
-				printed_here += (params->zero && !params->precision) \
+				params->nprinted_here += (params->zero && !params->precision) \
 				? write(1, "0", 1) : \
 				write(1, " ", 1);
 		}
 	}
 	if (c == '\0')
-		printed_here += write(1, "\0", 1);
+		params->nprinted_here += write(1, "\0", 1);
 	else
-		printed_here += write(1, &c, 1);
+		params->nprinted_here += write(1, &c, 1);
 	if (params->width && params->minus)
-		while (printed_here < params->width)
-			printed_here += write(1, " ", 1);
-	params->nprinted += printed_here;
+		while (params->nprinted_here < params->width)
+			params->nprinted_here += write(1, " ", 1);
+	params->nprinted += params->nprinted_here;
 }
 
 void	type_char(va_list args, t_struct *params)
