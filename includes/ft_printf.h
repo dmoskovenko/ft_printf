@@ -73,9 +73,9 @@ void			precision(const char *fmt, t_struct	*params);
 
 void			type_int(va_list args, t_struct *params);
 void			int_from_fmt(t_struct *params, intmax_t num, int i);
-void			int_print(t_struct *params, char *s, int num_length, int indent);
-int				int_print2(t_struct *params, char *s, int num_length);
-char			*int_with_prec(t_struct *params, char *s, int num_length, int i);
+void			int_print(t_struct *params, char *s, int indent);
+int				int_print2(t_struct *params, char *s);
+char			*int_with_prec(t_struct *params, char *s, int i);
 void			int_chk(t_struct *params);
 
 void			type_char(va_list args, t_struct *params);

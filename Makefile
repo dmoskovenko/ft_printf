@@ -8,6 +8,7 @@ SOURCES = 	ft_printf.c \
 			type_str.c \
 			type_ptr.c \
 			type_int.c \
+			type_int2.c \
 			type_u.c \
 			type_oct.c \
 			type_oct2.c \
