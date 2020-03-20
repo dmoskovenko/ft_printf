@@ -47,21 +47,20 @@ char	*itoa_base(t_struct *params, intmax_t num, int base)
 {
 	char	*out;
 	int		i;
-//	int		is_neg;
 
 	i = num_len(num, base);
-	/*is_neg*/ params->negative = (num < 0 && base == 10) ? 1 : 0;
+	params->negative = (num < 0 && base == 10) ? 1 : 0;
 	num = (num < 0 && base == 10) ? -num : num;
-	out = (char *)malloc(sizeof(char) * (/*is_neg + */ i + 1));
-	out[i-- /* + is_neg */] = '\0';
+	if (!(out = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	out[i--] = '\0';
 	while (i >= 0)
 	{
-		out[i /* + is_neg */] = (num % base < 10) ? (num % base) + '0' : \
+		out[i] = (num % base < 10) ? (num % base) + '0' : \
 		(num % base + 'a' - 10);
 		num /= base;
 		i--;
 	}
-	// out[0] = (is_neg == 1) ? '-' : out[0];
 	return (out);
 }
 
@@ -71,7 +70,8 @@ char	*itoa_base_unsigned(uintmax_t num, int base)
 	int		i;
 
 	i = unsigned_num_len(num, base);
-	out = (char *)malloc(sizeof(char) * (i + 1));
+	if (!(out = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
 	out[i--] = '\0';
 	while (i >= 0)
 	{
@@ -89,7 +89,8 @@ char	*itoa_base_upp(uintmax_t num, int base)
 	int		i;
 
 	i = unsigned_num_len(num, base);
-	out = (char *)malloc(sizeof(char) * (i + 1));
+	if (!(out = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
 	out[i--] = '\0';
 	while (i >= 0)
 	{

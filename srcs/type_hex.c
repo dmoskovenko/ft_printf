@@ -81,6 +81,7 @@ char	*hex_with_prec(t_struct *params, char *s, int num_length, int i)
 		j++;
 	}
 	s_prec[i] = '\0';
+	free (s);
 	return (s_prec);
 }
 
@@ -107,6 +108,7 @@ char	*hex_hash(char *s, int num_length, char spec)
 		j++;
 	}
 	s_hash[i] = '\0';
+	free(s);
 	return (s_hash);
 }
 
@@ -136,10 +138,7 @@ void	hex_from_fmt(t_struct *params, uintmax_t num, char spec, int i)
 	s = (params->small_hex == 1) ? itoa_base_unsigned(num, 16) : itoa_base_upp(num, 16);
 	hex_hash_chk(params, num, num_length);
 	if (params->precision > num_length)
-	{
 		s = hex_with_prec(params, s, num_length, i);
-//		free(s_prec);
-	}
 	if (params->hash && params->zero && params->width && !params->precision)
 	{
 		params->hash_case_zero++;

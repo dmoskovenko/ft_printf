@@ -15,8 +15,10 @@
 
 int		oct_print2(t_struct *params, char *s, int num_length)
 {
-	if ((!params->width && params->dot && params->zero_arg && params->precisionzero) \
-	|| (!params->width && params->dot && !params->precision && !params->precisionzero && params->zero_arg))
+	if ((!params->width && params->dot && params->zero_arg \
+	&& params->precisionzero) \
+	|| (!params->width && params->dot && !params->precision && \
+	!params->precisionzero && params->zero_arg))
 	{
 		if (params->hash_case)
 		{
@@ -57,50 +59,6 @@ void	oct_print(t_struct *params, char *s, int num_length, int indent)
 	oct_print2(params, s, num_length);
 }
 
-char	*oct_with_prec(t_struct *params, char *s, int num_length, int i)
-{
-	char	*s_prec;
-	int		j;
-
-	j = 0;
-	if (!(s_prec = (char *)malloc(sizeof(char) * (params->precision + 1))))
-		s_prec = NULL;
-	while (i < (params->precision - num_length))
-	{
-		s_prec[i] = '0';
-		i++;
-	}
-	while (s[j])
-	{
-		s_prec[i] = s[j];
-		i++;
-		j++;
-	}
-	s_prec[i] = '\0';
-	return (s_prec);
-}
-
-char	*oct_hash(char *s, int num_length)
-{
-	char	*s_hash;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!(s_hash = (char *)malloc(sizeof(char) * (num_length + 2))))
-		s_hash = NULL;
-	s_hash[i++] = '0';
-	while (s[j])
-	{
-		s_hash[i] = s[j];
-		i++;
-		j++;
-	}
-	s_hash[i] = '\0';
-	return (s_hash);
-}
-
 void	oct_hash_chk(t_struct *params, int num, int num_length)
 {
 	if ((num == 0) && (num_length == 1))
@@ -130,10 +88,7 @@ void	oct_from_fmt(t_struct *params, uintmax_t num, int i)
 	if (params->hash)
 		s = oct_hash(s, num_length);
 	if (params->precision > num_length)
-	{
 		s = oct_with_prec(params, s, num_length, i);
-//		free(s_prec);
-	}
 	num_length = ft_strlen(s);
 	if (params->plus)
 		params->plus = 0;

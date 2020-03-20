@@ -12,12 +12,21 @@
 
 #include "ft_printf.h"
 
+void	int_chk(t_struct *params)
+{
+	if (params->negative  && params->zero)
+		params->nprinted += write(1, "-", 1);
+	if (params->plus && !params->negative && params->zero)
+		params->nprinted += write(1, "+", 1);
+	if (params->space && !params->negative && params->zero)
+		params->nprinted += write(1, " ", 1);
+}
+
 int		int_print2(t_struct *params, char *s, int num_length)
 {
 	if ((!params->width && params->dot && params->zero_arg && params->precisionzero) \
 	|| (!params->width && params->dot && !params->precision && !params->precisionzero && params->zero_arg))
 		return (0);
-
 	if (params->width && params->dot && params->zero_arg && !params->precision)
 		if (params->plus)
 			write(1, "", 0);
@@ -25,7 +34,6 @@ int		int_print2(t_struct *params, char *s, int num_length)
 			params->nprinted += write(1, " ", 1);
 	else
 		params->nprinted += write(1, s, num_length);
-
 	if (params->width && params->minus)
 		while (params->nprinted < params->width)
 			params->nprinted += write(1, " ", 1);
@@ -34,26 +42,13 @@ int		int_print2(t_struct *params, char *s, int num_length)
 
 void	int_print(t_struct *params, char *s, int num_length, int indent)
 {
-
-	if (params->negative  && params->zero)
-		params->nprinted += write(1, "-", 1);
-
-	if (params->plus && !params->negative && params->zero)
-		params->nprinted += write(1, "+", 1);
-
-	if (params->space && !params->negative && params->zero)
-		params->nprinted += write(1, " ", 1);
-
-
-
+	int_chk(params);
 	if (params->width > num_length)
 			indent = params->width - num_length;
-	
 	if (params->negative || params->plus || params->space)
 		indent--;
 	if (params->zero_arg && params->plus && params->dot && params->width && !params->precision)
 		indent++;
-
 	if (params->width > num_length && !params->minus)
 	{
 		while (indent--)
@@ -63,23 +58,14 @@ void	int_print(t_struct *params, char *s, int num_length, int indent)
 			write(1, " ", 1);
 		}
 	}
-
-
-
 	if (params->negative  && !params->zero)
 		params->nprinted += write(1, "-", 1);
-
-
 	if (params->plus && !params->negative && !params->zero)
 		params->nprinted += write(1, "+", 1);
-
 	if (params->space && !params->negative && !params->zero)
 		params->nprinted += write(1, " ", 1);
-
-
 	int_print2(params, s, num_length);
 }
-
 
 char	*int_with_prec(t_struct *params, char *s, int num_length, int i)
 {
@@ -101,6 +87,7 @@ char	*int_with_prec(t_struct *params, char *s, int num_length, int i)
 		j++;
 	}
 	s_prec[i] = '\0';
+	free (s);
 	return (s_prec);
 }
 
@@ -115,19 +102,16 @@ void	int_from_fmt(t_struct *params, intmax_t num, int i)
 	num_length = num_len(num, 10);
 	s = itoa_base(params, num, 10);
 
-	if (/* params->minus || */ params->dot)
+	if (params->dot)
 		params->zero = 0;
-
 	if ((num == 0) && (num_length == 1))
 		params->zero_arg++;
-	
 	if (params->precision && params->precision > num_length && !params->negative)
 		s = int_with_prec(params, s, num_length, i);
-	else if (params->precision && params->precision > num_length && params->negative)
+	else if (params->precision && params->precision > \
+	num_length && params->negative)
 		s = int_with_prec(params, s, num_length, i);
 	num_length = ft_strlen(s);
-	
-
 	int_print(params, s, num_length, indent);
 	free(s);
 	bzerostruct(params, 0);

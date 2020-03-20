@@ -68,6 +68,7 @@ char	*u_with_prec(t_struct *params, char *s, int num_length, int i)
 		j++;
 	}
 	s_prec[i] = '\0';
+	free (s);
 	return (s_prec);
 }
 
@@ -83,7 +84,6 @@ void	u_from_fmt(t_struct *params, uintmax_t num, int i)
 	if (params->precision && params->precision > num_length)
 	{
 		s = u_with_prec(params, s, num_length, i);
-//		free(s_prec);
 		num_length = ft_strlen(s);
 	}
 	if (params->plus)

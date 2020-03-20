@@ -10,6 +10,7 @@ SOURCES = 	ft_printf.c \
 			type_int.c \
 			type_u.c \
 			type_oct.c \
+			type_oct2.c \
 			type_hex.c \
 			type_float.c \
 			modifiers.c \
