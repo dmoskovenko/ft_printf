@@ -89,5 +89,6 @@ void	type_ptr(va_list args, t_struct *params)
 		while (printed_here < params->width)
 			printed_here += write(1, " ", 1);
 	params->nprinted += printed_here;
+	free (s);
 	bzerostruct(params, 0);
 }
