@@ -26,6 +26,7 @@ void	bzerostruct(t_struct *params, int full)
 		params->i = 0;
 		params->nprinted = 0;
 	}
+	params->nprinted_here = 0;
 	params->negative = 0;
 	params->minus = 0;
 	params->plus = 0;
@@ -41,6 +42,7 @@ void	bzerostruct(t_struct *params, int full)
 	params->precision = 0;
 	params->precisionzero = 0;
 	params->length = 0;
+	params->lenbefore = 0;
 	/* Other float fields? */
 }
 

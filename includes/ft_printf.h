@@ -33,6 +33,7 @@ typedef struct	s_struct
 {
 	char		*fmt;
 	int			nprinted;
+	int			nprinted_here;
 	int			i;
 	int			negative;
 	int			minus;
@@ -100,12 +101,13 @@ void			oct_print(t_struct *params, char *s, int num_length, int indent);
 int				oct_print2(t_struct *params, char *s, int num_length);
 
 void			type_hex(va_list args, t_struct *params, char spec);
-void			hex_from_fmt(t_struct *params, uintmax_t num, char spec, int i);
-char			*hex_hash(char *s, int num_length, char spec);
-char			*hex_with_prec(t_struct *params, char *s, int num_length, int i);
-void			hex_hash_chk(t_struct *params, int num, int num_length);
-void			hex_print(t_struct *params, char *s, int num_length, int indent);
-int				hex_print2(t_struct *params, char *s, int num_length);
+void			hex_from_fmt(t_struct *params, uintmax_t num, int i);
+void			hex_from_fmt2(t_struct *params, char *s, int indent);
+char			*hex_hash(t_struct *params, char *s);
+char			*hex_with_prec(t_struct *params, char *s, int i);
+void			hex_hash_chk(t_struct *params, int num);
+void			hex_print(t_struct *params, char *s, int indent);
+int				hex_print2(t_struct *params, char *s);
 
 void			type_float(va_list args, t_struct *params);
 int				is_infnan(t_struct *params, long double num);

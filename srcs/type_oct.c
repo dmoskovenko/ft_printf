@@ -22,18 +22,18 @@ int		oct_print2(t_struct *params, char *s, int num_length)
 	{
 		if (params->hash_case)
 		{
-			params->nprinted += write(1, "0", 1);
+			params->nprinted_here += write(1, "0", 1);
 			return (1);
 		}
 		return (0);
 	}
 	if (params->width && params->dot && params->zero_arg && !params->precision && !params->hash_case)
-		params->nprinted += write(1, " ", 1);
+		params->nprinted_here += write(1, " ", 1);
 	else   
-		params->nprinted += write(1, s, num_length);
+		params->nprinted_here += write(1, s, num_length);
 	if (params->width && params->minus)
-		while (params->nprinted < params->width)
-			params->nprinted += write(1, " ", 1);
+		while (params->nprinted_here < params->width)
+			params->nprinted_here += write(1, " ", 1);
 	return (1);
 }
 
@@ -47,15 +47,15 @@ void	oct_print(t_struct *params, char *s, int num_length, int indent)
 	{
 		while (indent--)
 		{
-			params->nprinted += (params->zero && !params->precision) \
+			params->nprinted_here += (params->zero && !params->precision) \
 			? write(1, "0", 1) : \
 			write(1, " ", 1);
 		}
 	}
 	if (params->negative)
-		params->nprinted += write(1, "-", 1);
+		params->nprinted_here += write(1, "-", 1);
 	if (params->space && !params->negative)
-		params->nprinted += write(1, " ", 1);
+		params->nprinted_here += write(1, " ", 1);
 	oct_print2(params, s, num_length);
 }
 
@@ -95,6 +95,7 @@ void	oct_from_fmt(t_struct *params, uintmax_t num, int i)
 	if (params->space)
 		params->space = 0;
 	oct_print(params, s, num_length, indent);
+	params->nprinted += params->nprinted_here;
 	free(s);
 	bzerostruct(params, 0);
 }
