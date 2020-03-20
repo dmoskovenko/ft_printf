@@ -67,7 +67,7 @@ void	oct_hash_chk(t_struct *params, int num, int num_length)
 		params->hash_case++;
 	if (params->hash && params->width && !params->precision && params->zero_arg)
 		params->hash_case++;
-	if (params->hash && params->dot && !params->precision && !params->precisionzero)
+	if (params->hash && params->dot && !params->precision && !params->precisionzero && params->zero_arg)
 		params->hash = 0;
 	if (params->zero_arg)
 		params->hash = 0;
