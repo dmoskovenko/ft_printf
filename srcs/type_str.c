@@ -28,7 +28,7 @@ void	str_print(t_struct *params, char *s, int str_len, int indent)
 		if (params->width > str_len && !params->minus && !params->dot)
 				indent = params->width - str_len;
 
-		else if (params->width && params->precision && params->precision < str_len)
+		else if (params->width && params->width > str_len && params->precision && params->precision < str_len)
 			indent = params->width - params->precision;
 
 		else if (params->width > str_len && params->precision && params->precision > str_len)
