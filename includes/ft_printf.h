@@ -81,7 +81,7 @@ int				int_print2(t_struct *params, char *s);
 char			*int_with_prec(t_struct *params, char *s, int i);
 void			int_chk(t_struct *params);
 
-void			type_char(va_list args, t_struct *params);
+void			type_char(va_list args, t_struct *prms);
 void			char_print(t_struct *params, char c, int indent);
 
 void			type_str(va_list args, t_struct *params);
