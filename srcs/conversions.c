@@ -12,26 +12,6 @@
 
 #include "ft_printf.h"
 
-/*
-void	writezeros(int n)
-{
-	while (n > 0)
-	{
-		write(1, "0", 1);
-		n--;
-	}
-}
-
-void	writeblanks(int n)
-{
-	while (n > 0)
-	{
-		write(1, " ", 1);
-		n--;
-	}
-}
-*/
-
 int		conversions(va_list args, char spec, t_struct *params)
 {
 	if (spec == 'c' || spec == 'C')
@@ -43,7 +23,7 @@ int		conversions(va_list args, char spec, t_struct *params)
 	else if (spec == 'd' || spec == 'i' || spec == 'D' || spec == 'I')
 		type_int(args, params);
 	else if (spec == 'u' || spec == 'U')
-		type_u(args, params);
+		type_u(args, params, spec);
 	else if (spec == 'x' || spec == 'X')
 		type_hex(args, params, spec);
 	else if (spec == 'f' || spec == 'F')
@@ -52,6 +32,8 @@ int		conversions(va_list args, char spec, t_struct *params)
 		type_oct(args, params);
 	else if (spec == '%')
 		percent(params);
+	// else if (spec == 'Z')
+	// 	params->nprinted += write(1, "Z", 1);
 	else
 		bzerostruct(params, 0);
 	return (params->i);

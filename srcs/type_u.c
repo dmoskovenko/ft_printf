@@ -98,20 +98,25 @@ void	u_from_fmt(t_struct *params, uintmax_t num, int i)
 	bzerostruct(params, 0);
 }
 
-void	type_u(va_list args, t_struct *params)
+void	type_u(va_list args, t_struct *params, char spec)
 {
-	intmax_t num;
+	uintmax_t num;
 
 	num = 0;
-	if (params->length == 0)
+	if (params->length == 0 && spec == 'u')
 		num = (unsigned int)va_arg(args, int);
-	if (params->length == SHORTSHORT)
+		// num = (unsigned long)va_arg(args, unsigned long);
+	else if (params->length == SHORTSHORT && spec == 'u')
 		num = (unsigned char)va_arg(args, int);
-	if (params->length == SHORT)
+	else if (params->length == SHORT && spec == 'u')
 		num = (unsigned short)va_arg(args, int);
-	if (params->length == LONG)
+	else if (params->length == LONG || spec == 'U')
 		num = (unsigned long)va_arg(args, unsigned long);
-	if (params->length == LONGLONG)
+	else if (params->length == LONGLONG)
 		num = (unsigned long long)va_arg(args, unsigned long long);
+	if (params->length == SIZET)
+		num = (size_t)va_arg(args, size_t);
+	if (params->length == INTUINTMAX)
+		num = (uintmax_t)va_arg(args, uintmax_t);
 	u_from_fmt(params, num, 0);
 }

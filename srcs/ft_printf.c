@@ -46,36 +46,66 @@ void	bzerostruct(t_struct *params, int full)
 	params->precisionzero = 0;
 	params->length = 0;
 	params->lenbefore = 0;
+	params->after_percent = 0;
 }
 
 int		format_parse(va_list args, const char *fmt, t_struct *params, int pos)
 {
-	while (fmt[pos])
+	while (fmt[pos] && pos < (int)ft_strlen(fmt))
 	{
+
 		if (fmt[pos] != '%' && fmt[pos])
 			params->nprinted += write(1, &fmt[pos], 1);
 		else if (fmt[pos] == '%')
 		{
-			if (!ft_strchr(VALIDSYM, fmt[pos + 1]))
+			
+			if (!ft_strchr(VALIDSYM, fmt[pos + 1]) && params->after_percent)
 				break;
-			while (ft_strchr(VALIDSYM, fmt[pos + 1]))
+			params->after_percent = 1;
+			while (ft_strchr(VALIDSYM, fmt[pos + 1]) && pos < (int)ft_strlen(fmt))
 			{
 				pos++;
 				params->i = pos;
+			
 				if (ft_strchr(TYPESYM, fmt[pos]))
 				{
 					pos = conversions(args, fmt[pos], params) + 1;
+					params->after_percent = 0;
 					break;
 				}
 				else if (ft_strchr(FLAGS, fmt[pos]) || ft_isdigit(fmt[pos]))
 				{
 					pos = modifiers(args, fmt, params) - 1;
-					if (pos > (int)ft_strlen(fmt) - 1)
+					if (pos > (int)ft_strlen(fmt) - 1 && fmt[pos] != '\0')
 					{
 						pos--;
 						break;
 					}
 				}
+			}
+			while (!ft_strchr("%", fmt[pos + 1]) && pos < (int)ft_strlen(fmt) && params->after_percent)
+			{
+				if (fmt[pos] == '%')
+					pos++;
+				if (fmt[pos] == ' ' && pos == 1)
+				{
+					if (fmt[pos + 1] == '\0')
+						break;
+					pos++;
+				}
+				while (ft_strchr(FLAGS, fmt[pos]))
+					pos++;
+			
+				if (fmt[pos] == '\0')
+					exit(0);
+				if (fmt[pos + 1] == '%' && fmt[pos + 2] != '\0')
+				{
+					break;
+					pos--;
+				}
+				params->nprinted += write(1, &fmt[pos], 1);
+				params->after_percent = 0;
+				 pos++;
 			}
 			continue;
 		}

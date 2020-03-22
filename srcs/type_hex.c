@@ -106,6 +106,10 @@ void	type_hex(va_list args, t_struct *params, char spec)
 		num = (unsigned long)va_arg(args, unsigned long);
 	if (params->length == LONGLONG)
 		num = (unsigned long long)va_arg(args, unsigned long long);
+	if (params->length == SIZET)
+		num = (size_t)va_arg(args, size_t);
+	if (params->length == INTUINTMAX)
+		num = (uintmax_t)va_arg(args, uintmax_t);
 	params->small_hex = (spec == 'x') ? 1 : 0;	
 	hex_from_fmt(params, num, 0);
 }

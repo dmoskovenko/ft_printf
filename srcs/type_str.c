@@ -36,7 +36,8 @@ void	str_print(t_struct *prms, char *s)
 	if (!prms->minus)
 		str_print2(prms);
 	while (prms->indent--)
-		prms->nprinted_here += write(1, " ", 1);
+		prms->nprinted_here += (prms->zero) ? write(1, "0", 1) \
+		: write(1, " ", 1);
 	if (prms->precision && prms->precision < prms->lenbefore)
 	{
 		if (prms->width && prms->width > prms->precision && !prms->minus)

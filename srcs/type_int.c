@@ -111,10 +111,28 @@ void	type_int(va_list args, t_struct *params)
 		num = (long int)va_arg(args, long int);
 	if (params->length == LONGLONG)
 		num = (long long int)va_arg(args, long long int);
+	if (params->length == SIZET)
+		num = (size_t)va_arg(args, size_t);
+	if (params->length == INTUINTMAX)
+		num = (intmax_t)va_arg(args, intmax_t);
+
 	if (num == LLONG_MIN)
 	{
 		params->nprinted += write(1, "-9223372036854775808", 20);
 		return ;
 	}
+	else if (num == LLONG_MAX)
+	{
+		params->nprinted += write(1, "9223372036854775807", 19);
+		return ;
+	}
+
+	if (params->dot > 1 && params->precision)
+	{
+		params->dot = 0;
+		params->zero = 0;
+		params->precision = 0;
+	}
+
 	int_from_fmt(params, num, 0);
 }

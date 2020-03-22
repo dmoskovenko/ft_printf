@@ -61,21 +61,29 @@ void	flags(const char *fmt, t_struct *params)
 
 void	length_field(const char *fmt, t_struct *params)
 {
-	if (ft_strchr("hlL", fmt[params->i]))
+	if (ft_strchr("hlLjz", fmt[params->i]))
 	{
-		if (fmt[params->i] == 'h')
+		while (ft_strchr("hlLjz", fmt[params->i]))
+		{
+		if (fmt[params->i] == 'h' && params->length < SHORT)
 			params->length = SHORT;
-		if (fmt[params->i] == 'h' && fmt[params->i + 1] == 'h')
+		if (fmt[params->i] == 'h' && fmt[params->i + 1] == 'h' \
+		&& params->length < SHORTSHORT)
 			params->length = SHORTSHORT;
-		if (fmt[params->i] == 'l')
+		if (fmt[params->i] == 'l' && params->length < LONG)
 			params->length = LONG;
-		if (fmt[params->i] == 'l' && fmt[params->i + 1] == 'l')
+		if (fmt[params->i] == 'l' && fmt[params->i + 1] == 'l'  \
+		&& params->length < LONGLONG)
 			params->length = LONGLONG;
 		if (fmt[params->i] == 'L')
 			params->length = LONGDOUBLE;
-	}
-	while (ft_strchr("hlL", fmt[params->i]))
+		if (fmt[params->i] == 'z'  && params->length < SIZET)
+			params->length = SIZET;
+		if (fmt[params->i] == 'j' && params->length < INTUINTMAX)
+			params->length = INTUINTMAX;
 		params->i++;
+		}
+	}
 }
 
 int		modifiers(va_list args, const char *fmt, t_struct *params)

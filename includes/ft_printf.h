@@ -20,14 +20,16 @@
 # include <limits.h>
 # include "../libft/includes/libft.h"
 
-# define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlL0123456789 .-+#%"
+# define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlLjz0123456789 .-+#%"
 # define TYPESYM		"cCsSpPdDiIoOuUxXfF%"
-# define FLAGS			" .-+#0hlL"
-# define SHORT			1
-# define SHORTSHORT		2
+# define FLAGS			" .-+#0hlLjz6"
+# define SHORTSHORT		1
+# define SHORT			2
 # define LONG			3
 # define LONGLONG		4
 # define LONGDOUBLE		7
+# define SIZET			8
+# define INTUINTMAX		9
 
 typedef struct	s_struct
 {
@@ -53,6 +55,7 @@ typedef struct	s_struct
 	int			indent;
 	int			indent_was;
 	int			length;
+	int			after_percent;
 	long double fdecimal;
 	char		*fstr;
 	long long	fbefore;
@@ -95,7 +98,7 @@ void			ptr_print3(t_struct *prms, char*s);
 void			ptr_print4(t_struct *prms, char*s);
 void			ptr_chk(t_struct *prms);
 
-void			type_u(va_list args, t_struct *params);
+void			type_u(va_list args, t_struct *params, char spec);
 void			u_from_fmt(t_struct *params, uintmax_t num, int i);
 char			*u_with_prec(t_struct *params, char *s, int num_length, int i);
 void			u_print(t_struct *params, char *s, int num_length, int indent);
