@@ -40,10 +40,12 @@ void	bzerostruct(t_struct *params, int full)
 	params->dot = 0;
 	params->width = 0;
 	params->precision = 0;
+	params->precision_was = 0;
+	params->indent = 0;
+	params->indent_was = 0;
 	params->precisionzero = 0;
 	params->length = 0;
 	params->lenbefore = 0;
-	/* Other float fields? */
 }
 
 int		format_parse(va_list args, const char *fmt, t_struct *params, int pos)

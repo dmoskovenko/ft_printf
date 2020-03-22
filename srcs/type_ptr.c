@@ -12,83 +12,76 @@
 
 #include "ft_printf.h"
 
+void	ptr_print2(t_struct *prms, char*s)
+{
+	while (prms->indent--)
+		prms->nprinted_here += write(1, " ", 1);
+	if (prms->plus)
+		prms->nprinted_here += write(1, "+", 1);
+	prms->nprinted_here += write(1, "0x", 2);
+	if (prms->dot && !prms->precision_was && !prms->precision)
+		write(1, "", 0);
+	else
+		prms->nprinted_here += write(1, s, prms->lenbefore);
+}
+
+void	ptr_print3(t_struct *prms, char *s)
+{
+	if (prms->plus)
+		prms->nprinted_here += write(1, "+", 1);
+	prms->nprinted_here += write(1, "0x", 2);
+	while (prms->indent--)
+		prms->nprinted_here += write(1, "0", 1);
+	if (prms->dot && !prms->precision)
+		write(1, "", 0);
+	else
+		prms->nprinted_here += write(1, s, prms->lenbefore);
+}
+
+void	ptr_print4(t_struct *prms, char *s)
+{
+	if (prms->plus)
+		prms->nprinted_here += write(1, "+", 1);
+	prms->nprinted_here += write(1, "0x", 2);
+	if (prms->dot && !prms->precision)
+		write(1, "", 0);
+	else
+		prms->nprinted_here += write(1, s, prms->lenbefore);
+}
+
+void	ptr_print(t_struct *prms, char *s)
+{
+	ptr_chk(prms);
+	if (prms->width && prms->width > prms->lenbefore \
+	&& !prms->zero && !prms->minus)
+		ptr_print2(prms, s);
+	else if (prms->width && prms->width > prms->lenbefore \
+	&& prms->zero && !prms->minus)
+		ptr_print3(prms, s);
+	else if (prms->precision && prms->precision > prms->lenbefore)
+	{
+		prms->nprinted_here += write(1, "0x", 2);
+		while (prms->nprinted_here < prms->precision + 2 - prms->lenbefore)
+			prms->nprinted_here += write(1, "0", 1);
+		prms->nprinted_here += write(1, s, prms->lenbefore);
+	}
+	else
+		ptr_print4(prms, s);
+	if (prms->width && prms->minus)
+		while (prms->nprinted_here < prms->width)
+			prms->nprinted_here += write(1, " ", 1);
+}
+
 void	type_ptr(va_list args, t_struct *params)
 {
 	uintmax_t	ptr;
-	int			ptr_len;
-	int			indent;
-	int			indent_was;
-	int			precision_was;
-	int			printed_here;
 	char		*s;
 
-	printed_here = 0;
-	indent = 0;
-	indent_was = 0;
-	precision_was = 0;
 	ptr = (uintmax_t)va_arg(args, void *);
-	ptr_len = unsigned_num_len(ptr, 16);
+	params->lenbefore = unsigned_num_len(ptr, 16);
 	s = itoa_base_unsigned(ptr, 16);
-	if (params->zero && params->dot)
-		params->zero = 0;
-	if (params->width > params->precision)
-	{
-		params->precision = 0;
-		precision_was = 1;
-	}
-	if (params->precision > params->width)
-		params->width = 0;
-
-	if (params->width > ptr_len)
-	{
-		indent = params->width - params->precision - ptr_len - params->plus - 2;
-		indent_was = indent;
-	}
-	if (params->width && params->width > ptr_len && !params->zero && !params->minus)
-	{
-		while (indent--)
-			printed_here += write(1, " ", 1);
-		if (params->plus)
-			printed_here += write(1, "+", 1);
-		printed_here += write(1, "0x", 2);
-		if (params->dot && !precision_was && !params->precision)
-			write(1, "", 0);
-		else
-			printed_here += write(1, s, ptr_len);
-	}
-	else if (params->width && params->width > ptr_len && params->zero && !params->minus)
-	{
-		if (params->plus)
-			printed_here += write(1, "+", 1);
-		printed_here += write(1, "0x", 2);
-		while (indent--)
-			printed_here += write(1, "0", 1);
-		if (params->dot && !params->precision)
-			write(1, "", 0);
-		else
-			printed_here += write(1, s, ptr_len);
-	}
-	else if (params->precision && params->precision > ptr_len)
-	{
-		printed_here += write(1, "0x", 2);
-		while (printed_here < params->precision + 2 - ptr_len)
-			printed_here += write(1, "0", 1);
-		printed_here += write(1, s, ptr_len);
-	}
-	else
-	{
-		if (params->plus)
-			printed_here += write(1, "+", 1);
-		printed_here += write(1, "0x", 2);
-		if (params->dot && !params->precision)
-			write(1, "", 0);
-		else
-			printed_here += write(1, s, ptr_len);
-	}
-	if (params->width && params->minus)
-		while (printed_here < params->width)
-			printed_here += write(1, " ", 1);
-	params->nprinted += printed_here;
+	ptr_print(params, s);
+	params->nprinted += params->nprinted_here;
 	free (s);
 	bzerostruct(params, 0);
 }

@@ -48,7 +48,10 @@ typedef struct	s_struct
 	int			dot;
 	int			width;
 	int			precision;
+	int			precision_was;
 	int			precisionzero;
+	int			indent;
+	int			indent_was;
 	int			length;
 	long double fdecimal;
 	char		*fstr;
@@ -85,6 +88,11 @@ void			type_str(va_list args, t_struct *params);
 void			str_print(t_struct *params, char *s, int str_len, int indent);
 
 void			type_ptr(va_list args, t_struct *params);
+void			ptr_print(t_struct *prms, char *s);
+void			ptr_print2(t_struct *prms, char*s);
+void			ptr_print3(t_struct *prms, char*s);
+void			ptr_print4(t_struct *prms, char*s);
+void			ptr_chk(t_struct *prms);
 
 void			type_u(va_list args, t_struct *params);
 void			u_from_fmt(t_struct *params, uintmax_t num, int i);
