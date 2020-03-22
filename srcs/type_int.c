@@ -79,6 +79,16 @@ void	int_from_fmt(t_struct *params, intmax_t num, int i)
 	indent = 0;
 	params->lenbefore = num_len(num, 10);
 	s = itoa_base(params, num, 10);
+	if (num == LLONG_MIN)
+	{
+		free(s);
+		s = "9223372036854775808";
+	}
+	else if (num == LLONG_MAX)
+	{
+		free(s);
+		s = "9223372036854775807";
+	}
 	if (params->dot)
 		params->zero = 0;
 	if ((num == 0) && (params->lenbefore == 1))
@@ -92,7 +102,8 @@ void	int_from_fmt(t_struct *params, intmax_t num, int i)
 	params->lenbefore = ft_strlen(s);
 	int_print(params, s, indent);
 	params->nprinted += params->nprinted_here;
-	free(s);
+	if (num != LLONG_MAX && num != LLONG_MIN)
+		free(s);
 	bzerostruct(params, 0);
 }
 
@@ -116,16 +127,16 @@ void	type_int(va_list args, t_struct *params)
 	if (params->length == INTUINTMAX)
 		num = (intmax_t)va_arg(args, intmax_t);
 
-	if (num == LLONG_MIN)
-	{
-		params->nprinted += write(1, "-9223372036854775808", 20);
-		return ;
-	}
-	else if (num == LLONG_MAX)
-	{
-		params->nprinted += write(1, "9223372036854775807", 19);
-		return ;
-	}
+	// if (num == LLONG_MIN)
+	// {
+	// 	params->nprinted += write(1, "-9223372036854775808", 20);
+	// 	return ;
+	// }
+	// else if (num == LLONG_MAX)
+	// {
+	// 	params->nprinted += write(1, "9223372036854775807", 19);
+	// 	return ;
+	// }
 
 	if (params->dot > 1 && params->precision)
 	{

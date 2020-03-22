@@ -23,8 +23,8 @@
 # define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlLjz0123456789 .-+#%"
 # define TYPESYM		"cCsSpPdDiIoOuUxXfF%"
 # define FLAGS			" .-+#0hlLjz6"
-# define SHORTSHORT		1
-# define SHORT			2
+# define SHORT			1
+# define SHORTSHORT		2
 # define LONG			3
 # define LONGLONG		4
 # define LONGDOUBLE		7
