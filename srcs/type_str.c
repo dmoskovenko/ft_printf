@@ -12,70 +12,57 @@
 
 #include "ft_printf.h"
 
-void	str_print(t_struct *params, char *s, int str_len, int indent)
+void	str_print2(t_struct *prms)
 {
-	int	printed_here;
+	if (prms->width > prms->lenbefore && !prms->minus && !prms->dot)
+			prms->indent = prms->width - prms->lenbefore;
+	else if (prms->width && prms->width > prms->lenbefore && prms->precision \
+	&& prms->precision < prms->lenbefore)
+		prms->indent = prms->width - prms->precision;
+	else if (prms->width > prms->lenbefore && prms->precision \
+	&& prms->precision > prms->lenbefore)
+		prms->indent = prms->width - prms->lenbefore;
+	else if (prms->width && prms->dot && !prms->precision && !prms->precisionzero)
+		prms->indent = prms->width;
+	else if (prms->width && prms->dot && prms->precision \
+	&& !prms->precisionzero && prms->width > prms->precision)
+		prms->indent = prms->width - prms->precision;
+}
 
-	printed_here = 0;
-
-	if (params->dot && params->precision & params->precisionzero)
+void	str_print(t_struct *prms, char *s)
+{
+	if (prms->dot && prms->precision & prms->precisionzero)
+		prms->width = 0;
+	if (!prms->minus)
+		str_print2(prms);
+	while (prms->indent--)
+		prms->nprinted_here += write(1, " ", 1);
+	if (prms->precision && prms->precision < prms->lenbefore)
 	{
-		params->width = 0;
-	}
-
-	if (!params->minus)
-	{
-		if (params->width > str_len && !params->minus && !params->dot)
-				indent = params->width - str_len;
-
-		else if (params->width && params->width > str_len && params->precision && params->precision < str_len)
-			indent = params->width - params->precision;
-
-		else if (params->width > str_len && params->precision && params->precision > str_len)
-			indent = params->width - str_len;
-		else if (params->width && params->dot && !params->precision && !params->precisionzero)
-			indent = params->width;
-		else if (params->width && params->dot && params->precision \
-		&& !params->precisionzero && params->width > params->precision)
-			indent = params->width - params->precision;
-	}
-
-	while (indent--)
-		printed_here += write(1, " ", 1);
-
-
-
-	if (params->precision && params->precision < str_len)
-	{
-		if (params->width && params->width > params->precision && !params->minus)
-			while (printed_here < params->width)
-				printed_here += write(1, s, params->precision);
+		if (prms->width && prms->width > prms->precision && !prms->minus)
+			while (prms->nprinted_here < prms->width)
+				prms->nprinted_here += write(1, s, prms->precision);
 		else 
-			while (printed_here < params->precision)
-				printed_here += write(1, s, params->precision);
+			while (prms->nprinted_here < prms->precision)
+				prms->nprinted_here += write(1, s, prms->precision);
 	}
-
-	else if (params->dot && !params->precision)
+	else if (prms->dot && !prms->precision)
 		write(1, "", 0);
 	else
-		printed_here += write(1, s, str_len);
-
-
-
-	if (params->width && params->minus)
-		while (printed_here < params->width)
-			printed_here += write(1, " ", 1);
-	params->nprinted += printed_here;
+		prms->nprinted_here += write(1, s, prms->lenbefore);
+	if (prms->width && prms->minus)
+		while (prms->nprinted_here < prms->width)
+			prms->nprinted_here += write(1, " ", 1);
+	prms->nprinted += prms->nprinted_here;
 }
 
 void	type_str(va_list args, t_struct *params)
 {
 	char	*s;
-	int		str_len;
 
 	if (!(s = (char *)va_arg(args, char *)))
 		s = "(null)";
-	str_len = ft_strlen(s);
-	str_print(params, s, str_len, 0);
+	params->lenbefore = ft_strlen(s);
+	str_print(params, s);
 	bzerostruct(params, 0);
 }

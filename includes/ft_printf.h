@@ -85,7 +85,8 @@ void			type_char(va_list args, t_struct *prms);
 void			char_print(t_struct *params, char c, int indent);
 
 void			type_str(va_list args, t_struct *params);
-void			str_print(t_struct *params, char *s, int str_len, int indent);
+void			str_print(t_struct *params, char *s);
+void			str_print2(t_struct *params);
 
 void			type_ptr(va_list args, t_struct *params);
 void			ptr_print(t_struct *prms, char *s);
