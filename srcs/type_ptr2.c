@@ -25,7 +25,8 @@ void	ptr_chk(t_struct *prms)
 		prms->width = 0;
 	if (prms->width > prms->lenbefore)
 	{
-		prms->indent = prms->width - prms->precision - prms->lenbefore - prms->plus - 2;
+		prms->indent = prms->width - prms->precision \
+		- prms->lenbefore - prms->plus - 2;
 		prms->indent_was = prms->indent;
 	}
 }

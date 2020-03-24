@@ -18,7 +18,8 @@ char	*hex_with_prec(t_struct *params, char *s, int i)
 	int		j;
 
 	j = 0;
-	if (!(s_prec = (char *)malloc(sizeof(char) * (params->precision + 1))))
+	if (!(s_prec = (char *)malloc(sizeof(char) * \
+	(params->precision + 1))))
 		s_prec = NULL;
 	while (i < (params->precision - params->lenbefore))
 	{
@@ -45,7 +46,8 @@ char	*hex_hash(t_struct *params, char *s)
 
 	i = 0;
 	j = 0;
-	if (!(s_hash = (char *)malloc(sizeof(char) * (params->lenbefore + 3))))
+	if (!(s_hash = (char *)malloc(sizeof(char) \
+	* (params->lenbefore + 3))))
 		s_hash = NULL;
 	s_hash[i++] = '0';
 	if (params->small_hex)
@@ -67,13 +69,15 @@ void	hex_hash_chk(t_struct *params, int num)
 {
 	if ((num == 0) && (params->lenbefore == 1))
 		params->zero_arg++;
-	if (!params->width && params->hash && params->dot && params->zero_arg)
+	if (!params->width && params->hash && \
+	params->dot && params->zero_arg)
 		params->hash_case++;
-	if (params->hash && params->width && !params->precision && params->zero_arg)
+	if (params->hash && params->width && \
+	!params->precision && params->zero_arg)
 		params->hash_case++;
-	if (params->hash && params->dot && !params->precision && !params->precisionzero)
+	if (params->hash && params->dot && \
+	!params->precision && !params->precisionzero)
 		params->hash = 0;
 	if (params->zero_arg)
 		params->hash = 0;
 }
-

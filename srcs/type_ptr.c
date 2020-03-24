@@ -61,7 +61,8 @@ void	ptr_print(t_struct *prms, char *s)
 	else if (prms->precision && prms->precision > prms->lenbefore)
 	{
 		prms->nprinted_here += write(1, "0x", 2);
-		while (prms->nprinted_here < prms->precision + 2 - prms->lenbefore)
+		while (prms->nprinted_here < prms->precision \
+		+ 2 - prms->lenbefore)
 			prms->nprinted_here += write(1, "0", 1);
 		prms->nprinted_here += write(1, s, prms->lenbefore);
 	}

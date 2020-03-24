@@ -12,15 +12,16 @@
 
 #include "ft_printf.h"
 
-char	*oct_with_prec(t_struct *params, char *s, int num_length, int i)
+char	*oct_with_prec(t_struct *prms, char *s, int i)
 {
 	char	*s_prec;
 	int		j;
 
 	j = 0;
-	if (!(s_prec = (char *)malloc(sizeof(char) * (params->precision + 1))))
+	if (!(s_prec = (char *)malloc(sizeof(char) * \
+	(prms->precision + 1))))
 		s_prec = NULL;
-	while (i < (params->precision - num_length))
+	while (i < (prms->precision - prms->lenbefore))
 	{
 		s_prec[i] = '0';
 		i++;
@@ -36,7 +37,7 @@ char	*oct_with_prec(t_struct *params, char *s, int num_length, int i)
 	return (s_prec);
 }
 
-char	*oct_hash(char *s, int num_length)
+char	*oct_hash(t_struct *prms, char *s)
 {
 	char	*s_hash;
 	int		i;
@@ -44,7 +45,8 @@ char	*oct_hash(char *s, int num_length)
 
 	i = 0;
 	j = 0;
-	if (!(s_hash = (char *)malloc(sizeof(char) * (num_length + 2))))
+	if (!(s_hash = (char *)malloc(sizeof(char) \
+	* (prms->lenbefore + 2))))
 		s_hash = NULL;
 	s_hash[i++] = '0';
 	while (s[j])

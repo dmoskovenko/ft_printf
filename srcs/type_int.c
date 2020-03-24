@@ -29,7 +29,8 @@ int		int_print2(t_struct *params, char *s)
 	params->dot && !params->precision && !params->precisionzero \
 	&& params->zero_arg))
 		return (0);
-	if (params->width && params->dot && params->zero_arg && !params->precision)
+	if (params->width && params->dot && params->zero_arg \
+	&& !params->precision)
 		if (params->plus)
 			write(1, "", 0);
 		else
@@ -79,16 +80,7 @@ void	int_from_fmt(t_struct *params, intmax_t num, int i)
 	indent = 0;
 	params->lenbefore = num_len(num, 10);
 	s = itoa_base(params, num, 10);
-	if (num == LLONG_MIN)
-	{
-		free(s);
-		s = "9223372036854775808";
-	}
-	else if (num == LLONG_MAX)
-	{
-		free(s);
-		s = "9223372036854775807";
-	}
+	s = int_overflow_chk(num, s);
 	if (params->dot)
 		params->zero = 0;
 	if ((num == 0) && (params->lenbefore == 1))
@@ -126,24 +118,11 @@ void	type_int(va_list args, t_struct *params)
 		num = (size_t)va_arg(args, size_t);
 	if (params->length == INTUINTMAX)
 		num = (intmax_t)va_arg(args, intmax_t);
-
-	// if (num == LLONG_MIN)
-	// {
-	// 	params->nprinted += write(1, "-9223372036854775808", 20);
-	// 	return ;
-	// }
-	// else if (num == LLONG_MAX)
-	// {
-	// 	params->nprinted += write(1, "9223372036854775807", 19);
-	// 	return ;
-	// }
-
 	if (params->dot > 1 && params->precision)
 	{
 		params->dot = 0;
 		params->zero = 0;
 		params->precision = 0;
 	}
-
 	int_from_fmt(params, num, 0);
 }

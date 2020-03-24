@@ -12,51 +12,53 @@
 
 #include "ft_printf.h"
 
-int		u_print2(t_struct *params, char *s, int num_length)
+int		u_print2(t_struct *prms, char *s)
 {
-	if (!params->width && params->dot && s[0] == '0' && num_length == 1)
+	if (!prms->width && prms->dot && s[0] == '0' \
+	&& prms->lenbefore == 1)
 		return (0);
-	else if (params->dot && s[0] == '0' && num_length == 1)
-		params->nprinted_here += write(1, " ", num_length);
+	else if (prms->dot && s[0] == '0' && prms->lenbefore == 1)
+		prms->nprinted_here += write(1, " ", prms->lenbefore);
 	else
-		params->nprinted_here += write(1, s, num_length);
-	if (params->width && params->minus)
-		while (params->nprinted_here < params->width)
-			params->nprinted_here += write(1, " ", 1);
+		prms->nprinted_here += write(1, s, prms->lenbefore);
+	if (prms->width && prms->minus)
+		while (prms->nprinted_here < prms->width)
+			prms->nprinted_here += write(1, " ", 1);
 	return (1);
 }
 
-void	u_print(t_struct *params, char *s, int num_length, int indent)
+void	u_print(t_struct *prms, char *s, int indent)
 {
-	if (params->width > num_length)
-		indent = params->width - num_length;
-	if (params->negative || params->plus || params->space)
+	if (prms->width > prms->lenbefore)
+		indent = prms->width - prms->lenbefore;
+	if (prms->negative || prms->plus || prms->space)
 		indent--;
-	if (params->width > num_length && !params->minus)
+	if (prms->width > prms->lenbefore && !prms->minus)
 	{
 		while (indent--)
 		{
-			params->nprinted_here += (params->zero && !params->precision) \
-			? write(1, "0", 1) : \
+			prms->nprinted_here += (prms->zero && \
+			!prms->precision) ? write(1, "0", 1) : \
 			write(1, " ", 1);
 		}
 	}
-	if (params->negative)
-		params->nprinted_here += write(1, "-", 1);
-	if (params->space && !params->negative)
-		params->nprinted_here += write(1, " ", 1);
-	u_print2(params, s, num_length);
+	if (prms->negative)
+		prms->nprinted_here += write(1, "-", 1);
+	if (prms->space && !prms->negative)
+		prms->nprinted_here += write(1, " ", 1);
+	u_print2(prms, s);
 }
 
-char	*u_with_prec(t_struct *params, char *s, int num_length, int i)
+char	*u_with_prec(t_struct *prms, char *s, int i)
 {
 	char	*s_prec;
 	int		j;
 
 	j = 0;
-	if (!(s_prec = (char *)malloc(sizeof(char) * (params->precision + 1))))
+	if (!(s_prec = (char *)malloc(sizeof(char) * \
+	(prms->precision + 1))))
 		s_prec = NULL;
-	while (i < (params->precision - num_length))
+	while (i < (prms->precision - prms->lenbefore))
 	{
 		s_prec[i] = '0';
 		i++;
@@ -72,51 +74,48 @@ char	*u_with_prec(t_struct *params, char *s, int num_length, int i)
 	return (s_prec);
 }
 
-void	u_from_fmt(t_struct *params, uintmax_t num, int i)
+void	u_from_fmt(t_struct *prms, uintmax_t num, int i)
 {
 	char	*s;
-	int		num_length;
-	int		indent;
 
-	indent = 0;
-	num_length = unsigned_num_len(num, 10);
+	prms->lenbefore = unsigned_num_len(num, 10);
 	s = itoa_base_unsigned(num, 10);
-	if (params->precision && params->precision > num_length)
+	if (prms->precision && prms->precision > prms->lenbefore)
 	{
-		s = u_with_prec(params, s, num_length, i);
-		num_length = ft_strlen(s);
+		s = u_with_prec(prms, s, i);
+		prms->lenbefore = ft_strlen(s);
 	}
-	if (params->plus)
-		params->plus = 0;
-	if (params->hash)
-		params->hash = 0;
-	if (params->space)
-		params->space = 0;
-	u_print(params, s, num_length, indent);
-	params->nprinted += params->nprinted_here;
+	if (prms->plus)
+		prms->plus = 0;
+	if (prms->hash)
+		prms->hash = 0;
+	if (prms->space)
+		prms->space = 0;
+	u_print(prms, s, 0);
+	prms->nprinted += prms->nprinted_here;
 	free(s);
-	bzerostruct(params, 0);
+	bzerostruct(prms, 0);
 }
 
-void	type_u(va_list args, t_struct *params, char spec)
+void	type_u(va_list args, t_struct *prms, char spec)
 {
 	uintmax_t num;
 
 	num = 0;
-	if (params->length == 0 && spec == 'u')
+	if (prms->length == 0 && spec == 'u')
 		num = (unsigned int)va_arg(args, int);
-		// num = (unsigned long)va_arg(args, unsigned long);
-	else if (params->length == SHORTSHORT && spec == 'u')
+	else if (prms->length == SHORTSHORT && spec == 'u')
 		num = (unsigned char)va_arg(args, int);
-	else if (params->length == SHORT && spec == 'u')
+	else if (prms->length == SHORT && spec == 'u')
 		num = (unsigned short)va_arg(args, int);
-	else if (params->length == LONG || spec == 'U')
+	else if (prms->length == LONG || spec == 'U')
 		num = (unsigned long)va_arg(args, unsigned long);
-	else if (params->length == LONGLONG)
-		num = (unsigned long long)va_arg(args, unsigned long long);
-	if (params->length == SIZET)
+	else if (prms->length == LONGLONG)
+		num = (unsigned long long)va_arg(args, \
+		unsigned long long);
+	if (prms->length == SIZET)
 		num = (size_t)va_arg(args, size_t);
-	if (params->length == INTUINTMAX)
+	if (prms->length == INTUINTMAX)
 		num = (uintmax_t)va_arg(args, uintmax_t);
-	u_from_fmt(params, num, 0);
+	u_from_fmt(prms, num, 0);
 }

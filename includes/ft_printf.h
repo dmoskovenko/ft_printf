@@ -66,7 +66,9 @@ typedef struct	s_struct
 
 int				ft_printf(const char *fmt, ...);
 int				format_parse(va_list args, const char *fmt, \
-				t_struct *params, int pos);
+				t_struct *prms);
+int				parse_normal(va_list args, t_struct *prms, const char *fmt);
+int				parse_text_after_percent(t_struct *prms, const char *fmt);			
 int				conversions(va_list args, char spec, t_struct *params);
 int				modifiers(va_list args, const char *fmt, t_struct *params);
 int				retmsg(char *str);
@@ -83,6 +85,7 @@ void			int_print(t_struct *params, char *s, int indent);
 int				int_print2(t_struct *params, char *s);
 char			*int_with_prec(t_struct *params, char *s, int i);
 void			int_chk(t_struct *params);
+char			*int_overflow_chk(intmax_t num, char *s);
 
 void			type_char(va_list args, t_struct *prms);
 void			char_print(t_struct *params, char c, int indent);
@@ -98,27 +101,27 @@ void			ptr_print3(t_struct *prms, char*s);
 void			ptr_print4(t_struct *prms, char*s);
 void			ptr_chk(t_struct *prms);
 
-void			type_u(va_list args, t_struct *params, char spec);
-void			u_from_fmt(t_struct *params, uintmax_t num, int i);
-char			*u_with_prec(t_struct *params, char *s, int num_length, int i);
-void			u_print(t_struct *params, char *s, int num_length, int indent);
-int				u_print2(t_struct *params, char *s, int num_length);
+void			type_u(va_list args, t_struct *prms, char spec);
+void			u_from_fmt(t_struct *prms, uintmax_t num, int i);
+char			*u_with_prec(t_struct *prms, char *s, int i);
+void			u_print(t_struct *prms, char *s, int indent);
+int				u_print2(t_struct *prms, char *s);
 
-void			type_oct(va_list args, t_struct *params);
-void			oct_from_fmt(t_struct *params, uintmax_t num, int i);
-char			*oct_with_prec(t_struct *params, char *s, int num_length, int i);
-char			*oct_hash(char *s, int num_length);
-void			oct_hash_chk(t_struct *params, int num, int num_length);
-void			oct_print(t_struct *params, char *s, int num_length, int indent);
-int				oct_print2(t_struct *params, char *s, int num_length);
+void			type_oct(va_list args, t_struct *prms);
+void			oct_from_fmt(t_struct *prms, uintmax_t num, int i);
+char			*oct_with_prec(t_struct *prms, char *s, int i);
+char			*oct_hash(t_struct *prms, char *s);
+void			oct_hash_chk(t_struct *prms, int num);
+void			oct_print(t_struct *prms, char *s, int indent);
+int				oct_print2(t_struct *prms, char *s);
 
-void			type_hex(va_list args, t_struct *params, char spec);
+void			type_hex(va_list args, t_struct *prms, char spec);
 void			hex_from_fmt(t_struct *params, uintmax_t num, int i);
 void			hex_from_fmt2(t_struct *params, char *s, int indent);
 char			*hex_hash(t_struct *params, char *s);
 char			*hex_with_prec(t_struct *params, char *s, int i);
 void			hex_hash_chk(t_struct *params, int num);
-void			hex_print(t_struct *params, char *s, int indent);
+void			hex_print(t_struct *prms, char *s, int indent);
 int				hex_print2(t_struct *params, char *s);
 
 void			type_float(va_list args, t_struct *params);

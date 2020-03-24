@@ -16,13 +16,14 @@ void	str_print2(t_struct *prms)
 {
 	if (prms->width > prms->lenbefore && !prms->minus && !prms->dot)
 			prms->indent = prms->width - prms->lenbefore;
-	else if (prms->width && prms->width > prms->lenbefore && prms->precision \
-	&& prms->precision < prms->lenbefore)
+	else if (prms->width && prms->width > prms->lenbefore \
+	&& prms->precision && prms->precision < prms->lenbefore)
 		prms->indent = prms->width - prms->precision;
 	else if (prms->width > prms->lenbefore && prms->precision \
 	&& prms->precision > prms->lenbefore)
 		prms->indent = prms->width - prms->lenbefore;
-	else if (prms->width && prms->dot && !prms->precision && !prms->precisionzero)
+	else if (prms->width && prms->dot && !prms->precision \
+	&& !prms->precisionzero)
 		prms->indent = prms->width;
 	else if (prms->width && prms->dot && prms->precision \
 	&& !prms->precisionzero && prms->width > prms->precision)
