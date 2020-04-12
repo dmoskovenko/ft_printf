@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	bzerostruct(t_struct *params, int full)
+void			bzerostruct(t_struct *params, int full)
 {
 	if (full)
 	{
@@ -55,7 +55,7 @@ long double		power(long long n, int i)
 	return (res);
 }
 
-void		percent(t_struct *params)
+void			percent(t_struct *params)
 {
 	char_print(params, '%', 0);
 	bzerostruct(params, 0);

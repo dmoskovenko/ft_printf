@@ -14,7 +14,7 @@
 
 void	int_chk(t_struct *params)
 {
-	if (params->negative  && params->zero)
+	if (params->negative && params->zero)
 		params->nprinted_here += write(1, "-", 1);
 	if (params->plus && !params->negative && params->zero)
 		params->nprinted_here += write(1, "+", 1);
@@ -47,7 +47,7 @@ void	int_print(t_struct *params, char *s, int indent)
 {
 	int_chk(params);
 	if (params->width > params->lenbefore)
-			indent = params->width - params->lenbefore;
+		indent = params->width - params->lenbefore;
 	if (params->negative || params->plus || params->space)
 		indent--;
 	if (params->zero_arg && params->plus && params->dot && \
@@ -63,7 +63,7 @@ void	int_print(t_struct *params, char *s, int indent)
 			write(1, " ", 1);
 		}
 	}
-	if (params->negative  && !params->zero)
+	if (params->negative && !params->zero)
 		params->nprinted_here += write(1, "-", 1);
 	if (params->plus && !params->negative && !params->zero)
 		params->nprinted_here += write(1, "+", 1);
@@ -102,7 +102,7 @@ void	int_from_fmt(t_struct *params, intmax_t num, int i)
 void	type_int(va_list args, t_struct *params)
 {
 	intmax_t num;
-	
+
 	num = 0;
 	if (params->length == 0)
 		num = (int)va_arg(args, int);

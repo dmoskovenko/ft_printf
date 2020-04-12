@@ -65,23 +65,23 @@ void	length_field(const char *fmt, t_struct *params)
 	{
 		while (ft_strchr("hlLjz", fmt[params->i]))
 		{
-		if (fmt[params->i] == 'h' && params->length < SHORT)
-			params->length = SHORT;
-		if (fmt[params->i] == 'h' && fmt[params->i + 1] == 'h' \
-		&& params->length < SHORTSHORT)
-			params->length = SHORTSHORT;
-		if (fmt[params->i] == 'l' && params->length < LONG)
-			params->length = LONG;
-		if (fmt[params->i] == 'l' && fmt[params->i + 1] == 'l'  \
-		&& params->length < LONGLONG)
-			params->length = LONGLONG;
-		if (fmt[params->i] == 'L')
-			params->length = LONGDOUBLE;
-		if (fmt[params->i] == 'z'  && params->length < SIZET)
-			params->length = SIZET;
-		if (fmt[params->i] == 'j' && params->length < INTUINTMAX)
-			params->length = INTUINTMAX;
-		params->i++;
+			if (fmt[params->i] == 'h' && params->length < SHORT)
+				params->length = SHORT;
+			if (fmt[params->i] == 'h' && fmt[params->i + 1] == 'h' \
+			&& params->length < SHORTSHORT)
+				params->length = SHORTSHORT;
+			if (fmt[params->i] == 'l' && params->length < LONG)
+				params->length = LONG;
+			if (fmt[params->i] == 'l' && fmt[params->i + 1] == 'l'  \
+			&& params->length < LONGLONG)
+				params->length = LONGLONG;
+			if (fmt[params->i] == 'L')
+				params->length = LONGDOUBLE;
+			if (fmt[params->i] == 'z' && params->length < SIZET)
+				params->length = SIZET;
+			if (fmt[params->i] == 'j' && params->length < INTUINTMAX)
+				params->length = INTUINTMAX;
+			params->i++;
 		}
 	}
 }

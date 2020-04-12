@@ -15,7 +15,7 @@
 void	str_print2(t_struct *prms)
 {
 	if (prms->width > prms->lenbefore && !prms->minus && !prms->dot)
-			prms->indent = prms->width - prms->lenbefore;
+		prms->indent = prms->width - prms->lenbefore;
 	else if (prms->width && prms->width > prms->lenbefore \
 	&& prms->precision && prms->precision < prms->lenbefore)
 		prms->indent = prms->width - prms->precision;
@@ -44,7 +44,7 @@ void	str_print(t_struct *prms, char *s)
 		if (prms->width && prms->width > prms->precision && !prms->minus)
 			while (prms->nprinted_here < prms->width)
 				prms->nprinted_here += write(1, s, prms->precision);
-		else 
+		else
 			while (prms->nprinted_here < prms->precision)
 				prms->nprinted_here += write(1, s, prms->precision);
 	}

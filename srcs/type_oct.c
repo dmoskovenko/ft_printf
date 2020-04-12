@@ -12,7 +12,6 @@
 
 #include "ft_printf.h"
 
-
 int		oct_print2(t_struct *prms, char *s)
 {
 	if ((!prms->width && prms->dot && prms->zero_arg \
@@ -30,7 +29,7 @@ int		oct_print2(t_struct *prms, char *s)
 	if (prms->width && prms->dot && prms->zero_arg && \
 	!prms->precision && !prms->hash_case)
 		prms->nprinted_here += write(1, " ", 1);
-	else   
+	else
 		prms->nprinted_here += write(1, s, prms->lenbefore);
 	if (prms->width && prms->minus)
 		while (prms->nprinted_here < prms->width)
@@ -104,7 +103,7 @@ void	oct_from_fmt(t_struct *prms, uintmax_t num, int i)
 void	type_oct(va_list args, t_struct *prms)
 {
 	uintmax_t num;
-	
+
 	num = 0;
 	if (prms->length == 0)
 		num = va_arg(args, unsigned int);

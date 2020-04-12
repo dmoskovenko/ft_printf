@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ptr_print2(t_struct *prms, char*s)
+void	ptr_print2(t_struct *prms, char *s)
 {
 	while (prms->indent--)
 		prms->nprinted_here += write(1, " ", 1);
@@ -83,6 +83,6 @@ void	type_ptr(va_list args, t_struct *params)
 	s = itoa_base_unsigned(ptr, 16);
 	ptr_print(params, s);
 	params->nprinted += params->nprinted_here;
-	free (s);
+	free(s);
 	bzerostruct(params, 0);
 }

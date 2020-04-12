@@ -16,12 +16,12 @@ int		hex_print2(t_struct *params, char *s)
 {
 	if ((!params->width && params->dot && params->zero_arg \
 	&& params->precisionzero) || (!params->width && params->dot \
-	&& !params->precision && !params->precisionzero && params->zero_arg)) 
+	&& !params->precision && !params->precisionzero && params->zero_arg))
 		return (0);
 	if (params->width && params->dot && \
 	params->zero_arg && !params->precision)
 		params->nprinted_here += write(1, " ", 1);
-	else   
+	else
 		params->nprinted_here += write(1, s, params->lenbefore);
 	if (params->width && params->minus)
 		while (params->nprinted_here < params->width)
@@ -76,7 +76,7 @@ void	hex_from_fmt2(t_struct *params, char *s, int indent)
 void	hex_from_fmt(t_struct *params, uintmax_t num, int i)
 {
 	char	*s;
-	int 	indent;
+	int		indent;
 
 	indent = 0;
 	params->lenbefore = unsigned_num_len(num, 16);
@@ -97,7 +97,7 @@ void	hex_from_fmt(t_struct *params, uintmax_t num, int i)
 void	type_hex(va_list args, t_struct *prms, char spec)
 {
 	uintmax_t num;
-	
+
 	num = 0;
 	if (!prms->length)
 		num = va_arg(args, unsigned int);
@@ -114,6 +114,6 @@ void	type_hex(va_list args, t_struct *prms, char spec)
 		num = (size_t)va_arg(args, size_t);
 	if (prms->length == INTUINTMAX)
 		num = (uintmax_t)va_arg(args, uintmax_t);
-	prms->small_hex = (spec == 'x') ? 1 : 0;	
+	prms->small_hex = (spec == 'x') ? 1 : 0;
 	hex_from_fmt(prms, num, 0);
 }

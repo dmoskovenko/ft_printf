@@ -70,7 +70,7 @@ char	*u_with_prec(t_struct *prms, char *s, int i)
 		j++;
 	}
 	s_prec[i] = '\0';
-	free (s);
+	free(s);
 	return (s_prec);
 }
 

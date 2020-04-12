@@ -68,7 +68,7 @@ int				ft_printf(const char *fmt, ...);
 int				format_parse(va_list args, const char *fmt, \
 				t_struct *prms);
 int				parse_normal(va_list args, t_struct *prms, const char *fmt);
-int				parse_text_after_percent(t_struct *prms, const char *fmt);			
+int				parse_text_after_percent(t_struct *prms, const char *fmt);
 int				conversions(va_list args, char spec, t_struct *params);
 int				modifiers(va_list args, const char *fmt, t_struct *params);
 int				retmsg(char *str);

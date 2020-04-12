@@ -16,7 +16,7 @@ int		retmsg(char *str)
 {
 	ft_putstr(str);
 	ft_putchar('\n');
-	exit (1);
+	exit(1);
 }
 
 int		parse_normal(va_list args, t_struct *prms, const char *fmt)
@@ -75,16 +75,16 @@ int		format_parse(va_list args, const char *fmt, t_struct *prms)
 		else if (fmt[prms->i] == '%')
 		{
 			if (!ft_strchr(VALIDSYM, fmt[prms->i + 1]) && prms->after_percent)
-				break;
+				break ;
 			prms->after_percent = 1;
 			while (ft_strchr(VALIDSYM, fmt[prms->i + 1]) \
 			&& prms->i < (int)ft_strlen(fmt))
-			if (!parse_normal(args, prms, fmt))
-				break;
+				if (!parse_normal(args, prms, fmt))
+					break ;
 			while (!ft_strchr("%", fmt[prms->i + 1]) \
 			&& prms->i < (int)ft_strlen(fmt) && prms->after_percent)
-			if (!parse_text_after_percent(prms, fmt))
-				break;
+				if (!parse_text_after_percent(prms, fmt))
+					break ;
 			continue;
 		}
 		prms->i++;
@@ -101,7 +101,7 @@ int		ft_printf(const char *fmt, ...)
 	if (!(params = (t_struct *)malloc(sizeof(t_struct))))
 		return (0);
 	bzerostruct(params, 1);
-	params->fmt = (char *) fmt;
+	params->fmt = (char *)fmt;
 	va_start(args, fmt);
 	if (!fmt[0])
 		return (0);

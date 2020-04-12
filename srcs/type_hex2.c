@@ -33,10 +33,9 @@ char	*hex_with_prec(t_struct *params, char *s, int i)
 		j++;
 	}
 	s_prec[i] = '\0';
-	free (s);
+	free(s);
 	return (s_prec);
 }
-
 
 char	*hex_hash(t_struct *params, char *s)
 {
