@@ -20,8 +20,8 @@
 # include <limits.h>
 # include "../libft/includes/libft.h"
 
-# define VALIDSYM		"cCsSpPdDiIoOuUxXfFrhlLjz0123456789 .-+#%"
-# define TYPESYM		"cCsSpPdDiIoOuUxXfF%r"
+# define VALIDSYM		"cCsSpPdDiIoOuUxXfFrhlLjz0123456789 .-+#%rb"
+# define TYPESYM		"cCsSpPdDiIoOuUxXfF%rb"
 # define FLAGS			" .-+#0hlLjz6"
 # define SHORT			1
 # define SHORTSHORT		2
@@ -70,6 +70,7 @@ int				format_parse(va_list args, const char *fmt, \
 int				parse_normal(va_list args, t_struct *prms, const char *fmt);
 int				parse_text_after_percent(t_struct *prms, const char *fmt);
 int				conversions(va_list args, char spec, t_struct *params);
+int				conversions2(va_list args, char spec, t_struct *params);
 int				modifiers(va_list args, const char *fmt, t_struct *params);
 int				retmsg(char *str);
 void			bzerostruct(t_struct *params, int full);
@@ -145,5 +146,8 @@ void			percent(t_struct *params);
 void			create_nonprint_str(va_list args, t_struct *params);
 int				recalc_len(char *s, int i);
 void			recreate_str(char *s, char *s_nonpr, int i, int j);
+
+void			type_b(va_list args, t_struct *prms);
+void			b_from_fmt(t_struct *prms, uintmax_t num, int i);
 
 #endif

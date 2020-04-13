@@ -19,7 +19,8 @@ SOURCES = 	ft_printf.c \
 			modifiers.c \
 			utility.c \
 			utility_2.c \
-			type_nonprint.c
+			type_nonprint.c \
+			type_binary.c
 
 HEADER = includes
 

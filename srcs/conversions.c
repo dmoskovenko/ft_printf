@@ -30,10 +30,17 @@ int		conversions(va_list args, char spec, t_struct *params)
 		type_float(args, params);
 	else if (spec == 'o' || spec == 'O')
 		type_oct(args, params);
-	else if (spec == '%')
+	return(conversions2(args, spec, params));
+}
+
+int		conversions2(va_list args, char spec, t_struct *params)
+{
+	if (spec == '%')
 		percent(params);
 	else if (spec == 'r')
 		create_nonprint_str(args, params);
+	else if (spec == 'b')
+		type_b(args, params);
 	else
 		bzerostruct(params, 0);
 	return (params->i);
