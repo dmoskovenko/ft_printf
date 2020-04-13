@@ -19,8 +19,8 @@ void	char_print(t_struct *prms, char c, int indent)
 		indent = prms->width - 1;
 		{
 			while (indent--)
-				prms->nprinted_here += (prms->zero \
-				&& !prms->precision) ? write(1, "0", 1) : \
+				prms->nprinted_here += (prms->zero) \
+				? write(1, "0", 1) : \
 				write(1, " ", 1);
 		}
 	}

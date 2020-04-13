@@ -32,6 +32,8 @@ int		conversions(va_list args, char spec, t_struct *params)
 		type_oct(args, params);
 	else if (spec == '%')
 		percent(params);
+	else if (spec == 'r')
+		create_nonprint_str(args, params);
 	else
 		bzerostruct(params, 0);
 	return (params->i);

@@ -20,8 +20,8 @@
 # include <limits.h>
 # include "../libft/includes/libft.h"
 
-# define VALIDSYM		"cCsSpPdDiIoOuUxXfFhlLjz0123456789 .-+#%"
-# define TYPESYM		"cCsSpPdDiIoOuUxXfF%"
+# define VALIDSYM		"cCsSpPdDiIoOuUxXfFrhlLjz0123456789 .-+#%"
+# define TYPESYM		"cCsSpPdDiIoOuUxXfF%r"
 # define FLAGS			" .-+#0hlLjz6"
 # define SHORT			1
 # define SHORTSHORT		2
@@ -141,5 +141,11 @@ char			*itoa_base_upp(uintmax_t num, int base);
 
 long double		power(long long n, int i);
 void			percent(t_struct *params);
+
+// void			unprint(t_struct *prms, unsigned char c);
+// void			unprint_print(t_struct *prms, char c, int indent);
+void			create_nonprint_str(va_list args, t_struct *params);
+int     		recalc_len(char *s, int i);
+void    		recreate_str(char *s, char *s_nonpr, int i, int j);
 
 #endif

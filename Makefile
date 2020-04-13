@@ -18,7 +18,8 @@ SOURCES = 	ft_printf.c \
 			type_float.c \
 			modifiers.c \
 			utility.c \
-			utility_2.c
+			utility_2.c \
+			type_nonprint.c
 
 HEADER = includes
 
