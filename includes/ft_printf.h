@@ -142,10 +142,8 @@ char			*itoa_base_upp(uintmax_t num, int base);
 long double		power(long long n, int i);
 void			percent(t_struct *params);
 
-// void			unprint(t_struct *prms, unsigned char c);
-// void			unprint_print(t_struct *prms, char c, int indent);
 void			create_nonprint_str(va_list args, t_struct *params);
-int     		recalc_len(char *s, int i);
-void    		recreate_str(char *s, char *s_nonpr, int i, int j);
+int				recalc_len(char *s, int i);
+void			recreate_str(char *s, char *s_nonpr, int i, int j);
 
 #endif
