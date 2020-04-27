@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/03/15 16:54:48 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/04/28 01:14:26 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ void		float_print(t_struct *params)
 void		float_math(long double num, t_struct *params)
 {
 	int			i;
-	long long	buf;
+//	long long	buf;
 	long double	fbuf;
 	long double fpower;
+	long long	fbuf2;
 
 	i = 0;
 	params->fbefore = num;
@@ -90,8 +91,11 @@ void		float_math(long double num, t_struct *params)
 	fbuf = params->fdecimal;
 	fpower = power(10, params->precision);
 	params->fdecimal *= fpower;
-	buf = params->fdecimal * 10;
-	if ((buf % 10) >= 5)
+	fbuf2 = params->fdecimal;
+	fbuf = params->fdecimal - fbuf2;
+//	buf = params->fdecimal * 10;
+//	if ((buf % 10) >= 5)
+	if (fbuf >= 0.5)
 		params->fdecimal += 0.5;
 	params->fafter = params->fdecimal;
 	if ((int)params->fdecimal == fpower)
