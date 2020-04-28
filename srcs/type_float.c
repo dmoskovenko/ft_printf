@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/04/28 01:14:26 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/04/28 18:33:32 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		float_print2(t_struct *params)
 	params->nprinted += params->lenbefore;
 	if (params->hash || params->precision)
 		params->nprinted += write(1, ".", 1);
-	if(params->precision)
+	if (params->precision)
 	{
 		while (i++ < params->precision - params->lenafter)
 			params->nprinted += write(1, "0", 1);
@@ -45,7 +45,7 @@ void		float_print2(t_struct *params)
 		params->nprinted += params->lenafter;
 	}
 	if (params->width && params->minus)
-		while(params->nprinted < params->width)
+		while (params->nprinted < params->width)
 			params->nprinted += write(1, " ", 1);
 	free(params->fstr);
 }
@@ -63,7 +63,7 @@ void		float_print(t_struct *params)
 	if (params->negative || params->plus || params->space)
 		indent--;
 	if (params->width > len && !params->minus && !params->zero)
-		while(indent--)
+		while (indent--)
 			params->nprinted += write(1, " ", 1);
 	if (params->space && !params->negative)
 		params->nprinted += write(1, " ", 1);
@@ -72,7 +72,7 @@ void		float_print(t_struct *params)
 	if (params->plus)
 		params->nprinted += write(1, "+", 1);
 	if (params->width > len && !params->minus && params->zero)
-		while(indent--)
+		while (indent--)
 			params->nprinted += write(1, "0", 1);
 	float_print2(params);
 }
@@ -80,7 +80,6 @@ void		float_print(t_struct *params)
 void		float_math(long double num, t_struct *params)
 {
 	int			i;
-//	long long	buf;
 	long double	fbuf;
 	long double fpower;
 	long long	fbuf2;
@@ -93,8 +92,6 @@ void		float_math(long double num, t_struct *params)
 	params->fdecimal *= fpower;
 	fbuf2 = params->fdecimal;
 	fbuf = params->fdecimal - fbuf2;
-//	buf = params->fdecimal * 10;
-//	if ((buf % 10) >= 5)
 	if (fbuf >= 0.5)
 		params->fdecimal += 0.5;
 	params->fafter = params->fdecimal;
@@ -116,7 +113,7 @@ void		type_float(va_list args, t_struct *params)
 	negative = 0;
 	if (params->length == LONG)
 		num = (double)va_arg(args, double);
-	if (params->length == LONGDOUBLE)  
+	if (params->length == LONGDOUBLE)
 		num = (long double)va_arg(args, long double);
 	if (params->length == 0)
 		num = (double)va_arg(args, double);
@@ -124,7 +121,7 @@ void		type_float(va_list args, t_struct *params)
 	{
 		params->hash = 0;
 		params->zero = 0;
-		return;
+		return ;
 	}
 	if (!params->precision && !params->precisionzero)
 		params->precision = 6;
@@ -135,5 +132,4 @@ void		type_float(va_list args, t_struct *params)
 	}
 	float_math(num, params);
 	float_print(params);
-	bzerostruct(params, 0);
-} 
+}
