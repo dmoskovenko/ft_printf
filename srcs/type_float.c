@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/04/28 18:33:32 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/04/28 19:11:12 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		float_print(t_struct *params)
 		params->nprinted += write(1, " ", 1);
 	if (params->negative)
 		params->nprinted += write(1, "-", 1);
-	if (params->plus)
+	if (params->plus && !params->negative)
 		params->nprinted += write(1, "+", 1);
 	if (params->width > len && !params->minus && params->zero)
 		while (indent--)
