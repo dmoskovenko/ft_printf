@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/04/28 19:11:12 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/05/17 17:44:47 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,33 +77,93 @@ void		float_print(t_struct *params)
 	float_print2(params);
 }
 
+void		float_math2(long double num, t_struct *params)
+{
+	int		i;
+
+	i = 0;
+	if (!(params->fstr = (char*)malloc(sizeof(params->fstr) * params->precision + 1)))
+		exit(1);
+	while (i < params->precision)
+	{
+		num *= 10;
+		params->fstr[i] = (int)(num) + '0';
+		num -= (int)num;
+		params->lenafter++;
+		i++;
+	}
+	if (num >= 0.5)
+	{
+		if (params->fstr[--i] != 9)
+			params->fstr[i]++;
+		else
+		{
+			params->fstr[i]++;
+			while (params->fstr[i - 1] == 9)
+				params->fstr[--i]++;
+		}
+	}
+}
+
 void		float_math(long double num, t_struct *params)
 {
 	int			i;
 	long double	fbuf;
-	long double fpower;
-	long long	fbuf2;
+//	long double fpower;
+//	long long	fbuf2;
 
 	i = 0;
 	params->fbefore = num;
 	params->fdecimal = num - params->fbefore;
 	fbuf = params->fdecimal;
-	fpower = power(10, params->precision);
-	params->fdecimal *= fpower;
-	fbuf2 = params->fdecimal;
-	fbuf = params->fdecimal - fbuf2;
-	if (fbuf >= 0.5)
-		params->fdecimal += 0.5;
-	params->fafter = params->fdecimal;
-	if ((int)params->fdecimal == fpower)
-	{
-		params->fbefore++;
-		params->fafter = 0;
-	}
-	params->fstr = itoa_base_unsigned(params->fafter, 10);
-	params->lenbefore = unsigned_num_len(params->fbefore, 10);
-	params->lenafter = ft_strlen(params->fstr);
+	float_math2(fbuf, params);
+/*
+** 	params->fdecimal *= fpower;
+** 	fbuf2 = params->fdecimal;
+** 	fbuf = params->fdecimal - fbuf2;
+** 	if (fbuf >= 0.5)
+** 		params->fdecimal += 0.5;
+** 	params->fafter = params->fdecimal;
+** 	if ((int)params->fdecimal == fpower)
+** 	{
+** 		params->fbefore++;
+** 		params->fafter = 0;
+** 	}
+** 	params->fstr = itoa_base_unsigned(params->fafter, 10);
+*/ 	params->lenbefore = unsigned_num_len(params->fbefore, 10);
+// 	params->lenafter = ft_strlen(params->fstr);
+//
 }
+
+/*
+** void		float_math(long double num, t_struct *params)
+** {
+** 	int			i;
+** 	long double	fbuf;
+** 	long double fpower;
+** 	long long	fbuf2;
+** 
+** 	i = 0;
+** 	params->fbefore = num;
+** 	params->fdecimal = num - params->fbefore;
+** 	fbuf = params->fdecimal;
+** 	fpower = power(10, params->precision);
+** 	params->fdecimal *= fpower;
+** 	fbuf2 = params->fdecimal;
+** 	fbuf = params->fdecimal - fbuf2;
+** 	if (fbuf >= 0.5)
+** 		params->fdecimal += 0.5;
+** 	params->fafter = params->fdecimal;
+** 	if ((int)params->fdecimal == fpower)
+** 	{
+** 		params->fbefore++;
+** 		params->fafter = 0;
+** 	}
+** 	params->fstr = itoa_base_unsigned(params->fafter, 10);
+** 	params->lenbefore = unsigned_num_len(params->fbefore, 10);
+** 	params->lenafter = ft_strlen(params->fstr);
+** }
+*/
 
 void		type_float(va_list args, t_struct *params)
 {
