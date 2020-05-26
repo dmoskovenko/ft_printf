@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/13 03:22:24 by releanor         ###   ########.fr       */
+/*   Updated: 2020/05/26 20:23:55 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_struct
 	int			after_percent;
 	long double fdecimal;
 	char		*fstr;
+	char		*fstrbefore;
 	long long	fbefore;
 	long long	fafter;
 	int			lenbefore;
@@ -127,7 +128,9 @@ int				hex_print2(t_struct *params, char *s);
 
 void			type_float(va_list args, t_struct *params);
 int				is_infnan(t_struct *params, long double num);
+char			*decimal_math(long double temp);
 void			float_math(long double num, t_struct *params);
+void			float_math2(long double num, t_struct *params);
 void			float_print(t_struct *params);
 void			float_print2(t_struct *params);
 
@@ -136,6 +139,8 @@ void			writeblanks(int n);
 
 int				num_len(intmax_t num, int base);
 int				unsigned_num_len(uintmax_t num, int base);
+int				float_num_len(long double num);
+long double		ft_atof(char *str);
 char			*itoa_base(t_struct *params, intmax_t num, int base);
 char			*itoa_base_unsigned(uintmax_t num, int base);
 char			*itoa_base_upp(uintmax_t num, int base);

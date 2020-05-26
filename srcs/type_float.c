@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/05/17 17:44:47 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/05/26 21:44:54 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void		float_print2(t_struct *params)
 	int	i;
 
 	i = 0;
-	ft_putnbr(params->fbefore);
+//	ft_putnbr(params->fbefore);
+	ft_putstr(params->fstrbefore);
 	params->nprinted += params->lenbefore;
 	if (params->hash || params->precision)
 		params->nprinted += write(1, ".", 1);
@@ -57,7 +58,8 @@ void		float_print(t_struct *params)
 
 	indent = 0;
 	len = params->lenbefore + params->lenafter;
-	(params->hash || params->precision) ? len++ : len--;
+	if (params->hash || params->precision)
+		len++;
 	if (params->width > len)
 		indent = params->width - len;
 	if (params->negative || params->plus || params->space)
@@ -86,37 +88,82 @@ void		float_math2(long double num, t_struct *params)
 		exit(1);
 	while (i < params->precision)
 	{
-		num *= 10;
+		num *= (long double)10;
 		params->fstr[i] = (int)(num) + '0';
 		num -= (int)num;
 		params->lenafter++;
 		i++;
 	}
+	params->fstr[i] = '\0';
 	if (num >= 0.5)
 	{
-		if (params->fstr[--i] != 9)
-			params->fstr[i]++;
-		else
+		if (i)
 		{
-			params->fstr[i]++;
-			while (params->fstr[i - 1] == 9)
-				params->fstr[--i]++;
+			if (params->fstr[--i] != '9')
+				params->fstr[i]++;
+			else
+			{
+				//params->fstr[i] = '0';
+				while (params->fstr[i] == '9' && i >= 0)
+					params->fstr[i--] = '0';
+				if (i >= 0)
+					params->fstr[i]++;
+				else
+					params->fbefore++;
+			}
 		}
+		else 
+			params->fbefore++;
 	}
+}
+
+char		*decimal_math(long double num)
+{
+	long double temp;
+	int			len;
+	int			i;
+	char		*str;
+	char		*ptr;
+
+	len = float_num_len(num);
+	if (!(str = (char*)malloc(sizeof(str) * len + 1)))
+		exit(1);
+	ptr = str;
+	while (len)
+	{
+		i = 0;
+		temp = num;
+		while (i < (len - 1))
+		{
+			temp /= 10;
+			i++;
+		}
+		*ptr++ = (int)temp + '0';
+		temp = (int)temp;
+		while (i--)
+			temp *= 10;
+		num -= temp;
+		len--;
+	}
+	*ptr = '\0';
+	return (str);
 }
 
 void		float_math(long double num, t_struct *params)
 {
 	int			i;
-	long double	fbuf;
-//	long double fpower;
-//	long long	fbuf2;
+	long double	temp;
+//	long double	temp2;
+//	long double fpower;	
 
 	i = 0;
-	params->fbefore = num;
-	params->fdecimal = num - params->fbefore;
-	fbuf = params->fdecimal;
-	float_math2(fbuf, params);
+	temp = num * power(10, params->precision);
+	temp -= ft_atof(decimal_math(temp));
+	num += (temp / power(10, params->precision));
+	params->fstrbefore = decimal_math(num);
+	params->fdecimal = num - ft_atof(params->fstrbefore);
+//	params->fdecimal += (temp / power(10, params->precision));
+	float_math2(params->fdecimal, params);
 /*
 ** 	params->fdecimal *= fpower;
 ** 	fbuf2 = params->fdecimal;

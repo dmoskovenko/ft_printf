@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/03/15 15:25:55 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/05/24 23:46:35 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void			bzerostruct(t_struct *params, int full)
 	params->precisionzero = 0;
 	params->length = 0;
 	params->lenbefore = 0;
+	params->lenafter = 0;
 }
 
 long double		power(long long n, int i)
@@ -53,6 +54,35 @@ long double		power(long long n, int i)
 	while (j++ < (i - 1))
 		res *= n;
 	return (res);
+}
+
+int		float_num_len(long double num)
+{
+	int	num_len;
+
+	num_len = 0;
+	if (num == 0)
+		return (1);
+	while (num > 1)
+	{
+		num /= 10;
+		num_len++;
+	}
+	return (num_len);
+}
+
+long double		ft_atof(char *str)
+{
+	long double	num;
+
+	num = 0;
+	while (*str)
+	{
+		num *= 10;
+		num += (long double)(*str - '0');
+		str++;
+	}
+	return (num);
 }
 
 void			percent(t_struct *params)
