@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/05/26 21:44:54 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/05/26 23:58:51 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,8 @@ void		float_math(long double num, t_struct *params)
 	i = 0;
 	temp = num * power(10, params->precision);
 	temp -= ft_atof(decimal_math(temp));
-	num += (temp / power(10, params->precision));
+	if (temp >= 0.5)
+		num += (0.5 / power(10, params->precision));
 	params->fstrbefore = decimal_math(num);
 	params->fdecimal = num - ft_atof(params->fstrbefore);
 //	params->fdecimal += (temp / power(10, params->precision));
@@ -177,7 +178,7 @@ void		float_math(long double num, t_struct *params)
 ** 		params->fafter = 0;
 ** 	}
 ** 	params->fstr = itoa_base_unsigned(params->fafter, 10);
-*/ 	params->lenbefore = unsigned_num_len(params->fbefore, 10);
+*/ 	params->lenbefore = ft_strlen(params->fstrbefore);
 // 	params->lenafter = ft_strlen(params->fstr);
 //
 }
