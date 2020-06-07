@@ -16,6 +16,7 @@ SOURCES = 	ft_printf.c \
 			type_hex.c \
 			type_hex2.c \
 			type_float.c \
+			type_float2.c \
 			modifiers.c \
 			utility.c \
 			utility_2.c \

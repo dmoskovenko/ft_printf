@@ -6,161 +6,76 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/05/27 05:50:43 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/07 16:11:57 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			is_infnan(t_struct *params, long double num)
-{
-	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
-	{
-		params->nprinted = write(1, "inf", 3);
-		return (1);
-	}
-	if (!(num == num))
-	{
-		params->plus = 0;
-		params->nprinted = write(1, "nan", 3);
-		return (1);
-	}
-	return (0);
-}
-
-void		float_print2(t_struct *params)
-{
-	int	i;
-
-	i = 0;
-	ft_putstr(params->fstrbefore);
-	params->nprinted += params->lenbefore;
-	if (params->hash || params->precision)
-		params->nprinted += write(1, ".", 1);
-	if (params->precision)
-	{
-		while (i++ < params->precision - params->lenafter)
-			params->nprinted += write(1, "0", 1);
-		ft_putstr(params->fstr);
-		params->nprinted += params->lenafter;
-	}
-	if (params->width && params->minus)
-		while (params->nprinted < params->width)
-			params->nprinted += write(1, " ", 1);
-	free(params->fstr);
-}
-
-void		float_print(t_struct *params)
-{
-	int len;
-	int	indent;
-
-	indent = 0;
-	len = params->lenbefore + params->lenafter;
-	if (params->hash || params->precision)
-		len++;
-	if (params->width > len)
-		indent = params->width - len;
-	if (params->negative || params->plus || params->space)
-		indent--;
-	if (params->width > len && !params->minus && !params->zero)
-		while (indent--)
-			params->nprinted += write(1, " ", 1);
-	if (params->space && !params->negative)
-		params->nprinted += write(1, " ", 1);
-	if (params->negative)
-		params->nprinted += write(1, "-", 1);
-	if (params->plus && !params->negative)
-		params->nprinted += write(1, "+", 1);
-	if (params->width > len && !params->minus && params->zero)
-		while (indent--)
-			params->nprinted += write(1, "0", 1);
-	float_print2(params);
-}
-
 void		float_math2(long double num, t_struct *params)
 {
 	int		i;
+	char	*str;
 
 	i = 0;
-	if (!(params->fstr = (char*)malloc(sizeof(params->fstr) * params->precision + 1)))
+	str = params->fstrafter;
+	if (!(params->fstrafter = (char*)malloc(sizeof(str) * params->precision + 1)))
 		exit(1);
 	while (i < params->precision)
 	{
 		num *= (long double)10;
-		params->fstr[i] = (int)(num) + '0';
+		params->fstrafter[i] = (int)(num) + '0';
 		num -= (int)num;
 		params->lenafter++;
 		i++;
 	}
-	params->fstr[i] = '\0';
-	if (num >= 0.5)
-	{
-		if (i)
-		{
-			if (params->fstr[--i] != '9')
-				params->fstr[i]++;
-			else
-			{
-				while (params->fstr[i] == '9' && i >= 0)
-					params->fstr[i--] = '0';
-				if (i >= 0)
-					params->fstr[i]++;
-				else
-					params->fbefore++;
-			}
-		}
-		else 
-			params->fbefore++;
-	}
+	params->fstrafter[i] = '\0';
+	rounding(num, params, i);
 }
 
-char		*decimal_math(long double num)
+char		*decimal_math(long double num, t_struct *params, int len)
 {
 	long double temp;
-	int			len;
 	int			i;
-	char		*str;
 	char		*ptr;
 
-	len = float_num_len(num);
-	if (!(str = (char*)malloc(sizeof(str) * len + 1)))
+	i = 0;
+	if (!(params->fstr = (char*)malloc(sizeof(params->fstr) * len + 1)))
 		exit(1);
-	ptr = str;
+	ptr = params->fstr;
 	while (len)
 	{
-		i = 0;
 		temp = num;
-		while (i < (len - 1))
-		{
+		while (i++ < (len - 1))
 			temp /= 10;
-			i++;
-		}
 		*ptr++ = (int)temp + '0';
 		temp = (int)temp;
-		while (i--)
+		while (i-- > 1)
 			temp *= 10;
 		num -= temp;
 		len--;
 	}
 	*ptr = '\0';
-	return (str);
+	return (params->fstr);
 }
 
 void		float_math(long double num, t_struct *params)
 {
 	int			i;
+	int			len;
 	long double	temp;
 
 	i = 0;
 	temp = num * power(10, params->precision);
-	temp -= ft_atof(decimal_math(temp));
-	if (temp >= 0.5)
+	len = float_num_len(temp);
+	temp -= ft_atof(decimal_math(temp, params, len));
+	if (temp > 0.5 || (temp == 0.5 && is_odd(params->fstr, len)))
 		num += (0.5 / power(10, params->precision));
-	params->fstrbefore = decimal_math(num);
+	len = float_num_len(num);
+	params->fstrbefore = decimal_math(num, params, len);
 	params->fdecimal = num - ft_atof(params->fstrbefore);
 	float_math2(params->fdecimal, params);
- 	params->lenbefore = ft_strlen(params->fstrbefore);
+	params->lenbefore = ft_strlen(params->fstrbefore);
 }
 
 void		type_float(va_list args, t_struct *params)

@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/05/26 20:23:55 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/07 16:02:05 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_struct
 	int			after_percent;
 	long double fdecimal;
 	char		*fstr;
+	char		*fstrafter;
 	char		*fstrbefore;
 	long long	fbefore;
 	long long	fafter;
@@ -128,9 +129,11 @@ int				hex_print2(t_struct *params, char *s);
 
 void			type_float(va_list args, t_struct *params);
 int				is_infnan(t_struct *params, long double num);
-char			*decimal_math(long double temp);
+char			*decimal_math(long double num, t_struct *params, int len);
 void			float_math(long double num, t_struct *params);
 void			float_math2(long double num, t_struct *params);
+int				is_odd(char *str, int len);
+void			rounding(long double num, t_struct *params, int i);
 void			float_print(t_struct *params);
 void			float_print2(t_struct *params);
 
