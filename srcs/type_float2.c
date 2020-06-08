@@ -6,18 +6,25 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/07 16:08:59 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/08 12:01:23 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		float_print2(t_struct *params)
+void	float_free(t_struct *params)
+{
+	free(params->fstrbef);
+	free(params->fstr);
+	free(params->fstraft);
+}
+
+void	float_print2(t_struct *params)
 {
 	int	i;
 
 	i = 0;
-	ft_putstr(params->fstrbefore);
+	ft_putstr(params->fstrbef);
 	params->nprinted += params->lenbefore;
 	if (params->hash || params->precision)
 		params->nprinted += write(1, ".", 1);
@@ -25,16 +32,15 @@ void		float_print2(t_struct *params)
 	{
 		while (i++ < params->precision - params->lenafter)
 			params->nprinted += write(1, "0", 1);
-		ft_putstr(params->fstrafter);
+		ft_putstr(params->fstraft);
 		params->nprinted += params->lenafter;
 	}
 	if (params->width && params->minus)
 		while (params->nprinted < params->width)
 			params->nprinted += write(1, " ", 1);
-	free(params->fstrafter);
 }
 
-void		float_print(t_struct *params)
+void	float_print(t_struct *params)
 {
 	int len;
 	int	indent;
@@ -62,35 +68,12 @@ void		float_print(t_struct *params)
 	float_print2(params);
 }
 
-void		rounding(long double num, t_struct *params, int i)
-{
-	if (num >= 0.5)
-	{
-		if (i)
-		{
-			if (params->fstrafter[--i] != '9')
-				params->fstrafter[i]++;
-			else
-			{
-				while (params->fstrafter[i] == '9' && i >= 0)
-					params->fstrafter[i--] = '0';
-				if (i >= 0)
-					params->fstrafter[i]++;
-				else
-					params->fbefore++;
-			}
-		}
-		else
-			params->fbefore++;
-	}
-}
-
-int			is_odd(char *str, int len)
+int		is_odd(char *str, int len)
 {
 	return ((str[len - 1] - '0') % 2);
 }
 
-int			is_infnan(t_struct *params, long double num)
+int		is_infnan(t_struct *params, long double num)
 {
 	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
 	{

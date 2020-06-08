@@ -6,43 +6,64 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/07 16:11:57 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/08 11:59:53 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		float_math2(long double num, t_struct *params)
+void	rounding(long double num, t_struct *params, int i)
+{
+	if (num >= 0.5)
+	{
+		if (i)
+		{
+			if (params->fstraft[--i] != '9')
+				params->fstraft[i]++;
+			else
+			{
+				while (params->fstraft[i] == '9' && i >= 0)
+					params->fstraft[i--] = '0';
+				if (i >= 0)
+					params->fstraft[i]++;
+				else
+					params->fbefore++;
+			}
+		}
+		else
+			params->fbefore++;
+	}
+}
+
+void	float_math2(long double num, t_struct *params)
 {
 	int		i;
 	char	*str;
 
 	i = 0;
-	str = params->fstrafter;
-	if (!(params->fstrafter = (char*)malloc(sizeof(str) * params->precision + 1)))
+	str = params->fstraft;
+	if (!(params->fstraft = (char*)malloc(sizeof(str) * params->precision + 1)))
 		exit(1);
 	while (i < params->precision)
 	{
 		num *= (long double)10;
-		params->fstrafter[i] = (int)(num) + '0';
+		params->fstraft[i] = (int)(num) + '0';
 		num -= (int)num;
 		params->lenafter++;
 		i++;
 	}
-	params->fstrafter[i] = '\0';
+	params->fstraft[i] = '\0';
 	rounding(num, params, i);
 }
 
-char		*decimal_math(long double num, t_struct *params, int len)
+char	*decimal_math(long double num, char *str, int len)
 {
 	long double temp;
 	int			i;
 	char		*ptr;
 
 	i = 0;
-	if (!(params->fstr = (char*)malloc(sizeof(params->fstr) * len + 1)))
-		exit(1);
-	ptr = params->fstr;
+	ptr = str;
 	while (len)
 	{
 		temp = num;
@@ -56,10 +77,10 @@ char		*decimal_math(long double num, t_struct *params, int len)
 		len--;
 	}
 	*ptr = '\0';
-	return (params->fstr);
+	return (str);
 }
 
-void		float_math(long double num, t_struct *params)
+void	float_math(long double num, t_struct *params)
 {
 	int			i;
 	int			len;
@@ -68,22 +89,24 @@ void		float_math(long double num, t_struct *params)
 	i = 0;
 	temp = num * power(10, params->precision);
 	len = float_num_len(temp);
-	temp -= ft_atof(decimal_math(temp, params, len));
+	if (!(params->fstr = (char*)malloc(sizeof(params->fstr) * len + 1)))
+		exit(1);
+	temp -= ft_atof(decimal_math(temp, params->fstr, len));
 	if (temp > 0.5 || (temp == 0.5 && is_odd(params->fstr, len)))
 		num += (0.5 / power(10, params->precision));
 	len = float_num_len(num);
-	params->fstrbefore = decimal_math(num, params, len);
-	params->fdecimal = num - ft_atof(params->fstrbefore);
+	if (!(params->fstrbef = (char*)malloc(sizeof(params->fstrbef) * len + 1)))
+		exit(1);
+	decimal_math(num, params->fstrbef, len);
+	params->fdecimal = num - ft_atof(params->fstrbef);
 	float_math2(params->fdecimal, params);
-	params->lenbefore = ft_strlen(params->fstrbefore);
+	params->lenbefore = ft_strlen(params->fstrbef);
 }
 
-void		type_float(va_list args, t_struct *params)
+void	type_float(va_list args, t_struct *params)
 {
 	long double num;
-	int			negative;
 
-	negative = 0;
 	if (params->length == LONG)
 		num = (double)va_arg(args, double);
 	if (params->length == LONGDOUBLE)
@@ -105,4 +128,5 @@ void		type_float(va_list args, t_struct *params)
 	}
 	float_math(num, params);
 	float_print(params);
+	float_free(params);
 }
