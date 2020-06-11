@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/08 12:01:23 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/10 11:27:01 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,20 @@ void	float_print2(t_struct *params)
 
 	i = 0;
 	ft_putstr(params->fstrbef);
-	params->nprinted += params->lenbefore;
+	params->nprinted_here += params->lenbefore;
 	if (params->hash || params->precision)
-		params->nprinted += write(1, ".", 1);
+		params->nprinted_here += write(1, ".", 1);
 	if (params->precision)
 	{
 		while (i++ < params->precision - params->lenafter)
-			params->nprinted += write(1, "0", 1);
+			params->nprinted_here += write(1, "0", 1);
 		ft_putstr(params->fstraft);
-		params->nprinted += params->lenafter;
+		params->nprinted_here += params->lenafter;
 	}
 	if (params->width && params->minus)
-		while (params->nprinted < params->width)
-			params->nprinted += write(1, " ", 1);
+		while (params->nprinted_here < params->width)
+			params->nprinted_here += write(1, " ", 1);
+	params->nprinted += params->nprinted_here;
 }
 
 void	float_print(t_struct *params)
@@ -55,16 +56,16 @@ void	float_print(t_struct *params)
 		indent--;
 	if (params->width > len && !params->minus && !params->zero)
 		while (indent--)
-			params->nprinted += write(1, " ", 1);
+			params->nprinted_here += write(1, " ", 1);
 	if (params->space && !params->negative)
-		params->nprinted += write(1, " ", 1);
+		params->nprinted_here += write(1, " ", 1);
 	if (params->negative)
-		params->nprinted += write(1, "-", 1);
+		params->nprinted_here += write(1, "-", 1);
 	if (params->plus && !params->negative)
-		params->nprinted += write(1, "+", 1);
+		params->nprinted_here += write(1, "+", 1);
 	if (params->width > len && !params->minus && params->zero)
 		while (indent--)
-			params->nprinted += write(1, "0", 1);
+			params->nprinted_here += write(1, "0", 1);
 	float_print2(params);
 }
 
@@ -77,13 +78,13 @@ int		is_infnan(t_struct *params, long double num)
 {
 	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
 	{
-		params->nprinted = write(1, "inf", 3);
+		params->nprinted_here = write(1, "inf", 3);
 		return (1);
 	}
 	if (!(num == num))
 	{
 		params->plus = 0;
-		params->nprinted = write(1, "nan", 3);
+		params->nprinted_here = write(1, "nan", 3);
 		return (1);
 	}
 	return (0);

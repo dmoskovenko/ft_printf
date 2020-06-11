@@ -6,13 +6,13 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/05/27 03:33:15 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/08 13:18:53 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			bzerostruct(t_struct *params, int full)
+void		bzerostruct(t_struct *params, int full)
 {
 	if (full)
 	{
@@ -42,7 +42,7 @@ void			bzerostruct(t_struct *params, int full)
 	params->lenafter = 0;
 }
 
-long double		power(long long n, int i)
+long double	power(long long n, int i)
 {
 	long long	j;
 	long double	res;
@@ -56,7 +56,7 @@ long double		power(long long n, int i)
 	return (res);
 }
 
-int		float_num_len(long double num)
+int			float_num_len(long double num)
 {
 	int	num_len;
 
@@ -71,7 +71,7 @@ int		float_num_len(long double num)
 	return (num_len);
 }
 
-long double		ft_atof(char *str)
+long double	ft_atof(char *str)
 {
 	long double	num;
 
@@ -85,7 +85,7 @@ long double		ft_atof(char *str)
 	return (num);
 }
 
-void			percent(t_struct *params)
+void		percent(t_struct *params)
 {
 	char_print(params, '%', 0);
 	bzerostruct(params, 0);
