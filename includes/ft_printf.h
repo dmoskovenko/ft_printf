@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/06/14 20:55:54 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 00:15:35 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct	s_struct
 	int			indent_was;
 	int			length;
 	int			after_percent;
-	char		*fstr;
 	char		*fstraft;
 	char		*fstrbef;
 	int			lenbefore;
@@ -127,14 +126,13 @@ int				hex_print2(t_struct *params, char *s);
 void			type_float(va_list args, t_struct *params);
 int				is_infnan(t_struct *params, long double num);
 void			float_math(long double num, t_struct *params);
-char			*integer_math(long double num, char *str, int len);
+char			*integer_math(long double num, int end);
 void			decimal_math(long double num, t_struct *params);
-int				is_odd(char *str, int len);
+int				is_odd(char str);
 void			rounding(long double num, t_struct *params, int i);
 void			f_increment(t_struct *params);
 void			float_print(t_struct *params);
 void			float_print2(t_struct *params);
-void			float_free(t_struct *params);
 
 void			writezeros(int n);
 void			writeblanks(int n);

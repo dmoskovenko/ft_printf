@@ -6,18 +6,11 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/14 22:30:11 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 00:19:23 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	float_free(t_struct *params)
-{
-	free(params->fstrbef);
-	free(params->fstr);
-	free(params->fstraft);
-}
 
 void	float_print2(t_struct *params)
 {

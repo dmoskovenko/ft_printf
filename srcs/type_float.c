@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/14 22:28:06 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 00:19:39 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	rounding(long double num, t_struct *params, int i)
 {
 	if ((num > 0.5) \
-	|| (num == 0.5 && is_odd(params->fstraft, params->lenafter)))
+	|| (num == 0.5 && is_odd(params->fstraft[params->lenafter])))
 	{
 		if (i)
 		{
@@ -55,13 +55,18 @@ void	decimal_math(long double num, t_struct *params)
 	params->lenbefore = ft_strlen(params->fstrbef);
 }
 
-char	*integer_math(long double num, char *str, int len)
+char	*integer_math(long double num, int end)
 {
-	long double temp;
 	int			i;
+	int			len;
+	char		*str;
 	char		*ptr;
+	long double temp;
 
 	i = 0;
+	len = float_num_len(num);
+	if (!(str = (char*)malloc(sizeof(str) * len + end)))
+		exit(1);
 	ptr = str;
 	while (len)
 	{
@@ -84,18 +89,16 @@ void	float_math(long double num, t_struct *params)
 	int			len;
 	long double	temp;
 	long double	fdecimal;
+	char		*str;
 
 	temp = num * power(10, params->precision);
-	len = float_num_len(temp);
-	if (!(params->fstr = (char*)malloc(sizeof(params->fstr) * len + 1)))
-		exit(1);
-	temp -= ft_atof(integer_math(temp, params->fstr, len));
-	if (temp > 0.5 || (temp == 0.5 && is_odd(params->fstr, len)))
+	str = integer_math(temp, 1);
+	temp -= ft_atof(str);
+	len = ft_strlen(str);
+	if (temp > 0.5 || (temp == 0.5 && is_odd(str[len - 1])))
 		num += (0.5 / power(10, params->precision));
-	len = float_num_len(num);
-	if (!(params->fstrbef = (char*)malloc(sizeof(params->fstrbef) * len + 2)))
-		exit(1);
-	integer_math(num, params->fstrbef, len);
+	free(str);
+	params->fstrbef = integer_math(num, 2);
 	fdecimal = num - ft_atof(params->fstrbef);
 	decimal_math(fdecimal, params);
 }
@@ -125,5 +128,6 @@ void	type_float(va_list args, t_struct *params)
 	}
 	float_math(num, params);
 	float_print(params);
-	float_free(params);
+	free(params->fstrbef);
+	free(params->fstraft);
 }
