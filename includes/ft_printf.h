@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/06/14 20:12:48 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/14 20:55:54 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int				hex_print2(t_struct *params, char *s);
 void			type_float(va_list args, t_struct *params);
 int				is_infnan(t_struct *params, long double num);
 void			float_math(long double num, t_struct *params);
-char			*before_math(long double num, char *str, int len);
-void			after_math(long double num, t_struct *params);
+char			*integer_math(long double num, char *str, int len);
+void			decimal_math(long double num, t_struct *params);
 int				is_odd(char *str, int len);
 void			rounding(long double num, t_struct *params, int i);
 void			f_increment(t_struct *params);
