@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/06/15 01:04:46 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 01:17:04 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct	s_struct
 	int			dot;
 	int			width;
 	int			precision;
-	int			precision_was;
+//	int			precision_was;
 	int			precisionzero;
 	int			indent;
 	int			indent_was;
