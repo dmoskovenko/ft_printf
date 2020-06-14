@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/14 20:12:24 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/14 20:44:03 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ void	rounding(long double num, t_struct *params, int i)
 			{
 				while (params->fstraft[i] == '9' && i >= 0)
 					params->fstraft[i--] = '0';
-				if (i >= 0)
-					params->fstraft[i]++;
-				else
-					f_increment(params);
+				(i >= 0) ? params->fstraft[i]++ : f_increment(params);
 			}
 		}
 		else
