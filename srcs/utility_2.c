@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/08 13:18:53 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/14 15:21:08 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			float_num_len(long double num)
 	int	num_len;
 
 	num_len = 0;
-	while (num > 1)
+	while (num >= 1)
 	{
 		num /= 10;
 		num_len++;

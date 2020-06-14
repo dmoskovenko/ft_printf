@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/10 11:27:01 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/14 20:19:00 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,4 @@ void	float_print(t_struct *params)
 		while (indent--)
 			params->nprinted_here += write(1, "0", 1);
 	float_print2(params);
-}
-
-int		is_odd(char *str, int len)
-{
-	return ((str[len - 1] - '0') % 2);
-}
-
-int		is_infnan(t_struct *params, long double num)
-{
-	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
-	{
-		params->nprinted_here = write(1, "inf", 3);
-		return (1);
-	}
-	if (!(num == num))
-	{
-		params->plus = 0;
-		params->nprinted_here = write(1, "nan", 3);
-		return (1);
-	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/06/08 11:01:22 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/14 20:12:48 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,9 @@ typedef struct	s_struct
 	int			indent_was;
 	int			length;
 	int			after_percent;
-	long double fdecimal;
 	char		*fstr;
 	char		*fstraft;
 	char		*fstrbef;
-	long long	fbefore;
-	long long	fafter;
 	int			lenbefore;
 	int			lenafter;
 }				t_struct;
@@ -129,14 +126,15 @@ int				hex_print2(t_struct *params, char *s);
 
 void			type_float(va_list args, t_struct *params);
 int				is_infnan(t_struct *params, long double num);
-char			*decimal_math(long double num, char *str, int len);
 void			float_math(long double num, t_struct *params);
-void			float_math2(long double num, t_struct *params);
+char			*before_math(long double num, char *str, int len);
+void			after_math(long double num, t_struct *params);
 int				is_odd(char *str, int len);
 void			rounding(long double num, t_struct *params, int i);
+void			f_increment(t_struct *params);
 void			float_print(t_struct *params);
 void			float_print2(t_struct *params);
-void 			float_free(t_struct *params);
+void			float_free(t_struct *params);
 
 void			writezeros(int n);
 void			writeblanks(int n);

@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/08 11:59:53 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/14 20:12:24 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	rounding(long double num, t_struct *params, int i)
 {
+	int j;
+
+	j = params->lenbefore;
 	if (num >= 0.5)
 	{
 		if (i)
@@ -27,15 +30,15 @@ void	rounding(long double num, t_struct *params, int i)
 				if (i >= 0)
 					params->fstraft[i]++;
 				else
-					params->fbefore++;
+					f_increment(params);
 			}
 		}
 		else
-			params->fbefore++;
+			f_increment(params);
 	}
 }
 
-void	float_math2(long double num, t_struct *params)
+void	after_math(long double num, t_struct *params)
 {
 	int		i;
 	char	*str;
@@ -54,9 +57,10 @@ void	float_math2(long double num, t_struct *params)
 	}
 	params->fstraft[i] = '\0';
 	rounding(num, params, i);
+	params->lenbefore = ft_strlen(params->fstrbef);
 }
 
-char	*decimal_math(long double num, char *str, int len)
+char	*before_math(long double num, char *str, int len)
 {
 	long double temp;
 	int			i;
@@ -85,22 +89,24 @@ void	float_math(long double num, t_struct *params)
 	int			i;
 	int			len;
 	long double	temp;
+	long double temp2;
+	long double	fdecimal;
 
 	i = 0;
 	temp = num * power(10, params->precision);
 	len = float_num_len(temp);
 	if (!(params->fstr = (char*)malloc(sizeof(params->fstr) * len + 1)))
 		exit(1);
-	temp -= ft_atof(decimal_math(temp, params->fstr, len));
+	temp2 = ft_atof(before_math(temp, params->fstr, len));
+	temp -= temp2;
 	if (temp > 0.5 || (temp == 0.5 && is_odd(params->fstr, len)))
 		num += (0.5 / power(10, params->precision));
 	len = float_num_len(num);
-	if (!(params->fstrbef = (char*)malloc(sizeof(params->fstrbef) * len + 1)))
+	if (!(params->fstrbef = (char*)malloc(sizeof(params->fstrbef) * len + 2)))
 		exit(1);
-	decimal_math(num, params->fstrbef, len);
-	params->fdecimal = num - ft_atof(params->fstrbef);
-	float_math2(params->fdecimal, params);
-	params->lenbefore = ft_strlen(params->fstrbef);
+	before_math(num, params->fstrbef, len);
+	fdecimal = num - ft_atof(params->fstrbef);
+	after_math(fdecimal, params);
 }
 
 void	type_float(va_list args, t_struct *params)
