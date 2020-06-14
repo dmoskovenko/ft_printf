@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/06/15 00:37:23 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 01:04:46 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct	s_struct
 	int			indent_was;
 	int			length;
 	int			after_percent;
-	char		*fstraft;
-	char		*fstrbef;
+	char		*fbefore;
+	char		*fafter;
 	int			lenbefore;
 	int			lenafter;
 }				t_struct;

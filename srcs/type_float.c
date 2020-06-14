@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 07:27:41 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/15 00:28:35 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 01:08:56 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	rounding(long double num, t_struct *params, int i)
 {
 	if ((num > 0.5) \
-	|| (num == 0.5 && is_odd(params->fstraft[params->lenafter])))
+	|| (num == 0.5 && is_odd(params->fafter[params->lenafter])))
 	{
 		if (i)
 		{
-			if (params->fstraft[--i] != '9')
-				params->fstraft[i]++;
+			if (params->fafter[--i] != '9')
+				params->fafter[i]++;
 			else
 			{
-				while (params->fstraft[i] == '9' && i >= 0)
-					params->fstraft[i--] = '0';
-				(i >= 0) ? params->fstraft[i]++ : f_increment(params);
+				while (params->fafter[i] == '9' && i >= 0)
+					params->fafter[i--] = '0';
+				(i >= 0) ? params->fafter[i]++ : f_increment(params);
 			}
 		}
 		else
@@ -39,20 +39,20 @@ void	decimal_math(long double num, t_struct *params)
 	char	*str;
 
 	i = 0;
-	str = params->fstraft;
-	if (!(params->fstraft = (char*)malloc(sizeof(str) * params->precision + 1)))
+	str = params->fafter;
+	if (!(params->fafter = (char*)malloc(sizeof(str) * params->precision + 1)))
 		exit(1);
 	while (i < params->precision)
 	{
 		num *= (long double)10;
-		params->fstraft[i] = (int)(num) + '0';
+		params->fafter[i] = (int)(num) + '0';
 		num -= (int)num;
 		params->lenafter++;
 		i++;
 	}
-	params->fstraft[i] = '\0';
+	params->fafter[i] = '\0';
 	rounding(num, params, i);
-	params->lenbefore = ft_strlen(params->fstrbef);
+	params->lenbefore = ft_strlen(params->fbefore);
 }
 
 char	*integer_math(long double num, int end)
@@ -98,8 +98,8 @@ void	float_math(long double num, t_struct *params)
 	if (temp > 0.5 || (temp == 0.5 && is_odd(str[len - 1])))
 		num += (0.5 / power(10, params->precision));
 	free(str);
-	params->fstrbef = integer_math(num, 2);
-	fdecimal = num - ft_atof(params->fstrbef);
+	params->fbefore = integer_math(num, 2);
+	fdecimal = num - ft_atof(params->fbefore);
 	decimal_math(fdecimal, params);
 }
 
@@ -128,6 +128,6 @@ void	type_float(va_list args, t_struct *params)
 	}
 	float_math(num, params);
 	float_print(params);
-	free(params->fstrbef);
-	free(params->fstraft);
+	free(params->fbefore);
+	free(params->fafter);
 }

@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/15 00:41:25 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 01:06:08 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	float_print2(t_struct *params)
 	int	i;
 
 	i = 0;
-	ft_putstr(params->fstrbef);
+	ft_putstr(params->fbefore);
 	params->nprinted_here += params->lenbefore;
 	if (params->hash || params->precision)
 		params->nprinted_here += write(1, ".", 1);
@@ -25,7 +25,7 @@ void	float_print2(t_struct *params)
 	{
 		while (i++ < params->precision - params->lenafter)
 			params->nprinted_here += write(1, "0", 1);
-		ft_putstr(params->fstraft);
+		ft_putstr(params->fafter);
 		params->nprinted_here += params->lenafter;
 	}
 	if (params->width && params->minus)
@@ -66,9 +66,9 @@ void	f_increment(t_struct *params)
 {
 	long double fbefore;
 
-	fbefore = ft_atof(params->fstrbef);
+	fbefore = ft_atof(params->fbefore);
 	fbefore++;
-	params->fstrbef = itoa_base_unsigned((uintmax_t)fbefore, 10);
+	params->fbefore = itoa_base_unsigned((uintmax_t)fbefore, 10);
 }
 
 int		is_odd(char str)
