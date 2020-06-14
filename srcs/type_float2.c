@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/15 01:06:08 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 01:29:45 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	f_increment(t_struct *params)
 	params->fbefore = itoa_base_unsigned((uintmax_t)fbefore, 10);
 }
 
-int		is_odd(char str)
+int		is_odd(char symb)
 {
-	return ((str - '0') % 2);
+	return ((symb - '0') % 2);
 }
 
 int		is_infnan(t_struct *params, long double num)

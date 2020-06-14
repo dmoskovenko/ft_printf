@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 20:15:37 by releanor          #+#    #+#             */
-/*   Updated: 2020/06/15 01:24:11 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/15 01:31:00 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void			float_math(long double num, t_struct *params);
 char			*integer_math(long double num, int end);
 void			decimal_math(long double num, t_struct *params);
 int				is_infnan(t_struct *params, long double num);
-int				is_odd(char str);
+int				is_odd(char symb);
 void			rounding(long double num, t_struct *params, int i);
 void			f_increment(t_struct *params);
 void			float_print(t_struct *params);
