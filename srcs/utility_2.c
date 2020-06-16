@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:53:04 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/15 01:24:27 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/16 22:47:37 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void		bzerostruct(t_struct *params, int full)
 	params->precision = 0;
 	params->precision_was = 0;
 	params->indent = 0;
-	params->indent_was = 0;
 	params->precisionzero = 0;
 	params->length = 0;
 	params->lenbefore = 0;

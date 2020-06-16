@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/16 19:49:17 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/16 22:14:03 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int		is_odd(char symb)
 
 int		is_infnan(t_struct *params, long double num)
 {
-	if (!(params->fbefore = (char*)malloc(sizeof(params->fbefore) * 3 + 1)))
-		exit(1);
 	params->lenbefore = 3;
 	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
 	{

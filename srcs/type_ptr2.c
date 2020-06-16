@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_ptr2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:45:48 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/06 14:58:36 by releanor         ###   ########.fr       */
+/*   Updated: 2020/06/16 22:47:47 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ void	ptr_chk(t_struct *prms)
 	{
 		prms->indent = prms->width - prms->precision \
 		- prms->lenbefore - prms->plus - 2;
-		prms->indent_was = prms->indent;
 	}
 }
