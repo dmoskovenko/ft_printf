@@ -6,7 +6,7 @@
 /*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:19:20 by coclayto          #+#    #+#             */
-/*   Updated: 2020/06/15 01:29:45 by coclayto         ###   ########.fr       */
+/*   Updated: 2020/06/16 19:49:17 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	float_print2(t_struct *params)
 	i = 0;
 	ft_putstr(params->fbefore);
 	params->nprinted_here += params->lenbefore;
-	if (params->hash || params->precision)
+	if ((params->hash || params->precision) && !ft_isalpha(params->fbefore[0]))
 		params->nprinted_here += write(1, ".", 1);
 	if (params->precision)
 	{
@@ -41,7 +41,7 @@ void	float_print(t_struct *params)
 
 	indent = 0;
 	len = params->lenbefore + params->lenafter;
-	if (params->hash || params->precision)
+	if ((params->hash || params->precision) && !ft_isalpha(params->fbefore[0]))
 		len++;
 	if (params->width > len)
 		indent = params->width - len;
@@ -78,15 +78,22 @@ int		is_odd(char symb)
 
 int		is_infnan(t_struct *params, long double num)
 {
+	if (!(params->fbefore = (char*)malloc(sizeof(params->fbefore) * 3 + 1)))
+		exit(1);
+	params->lenbefore = 3;
 	if (num == (1.0 / 0.0) || num == -(1.0 / 0.0))
 	{
-		params->nprinted_here = write(1, "inf", 3);
+		if (num == -(1.0 / 0.0))
+			params->negative = 1;
+		params->fbefore = "inf";
+		float_print(params);
 		return (1);
 	}
 	if (!(num == num))
 	{
+		params->fbefore = "nan";
 		params->plus = 0;
-		params->nprinted_here = write(1, "nan", 3);
+		float_print(params);
 		return (1);
 	}
 	return (0);
