@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_u.c                                           :+:      :+:    :+:   */
+/*   type_binary.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: releanor <releanor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coclayto <coclayto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 12:43:43 by releanor          #+#    #+#             */
-/*   Updated: 2020/03/13 02:18:27 by releanor         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:32:02 by coclayto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	type_b(va_list args, t_struct *prms)
 	uintmax_t num;
 
 	num = 0;
-	if (prms->length)
+	if (!prms->length)
 		num = (unsigned int)va_arg(args, int);
 	else if (prms->length == SHORTSHORT)
 		num = (unsigned char)va_arg(args, int);
